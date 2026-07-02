@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kiro — The AI receptionist for independent salons</title>
-<meta name="description" content="Kiro is an AI phone receptionist built for independent salons and studios. It answers every call, books the appointment, and texts you the details — even when you're mid-service. Free beta open now." />
+<title>Kiro — The receptionist that answers when your hands are full</title>
+<meta name="description" content="Kiro is an AI phone receptionist for independent salons and studios. It answers every call, books the appointment, and texts you the details — even when you're mid-service." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -130,6 +130,19 @@
   .feature h3 { font-size: 20px; color: var(--slate); font-weight: 600; margin-bottom: 8px; }
   .feature p { font-size: 15px; color: #475569; }
 
+  /* Split: why salons */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .split .pain { background: var(--white); border: 1px solid var(--line); border-left: 3px solid var(--cyan); border-radius: var(--radius); padding: 28px; }
+  .split .pain p { font-size: 17px; color: #334155; }
+  .split .pain p + p { margin-top: 14px; }
+
+  /* Honesty list */
+  .honest { list-style: none; display: grid; gap: 16px; }
+  .honest li { display: flex; gap: 14px; align-items: flex-start; }
+  .honest .mk { flex: none; width: 26px; height: 26px; border-radius: 7px; background: rgba(8,145,178,.1); color: var(--cyan); display: grid; place-items: center; margin-top: 2px; }
+  .honest strong { color: var(--slate); font-weight: 600; }
+  .honest span { color: #475569; }
+
   /* Final CTA */
   .final { background: var(--slate); color: var(--white); border-radius: 24px; padding: 64px 48px; text-align: center; }
   .final h2 { font-size: clamp(30px, 4.5vw, 46px); color: var(--white); max-width: 20ch; margin: 0 auto; }
@@ -168,51 +181,12 @@
   .roi p { font-size: 17px; font-weight: 500; color: #fff; max-width: 34em; }
   .roi p .hl { color: var(--cyan-bright); }
 
-  /* Origin story */
-  .origin { background: var(--paper-warm); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .origin-card { max-width: 720px; }
-  .origin-card .eyebrow { margin-bottom: 18px; }
-  .origin-card h2 { font-size: clamp(28px, 3.8vw, 40px); color: var(--slate); margin-bottom: 22px; }
-  .origin-card p { font-size: 18px; color: #334155; line-height: 1.72; }
-  .origin-card p + p { margin-top: 16px; }
-  .origin-card .pull { font-family: 'Fraunces', serif; font-size: clamp(21px,2.5vw,25px); color: var(--slate); font-weight: 500; line-height: 1.4; border-left: 3px solid var(--cyan); padding-left: 22px; margin: 26px 0; }
-  .origin-card .sign { margin-top: 26px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; letter-spacing: .02em; color: var(--muted); }
-
-  /* How it works — steps */
-  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .step { position: relative; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px; }
-  .step .sn { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 13px; color: var(--cyan); letter-spacing: .12em; }
-  .step h3 { font-size: 21px; color: var(--slate); font-weight: 600; margin: 12px 0 10px; }
-  .step p { font-size: 15px; color: #475569; }
-  .step .si { position: absolute; top: 28px; right: 26px; color: var(--cyan); opacity: .5; }
-
-  /* FAQ */
-  .faq { max-width: 760px; display: grid; gap: 12px; }
-  .faq details { background: var(--white); border: 1px solid var(--line); border-radius: 12px; }
-  .faq summary { list-style: none; cursor: pointer; padding: 20px 22px; font-weight: 600; color: var(--slate); font-size: 17px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-  .faq summary::-webkit-details-marker { display: none; }
-  .faq summary .chev { flex: none; color: var(--cyan); transition: transform .2s ease; }
-  .faq details[open] summary .chev { transform: rotate(45deg); }
-  .faq .fa { padding: 0 22px 20px; color: #475569; font-size: 15.5px; line-height: 1.62; }
-  .faq .fa strong { color: var(--slate); font-weight: 600; }
-
-  /* Footer expanded */
-  .footer-top { display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
-  .footer-blurb { font-size: 15px; color: var(--muted); max-width: 40ch; margin-top: 14px; }
-  .footer-links { display: flex; gap: 40px; flex-wrap: wrap; }
-  .footer-col h4 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--slate); margin-bottom: 12px; font-family: 'Inter', sans-serif; font-weight: 600; }
-  .footer-col a, .footer-col span { display: block; font-size: 14px; color: var(--muted); margin-bottom: 9px; }
-  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; padding-top: 24px; font-size: 13px; color: var(--muted); }
-  .footer-disclosure { max-width: 60ch; }
-
   @media (max-width: 860px) {
     .hero-grid, .split { grid-template-columns: 1fr; gap: 40px; }
     .features { grid-template-columns: 1fr; }
     .dash-body { grid-template-columns: 1fr; }
     .compare { grid-template-columns: 1fr; }
     .compare-col.old { border-right: 0; border-bottom: 1px solid var(--line); }
-    .steps { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr; gap: 28px; }
     .nav-links { display: none; }
     .hero { padding: 48px 0 24px; }
     .final { padding: 48px 24px; }
@@ -230,9 +204,9 @@
   <div class="wrap nav">
     <a class="brand" href="#top"><svg width="30" height="30" viewBox="0 0 72 72" aria-hidden="true" style="flex:none;"><rect width="72" height="72" rx="18" fill="#1e293b"/><g stroke-linecap="round"><circle cx="23" cy="25" r="3.6" fill="#22d3ee"/><line x1="31" y1="25" x2="52" y2="25" stroke="#64748b" stroke-width="3.4"/><circle cx="23" cy="36" r="3.6" fill="#22d3ee"/><line x1="31" y1="36" x2="52" y2="36" stroke="#22d3ee" stroke-width="3.4"/><circle cx="23" cy="47" r="3.6" fill="#64748b"/><line x1="31" y1="47" x2="45" y2="47" stroke="#64748b" stroke-width="3.4"/></g></svg> Kiro</a>
     <nav class="nav-links">
-      <a href="#why">Why Kiro</a>
       <a href="#how">How it works</a>
-      <a href="#faq">FAQ</a>
+      <a href="#salons">For salons</a>
+      <a href="#honest">What it won't do</a>
     </nav>
     <a class="btn btn-primary" href="mailto:hello@kirodesk.com?subject=Kiro%20beta%20for%20my%20salon">Start free beta</a>
   </div>
@@ -304,58 +278,13 @@
     </div>
   </section>
 
-  <!-- ORIGIN STORY -->
-  <section class="block origin" id="why">
-    <div class="wrap">
-      <div class="origin-card">
-        <span class="eyebrow"><span class="dot"></span> Why we built Kiro</span>
-        <h2>Small shops lose the most to a ringing phone — and can afford it the least.</h2>
-        <p>I used to work the counter at a busy bakery café. The phone rang more than you'd think, and every ring was the same decision: stop what I'm doing and pick up, or keep serving the person in front of me? You never know which call is the one that turns into a real order — so you can't just ignore it.</p>
-        <p class="pull">A big shop has enough hands to do both. A small one doesn't.</p>
-        <p>That's the whole reason Kiro exists. When you don't have to choose between the phone and the work in front of you, you get your focus back — and no call goes unanswered. The enterprise systems that solve this cost thousands and are built for chains. I wanted the one-person shop to have that same "never miss a call" power, at a price a small business can actually carry.</p>
-        <p class="sign">— The founder of Kiro</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS (3 steps) -->
+  <!-- HOW IT WORKS / FEATURES -->
   <section class="block" id="how">
     <div class="wrap">
       <div class="section-head">
-        <span class="eyebrow"><span class="dot"></span> How it works</span>
-        <h2>Three steps, and the phone takes care of itself.</h2>
-        <p>No new phone system, no app for your clients to download. Kiro sits on your existing number.</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <span class="si" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
-          <div class="sn">01</div>
-          <h3>A call comes in</h3>
-          <p>Mid-service, after hours, or when the line's already busy — Kiro picks up on the first ring, so it never goes to a dead-end voicemail.</p>
-        </div>
-        <div class="step">
-          <span class="si" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-          <div class="sn">02</div>
-          <h3>Kiro handles it</h3>
-          <p>Books the appointment, answers questions about hours, prices, and services, or takes a message — in plain conversation, not a "press 1, press 2" menu.</p>
-        </div>
-        <div class="step">
-          <span class="si" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
-          <div class="sn">03</div>
-          <h3>You get the details</h3>
-          <p>Every call lands as a text and in your dashboard. When someone wants a person, Kiro hands off to you with the full context — no one repeats themselves.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHAT YOU GET / FEATURES -->
-  <section class="block" id="what">
-    <div class="wrap">
-      <div class="section-head">
-        <span class="eyebrow"><span class="dot"></span> What you get</span>
-        <h2>A front desk that never clocks out.</h2>
-        <p>Everything a good receptionist does at the phone — without the wages, the breaks, or the missed calls.</p>
+        <span class="eyebrow"><span class="dot"></span> What Kiro does</span>
+        <h2>It answers the calls you can't.</h2>
+        <p>Not a voicemail. A receptionist that picks up, handles the request, and keeps you in the loop.</p>
       </div>
       <div class="features">
         <div class="feature">
@@ -405,6 +334,23 @@
     </div>
   </section>
 
+  <!-- WHY SALONS -->
+  <section class="block" id="salons" style="background:var(--paper-warm); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow"><span class="dot"></span> Built for independent salons</span>
+        <h2 style="font-size:clamp(30px,4vw,42px); color:var(--slate);">The big platforms are built for chains. Kiro is built for you.</h2>
+        <p style="color:var(--muted); font-size:17px; margin-top:16px;">Enterprise receptionist tools are made for multi‑location groups with big budgets and IT teams. Kiro is for the one‑chair studio and the busy neighborhood salon: simple to start, priced for a small business, and nothing to rip out. You keep your number and your booking book — Kiro just answers the phone.</p>
+      </div>
+      <div class="pain">
+        <p><strong>The moment Kiro is made for:</strong></p>
+        <p>You're mid‑color. The phone rings. You know it's probably a booking — but you have gloves on and a client in the chair.</p>
+        <p>You let it ring. The caller hangs up and tries the next salon on Google. That client, and every appointment they'd have booked after, is gone.</p>
+        <p style="color:var(--cyan); font-weight:600;">Kiro picks up before that happens.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- VALUE / ROI -->
   <section class="block">
     <div class="wrap">
@@ -432,39 +378,32 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="block origin" id="faq">
+  <!-- HONESTY -->
+  <section class="block" id="honest">
     <div class="wrap">
-      <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center;">
-        <span class="eyebrow" style="justify-content:center;"><span class="dot"></span> Straight answers</span>
-        <h2>The questions owners actually ask.</h2>
+      <div class="section-head">
+        <span class="eyebrow"><span class="dot"></span> Straight with you</span>
+        <h2>What Kiro won't do.</h2>
+        <p>We'd rather tell you the limits up front than oversell you.</p>
       </div>
-      <div class="faq">
-        <details>
-          <summary>Will Kiro replace my staff? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <div class="fa">No. Kiro catches the calls you'd otherwise miss while your hands are full, and hands off to your team the moment a caller wants a person. Your staff keep doing what they do best — Kiro just makes sure the phone always gets answered.</div>
-        </details>
-        <details>
-          <summary>Does it sound like a robot reading a menu? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <div class="fa">No "press 1, press 2." Callers just say what they need and Kiro answers in plain conversation. It's upfront that it's an assistant — it won't pretend to be a person — and it passes the call to you whenever someone asks for one.</div>
-        </details>
-        <details>
-          <summary>Do I need a new phone or a new number? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <div class="fa">No. You keep your current number and your booking book. Kiro sits on the number you already have — nothing to rip out, nothing for your clients to download.</div>
-        </details>
-        <details>
-          <summary>What happens if Kiro can't handle a call? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <div class="fa">It hands the call to you with the full context — who's calling and what they need — so no one has to repeat themselves. Kiro is there to catch what you'd miss, not to trap anyone.</div>
-        </details>
-        <details>
-          <summary>Is my call data private? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <div class="fa">Your calls and bookings are yours. Kiro handles call data securely and only uses it to run your service. You can read the details in our <a href="/privacy" style="color:var(--cyan);font-weight:600;">Privacy Policy</a>.</div>
-        </details>
-        <details>
-          <summary>What does it cost? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <div class="fa">Right now we're opening <strong>free beta</strong> to a handful of salons while we build alongside real owners. No long contract, keep your number, and you can leave whenever you like. When paid plans start, they begin at $179/month.</div>
-        </details>
-      </div>
+      <ul class="honest">
+        <li>
+          <span class="mk" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <span><strong>It won't pretend to be human.</strong> Kiro answers plainly as an assistant — and the second a client wants a person, it hands off to you with the full context.</span>
+        </li>
+        <li>
+          <span class="mk" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <span><strong>It won't trap your clients in a menu.</strong> No "press 1, press 2." People say what they need, and Kiro handles it or passes it along.</span>
+        </li>
+        <li>
+          <span class="mk" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <span><strong>It won't replace your team.</strong> Kiro catches the calls you'd otherwise miss. Your stylists still do what they do best.</span>
+        </li>
+        <li>
+          <span class="mk" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <span><strong>It won't lock you in.</strong> No long contract. If Kiro isn't earning its keep, you leave.</span>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -472,10 +411,9 @@
   <section class="block" style="padding-top:0;">
     <div class="wrap">
       <div class="final">
-        <h2>Stop losing bookings to a ringing phone.</h2>
-        <p>Be one of the first salons on Kiro. Free during beta, keep your number, no contract — you can walk away anytime. All we ask for is honest feedback.</p>
+        <h2>Be one of the first salons on Kiro.</h2>
+        <p>We're opening free beta access to a handful of salons and studios while we build alongside them. If you're tired of losing bookings to a ringing phone, let's talk.</p>
         <a class="btn btn-primary" href="mailto:hello@kirodesk.com?subject=Kiro%20beta%20for%20my%20salon" style="font-size:16px; padding:14px 26px;">Start free beta</a>
-        <p style="color:#94a3b8; font-size:14px; margin-top:18px;">Or call the demo line and hear it yourself — it's the fastest way to see what Kiro does.</p>
       </div>
     </div>
   </section>
@@ -483,31 +421,10 @@
 </main>
 
 <footer class="footer">
-  <div class="wrap">
-    <div class="footer-top">
-      <div>
-        <div class="brand" style="font-size:18px;"><svg width="28" height="28" viewBox="0 0 72 72" aria-hidden="true" style="flex:none;"><rect width="72" height="72" rx="18" fill="#1e293b"/><g stroke-linecap="round"><circle cx="23" cy="25" r="3.6" fill="#22d3ee"/><line x1="31" y1="25" x2="52" y2="25" stroke="#64748b" stroke-width="3.4"/><circle cx="23" cy="36" r="3.6" fill="#22d3ee"/><line x1="31" y1="36" x2="52" y2="36" stroke="#22d3ee" stroke-width="3.4"/><circle cx="23" cy="47" r="3.6" fill="#64748b"/><line x1="31" y1="47" x2="45" y2="47" stroke="#64748b" stroke-width="3.4"/></g></svg> Kiro</div>
-        <p class="footer-blurb">The AI receptionist that answers when your hands are full — built for independent salons and studios.</p>
-      </div>
-      <div class="footer-links">
-        <div class="footer-col">
-          <h4>Product</h4>
-          <a href="#how">How it works</a>
-          <a href="#what">What you get</a>
-          <a href="#faq">FAQ</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="mailto:hello@kirodesk.com">Contact</a>
-          <a href="/privacy">Privacy Policy</a>
-          <a href="/terms">Terms of Service</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span class="footer-disclosure">Kiro answers calls with an AI assistant, not a live person. © 2026 Kiro Solutions Inc. Calgary, Alberta.</span>
-      <a href="mailto:hello@kirodesk.com">hello@kirodesk.com</a>
-    </div>
+  <div class="wrap footer-row">
+    <div class="brand" style="font-size:16px;"><svg width="26" height="26" viewBox="0 0 72 72" aria-hidden="true" style="flex:none;"><rect width="72" height="72" rx="18" fill="#1e293b"/><g stroke-linecap="round"><circle cx="23" cy="25" r="3.6" fill="#22d3ee"/><line x1="31" y1="25" x2="52" y2="25" stroke="#64748b" stroke-width="3.4"/><circle cx="23" cy="36" r="3.6" fill="#22d3ee"/><line x1="31" y1="36" x2="52" y2="36" stroke="#22d3ee" stroke-width="3.4"/><circle cx="23" cy="47" r="3.6" fill="#64748b"/><line x1="31" y1="47" x2="45" y2="47" stroke="#64748b" stroke-width="3.4"/></g></svg> Kiro</div>
+    <div>AI receptionist for salons &amp; studios · <a href="mailto:hello@kirodesk.com">hello@kirodesk.com</a></div>
+    <div>© 2026 Kiro Solutions Inc.</div>
   </div>
 </footer>
 
