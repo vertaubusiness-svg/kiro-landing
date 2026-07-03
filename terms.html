@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Terms of Service — Kiro</title>
-<meta name="description" content="The terms for using Kiro during beta and beyond." />
+<meta name="description" content="The terms that govern your use of Kiro's AI receptionist service, during beta and on paid plans." />
 <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet" />
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 72'%3E%3Crect width='72' height='72' rx='18' fill='%231e293b'/%3E%3Cg stroke-linecap='round'%3E%3Ccircle cx='24' cy='26' r='5' fill='%2322d3ee'/%3E%3Cline x1='34' y1='26' x2='52' y2='26' stroke='%2394a3b8' stroke-width='5'/%3E%3Ccircle cx='24' cy='46' r='5' fill='%2322d3ee'/%3E%3Cline x1='34' y1='46' x2='52' y2='46' stroke='%2322d3ee' stroke-width='5'/%3E%3C/g%3E%3C/svg%3E" />
@@ -13,22 +13,40 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   body{font-family:'Inter',system-ui,sans-serif;color:var(--slate);background:var(--paper);line-height:1.65;-webkit-font-smoothing:antialiased;}
   a{color:var(--cyan);text-decoration:none;font-weight:500;}a:hover{text-decoration:underline;}
-  .wrap{max-width:760px;margin:0 auto;padding:0 24px;}
-  header{border-bottom:1px solid var(--line);background:#fff;}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:760px;margin:0 auto;padding:0 24px;}
+  .wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+  header{border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:10;}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:820px;margin:0 auto;padding:0 24px;}
   .brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:20px;color:var(--slate);}
   .brand svg{flex:none;}
   .back{font-size:14px;color:var(--muted);}
-  main{padding:56px 0 80px;}
-  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(32px,5vw,44px);color:var(--slate);line-height:1.1;letter-spacing:-.01em;}
-  .updated{color:var(--muted);font-size:14px;margin-top:12px;}
-  h2{font-family:'Fraunces',serif;font-weight:600;font-size:23px;color:var(--slate);margin:38px 0 12px;}
-  p,li{font-size:16px;color:#334155;}
-  p{margin-bottom:14px;}
-  ul{margin:0 0 14px 22px;}li{margin-bottom:8px;}
-  .lead{font-size:18px;color:#334155;margin-top:24px;}
+  main{padding:52px 0 80px;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(32px,5vw,46px);color:var(--slate);line-height:1.1;letter-spacing:-.01em;}
+  .dates{color:var(--muted);font-size:14px;margin-top:14px;line-height:1.7;}
+  .dates strong{color:var(--slate);font-weight:600;}
+  .intro{font-size:17px;color:#334155;margin-top:22px;}
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:25px;color:var(--slate);margin:44px 0 14px;padding-top:22px;border-top:1px solid var(--line);scroll-margin-top:80px;}
+  h3{font-family:'Inter',sans-serif;font-weight:600;font-size:17px;color:var(--slate);margin:22px 0 9px;}
+  p{margin-bottom:14px;font-size:16px;color:#334155;}
+  ul{margin:0 0 16px 4px;list-style:none;}
+  li{position:relative;padding-left:22px;margin-bottom:9px;font-size:16px;color:#334155;}
+  li::before{content:"";position:absolute;left:2px;top:11px;width:6px;height:6px;border-radius:50%;background:var(--cyan);}
+  li ul{margin-top:9px;margin-bottom:4px;}
+  strong{color:var(--slate);font-weight:600;}
+  .toc{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin:32px 0 8px;}
+  .toc h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:14px;font-weight:600;}
+  .toc ol{list-style:none;columns:2;column-gap:32px;}
+  .toc li{padding-left:0;margin-bottom:8px;font-size:14px;break-inside:avoid;}
+  .toc li::before{display:none;}
+  .toc a{color:#334155;font-weight:400;}
+  .toc a:hover{color:var(--cyan);}
+  .legal{font-size:14.5px;color:#475569;line-height:1.6;}
+  .legal p{font-size:14.5px;color:#475569;}
+  .contact-card{background:#fff;border:1px solid var(--line);border-left:3px solid var(--cyan);border-radius:12px;padding:22px 24px;margin:8px 0 14px;}
+  .contact-card .r{font-size:16px;color:#334155;margin-bottom:4px;}
+  .contact-card .r strong{color:var(--slate);}
   footer{border-top:1px solid var(--line);padding:32px 0;font-size:13px;color:var(--muted);}
   .footer-row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  @media(max-width:640px){.toc ol{columns:1;}}
 </style>
 </head>
 <body>
@@ -41,46 +59,175 @@
 <main>
   <div class="wrap">
     <h1>Terms of Service</h1>
-    <p class="updated">Last updated: July 2, 2026</p>
-    <p class="lead">These terms govern your use of Kiro, an AI phone receptionist service operated by Kiro Solutions Inc. ("Kiro," "we," "us"), Calgary, Alberta, Canada. By using Kiro, you agree to these terms.</p>
+    <p class="dates"><strong>Last Updated:</strong> July 3, 2026 &nbsp;·&nbsp; <strong>Effective Date:</strong> July 3, 2026</p>
+    <p class="intro">These Terms of Service ("Terms") govern your access to and use of Kiro, an AI phone receptionist service operated by Kiro Solutions Inc. ("Kiro," "we," "us," or "our"), a company based in Calgary, Alberta, Canada. By accepting these Terms, creating an account, or using the Service, you agree to these Terms on behalf of yourself and the business you represent.</p>
 
-    <h2>The service</h2>
-    <p>Kiro answers, records, and transcribes calls on your behalf; books appointments; takes messages; answers routine questions; and passes calls to you when needed. Calls are handled by an automated AI assistant, not a live person.</p>
+    <div class="toc">
+      <h4>Contents</h4>
+      <ol>
+        <li><a href="#s1">1. Acceptance and Eligibility</a></li>
+        <li><a href="#s2">2. Definitions</a></li>
+        <li><a href="#s3">3. The Service</a></li>
+        <li><a href="#s4">4. Beta</a></li>
+        <li><a href="#s5">5. Accounts and Security</a></li>
+        <li><a href="#s6">6. Fees, Taxes, and Payment</a></li>
+        <li><a href="#s7">7. Acceptable Use</a></li>
+        <li><a href="#s8">8. Call Recording Responsibilities</a></li>
+        <li><a href="#s9">9. Your Content and Data</a></li>
+        <li><a href="#s10">10. Intellectual Property</a></li>
+        <li><a href="#s11">11. Third-Party Services</a></li>
+        <li><a href="#s12">12. Confidentiality</a></li>
+        <li><a href="#s13">13. Warranty Disclaimer</a></li>
+        <li><a href="#s14">14. Limitation of Liability</a></li>
+        <li><a href="#s15">15. Indemnification</a></li>
+        <li><a href="#s16">16. Term, Suspension, and Termination</a></li>
+        <li><a href="#s17">17. Force Majeure</a></li>
+        <li><a href="#s18">18. Governing Law and Dispute Resolution</a></li>
+        <li><a href="#s19">19. Changes to These Terms</a></li>
+        <li><a href="#s20">20. General</a></li>
+        <li><a href="#s21">21. Contact</a></li>
+      </ol>
+    </div>
 
-    <h2>Beta</h2>
-    <p>Kiro is currently offered as a free beta while we build alongside real businesses. During beta, the service is provided as-is, may change or have interruptions, and features may be added or removed. We ask beta participants for honest feedback. Either of us can end participation at any time.</p>
+    <h2 id="s1">1. Acceptance and Eligibility</h2>
+    <p>By clicking "I agree," creating an account, or using the Service, you agree to these Terms on behalf of yourself or the business you represent. You represent and warrant that: (a) you are at least the age of majority in your jurisdiction; (b) you have the authority to bind the business entity you represent; and (c) your business is located in Canada or the United States. The Service is not offered to individuals or entities located outside Canada and the United States.</p>
 
-    <h2>Fees</h2>
-    <p>Kiro is free during your beta period. If you continue after paid plans begin, pricing starts at $179 CAD per month, and we'll tell you the terms before any charge. There is no long-term contract — you can stop using Kiro at any time.</p>
+    <h2 id="s2">2. Definitions</h2>
+    <p>"<strong>Business Client</strong>" or "<strong>you</strong>" means the business entity that has accepted these Terms. "<strong>End Customer</strong>" means an individual who contacts a Business Client through the Service. "<strong>Service</strong>" means Kiro's AI phone receptionist platform, including the AI voice agent, AI chatbot, appointment and reservation handling, transcription, and related features. "<strong>Beta</strong>" means the period during which the Service is offered free of charge as described in Section 4. "<strong>Content</strong>" means information, materials, and data that a Business Client uploads, provides, or generates through the Service.</p>
 
-    <h2>Your responsibilities</h2>
+    <h2 id="s3">3. The Service</h2>
+    <p>Kiro answers, records, and transcribes calls on your behalf; books appointments and reservations; takes messages and callback requests; answers routine questions; and passes calls to you when needed. Calls are handled by an automated AI assistant, not a live person. We grant you a limited, non-exclusive, non-transferable, non-sublicensable right to access and use the Service during the term of these Terms solely for your internal business purposes.</p>
+
+    <h2 id="s4">4. Beta</h2>
+    <p>Kiro is currently offered as a free Beta. During the Beta:</p>
     <ul>
-      <li>Use Kiro lawfully and only for your own business.</li>
-      <li><strong>Provide any call-recording notice and obtain any consent</strong> required by the laws that apply to you and your callers. You are responsible for compliance with call-recording and privacy laws in your area.</li>
-      <li>Keep your account details accurate and your login secure.</li>
-      <li>Don't use Kiro to harass, deceive, or break the law, and don't attempt to disrupt or misuse the service.</li>
+      <li>The Service is provided on an "as is" and "as available" basis, with no service level or uptime commitment;</li>
+      <li>We may change, add, remove, or discontinue features at any time;</li>
+      <li>Either party may end participation at any time on written notice;</li>
+      <li>Kiro's total aggregate liability during the Beta is limited as set out in Section 14, and Kiro is not obligated to provide refunds;</li>
+      <li>We may ask for feedback about the Service, and any feedback you provide is governed by Section 10 (Intellectual Property).</li>
     </ul>
+    <p><strong>No automatic charge.</strong> Your Beta will not convert to a paid plan automatically, and we do not collect payment details to use the Service during the Beta. When the Beta period ends, the Service will simply pause unless you choose to continue on a paid plan. To continue, you must take an affirmative step — add a payment method and expressly agree to the applicable fees. If you do nothing, no charge is made and your access ends. Data export on termination is described in Section 16.</p>
 
-    <h2>Your data</h2>
-    <p>You keep ownership of your business and call data. How we handle it is described in our <a href="/privacy">Privacy Policy</a>. You can request deletion of your data as described there.</p>
+    <h2 id="s5">5. Accounts and Security</h2>
+    <p>You are responsible for maintaining the confidentiality of your account credentials, for all activity under your account, and for promptly notifying us at <a href="mailto:hello@kirodesk.com">hello@kirodesk.com</a> of any unauthorized use or suspected compromise. We may require multi-factor authentication and may suspend accounts that show signs of compromise. You will keep your account information current and accurate.</p>
+    <p>One account is licensed to one Business Client. You will not share account credentials with any person outside your business, sublicense account access, or allow any third party to access the Service through your account.</p>
 
-    <h2>No warranty</h2>
-    <p>Kiro is provided "as is" and "as available." We work hard to keep it reliable, but we don't guarantee it will be uninterrupted, error-free, or that it will handle every call perfectly. Kiro is a tool to help you catch calls — it doesn't replace your own judgment or staff.</p>
+    <h2 id="s6">6. Fees, Taxes, and Payment</h2>
+    <p>The Service is provided free of charge during your Beta period, and no payment is due unless you choose to continue on a paid plan. When paid plans begin, current pricing starts at CAD $179 per month. <strong>We do not charge you automatically:</strong> you will only be charged after you add a payment method and expressly agree to a paid plan and its fees. By adding a payment method and confirming a paid plan, you authorize recurring monthly charges for that plan until you cancel. Fees are in Canadian dollars unless otherwise stated, are exclusive of taxes (including GST and any other applicable taxes, which you are responsible for paying), and are non-refundable except as required by law. If you fail to pay when due, we may suspend or terminate the Service after notice. We may change fees on at least thirty (30) days' prior notice, effective for the next billing cycle; if you do not agree to a fee change, you may cancel before it takes effect.</p>
+    <h3>6.1 Cancellation</h3>
+    <p>You may cancel at any time by (a) selecting "Cancel plan" in your account dashboard, or (b) emailing <a href="mailto:hello@kirodesk.com">hello@kirodesk.com</a> from the email address on your account. Cancellation takes effect at the end of your current billing period. No further charges will be made after cancellation, and no refund is provided for the current period except as required by law.</p>
+    <h3>6.2 Renewal reminders</h3>
+    <p>Where required by applicable law (including California's Automatic Renewal Law), we will send you a reminder by email at least fifteen (15) days before each recurring charge that follows an annual or longer commitment, and at other intervals required by law. For monthly plans, we send a receipt on each charge.</p>
+    <h3>6.3 Free-trial-to-paid transition</h3>
+    <p>If we ever offer a free trial that converts to a paid plan (which the current Beta does not), we will (i) disclose all material terms before you enroll, (ii) require your express affirmative consent to the recurring charge, and (iii) send you a reminder before the first paid charge, in each case as required by applicable law.</p>
 
-    <h2>Limitation of liability</h2>
-    <p>To the fullest extent permitted by law, Kiro Solutions Inc. is not liable for indirect, incidental, or consequential damages, or for lost business or bookings, arising from your use of the service. Nothing in these terms limits liability that cannot be limited by law.</p>
+    <h2 id="s7">7. Acceptable Use</h2>
+    <p>You will not, and will not permit any third party to: (a) use the Service to violate any law or regulation, including telecommunications, consumer protection, anti-spam, and privacy laws; (b) use the Service to send unsolicited commercial messages, harass, defame, or deceive any person; (c) upload or transmit malware, viruses, or harmful code; (d) attempt to reverse engineer, decompile, or derive the source code of the Service; (e) probe, scan, or test the vulnerability of the Service, or breach any security or authentication measures; (f) use the Service to build a competing product or benchmark it for public disclosure without our written consent; (g) resell, sublicense, or provide the Service to third parties as a service bureau; or (h) use the Service for any purpose that is unlawful, harmful, deceptive, or unauthorized. We may investigate suspected violations and cooperate with law enforcement.</p>
 
-    <h2>Ending use</h2>
-    <p>You can stop using Kiro at any time. We may suspend or end access if these terms are broken or if needed to protect the service or others.</p>
+    <h2 id="s8">8. Call Recording Responsibilities</h2>
+    <p>The Service records and transcribes calls handled on your behalf. We provide a standard opening notice that informs End Customers that the call may be recorded, that they are speaking with an AI assistant, and that information they share will be processed to handle their request.</p>
+    <p>You are responsible for confirming that this opening notice, together with any additional practice you adopt, satisfies the call-recording, wiretap, two-party consent, and privacy laws that apply to you and your End Customers, including in each U.S. state where your End Customers may be located (for example, all-party consent states such as California, Florida, Illinois, Massachusetts, Maryland, Montana, New Hampshire, Pennsylvania, and Washington). You may configure or supplement the opening notice as reasonably needed to meet those requirements. You will not disable the recording notice, and you will not use the Service for any call for which such notice or consent is legally insufficient.</p>
+    <p>You are the data controller with respect to End Customer information, and Kiro acts as your service provider (data processor), as further described in our <a href="/privacy">Privacy Policy</a> and any Data Processing Agreement between us.</p>
+    <p>Any commercial electronic messages sent through the Service on your behalf (for example, appointment reminders or follow-ups) are sent with you as the sender under Canada's Anti-Spam Legislation (CASL). You are responsible for obtaining any required consents and for the content of those messages. Transactional messages (such as confirmations directly relating to a request made by an End Customer) are exempt under CASL Section 6(6).</p>
 
-    <h2>Governing law</h2>
-    <p>These terms are governed by the laws of the Province of Alberta and the federal laws of Canada that apply there.</p>
+    <h2 id="s9">9. Your Content and Data</h2>
+    <p>As between the parties, you own your Content and any End Customer information collected on your behalf, and you are the data controller with respect to that End Customer information. Kiro acts as your service provider (data processor). How we collect, use, disclose, and retain personal information is described in our <a href="/privacy">Privacy Policy</a>, and specific processing obligations are set out in any Data Processing Agreement between us. Kiro may create and use aggregated and de-identified information as described in the Privacy Policy. You may request deletion or export of your data as described in the Privacy Policy, subject to legal retention requirements.</p>
+    <p>Requests from End Customers to access, correct, or delete personal information may be directed to you as the controller. Where Kiro receives such a request directly, we will refer or coordinate with you in accordance with our Privacy Policy.</p>
 
-    <h2>Changes</h2>
-    <p>We may update these terms as Kiro grows. We'll change the date above when we do, and material changes will be made clear.</p>
+    <h2 id="s10">10. Intellectual Property</h2>
+    <p>As between the parties, Kiro owns all right, title, and interest in and to the Service, including all software, models, prompts, workflows, documentation, and derivative works, and all associated intellectual property rights. We grant you a limited, non-exclusive, non-transferable, non-sublicensable right to access and use the Service during the term of these Terms solely for your internal business purposes.</p>
+    <p>As between the parties, you own your Content and End Customer information collected on your behalf. You grant Kiro a worldwide, non-exclusive, royalty-free license to host, process, transmit, display, and use your Content solely to provide, operate, secure, and support the Service and to create aggregated and de-identified information as described in the Privacy Policy.</p>
+    <p>If you provide feedback, suggestions, or ideas about the Service ("Feedback"), you grant Kiro a perpetual, irrevocable, royalty-free, worldwide license to use the Feedback for any purpose without obligation to you. Kiro will not identify you as the source of Feedback without your consent.</p>
+    <p>Kiro's name, logo, and trademarks are owned by Kiro. You will not use them without our prior written consent, except that you may make factual statements that you use the Service.</p>
 
-    <h2>Contact</h2>
-    <p>Questions? Email <a href="mailto:hello@kirodesk.com">hello@kirodesk.com</a> or write to Kiro Solutions Inc., Calgary, Alberta, Canada.</p>
+    <h2 id="s11">11. Third-Party Services</h2>
+    <p>The Service integrates or depends on third-party providers, including telephony, cloud hosting, AI processing, transcription, and messaging providers, as described in our <a href="/privacy">Privacy Policy</a>. We are not responsible for the availability, functionality, or acts or omissions of any third-party provider, and interruptions or failures of any third-party provider may affect the Service. Our liability for such matters is limited by Sections 13 and 14.</p>
+
+    <h2 id="s12">12. Confidentiality</h2>
+    <p>Each party may receive information of the other that is marked confidential or should reasonably be understood as confidential ("Confidential Information"). The receiving party will use Confidential Information only to perform under these Terms, will protect it with at least the care it uses for its own confidential information (and never less than reasonable care), and will not disclose it to third parties except to employees, contractors, and advisors under confidentiality obligations. This obligation survives termination for three (3) years, except for trade secrets, which survive as long as they remain trade secrets under applicable law.</p>
+
+    <h2 id="s13">13. Warranty Disclaimer</h2>
+    <p class="legal">THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE," WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ACCURACY, AVAILABILITY, OR THAT THE SERVICE WILL BE UNINTERRUPTED, ERROR-FREE, OR SECURE.</p>
+    <p class="legal">THE SERVICE RELIES ON ARTIFICIAL INTELLIGENCE. AI OUTPUTS, INCLUDING TRANSCRIPTS, INTENT DETECTION, BOOKING DETAILS, AND RESPONSES, MAY BE INACCURATE, INCOMPLETE, OR INAPPROPRIATE FOR YOUR NEEDS. YOU WILL INDEPENDENTLY REVIEW AND VERIFY AI OUTPUTS BEFORE ACTING ON THEM, AND YOU REMAIN RESPONSIBLE FOR YOUR BUSINESS DECISIONS. THE SERVICE IS NOT A SUBSTITUTE FOR PROFESSIONAL JUDGMENT, LICENSED STAFF, OR MEDICAL, LEGAL, FINANCIAL, OR EMERGENCY ADVICE.</p>
+    <p class="legal">THE SERVICE IS NOT AN EMERGENCY SERVICE. IN THE EVENT OF AN EMERGENCY, CALLERS SHOULD DIAL 911 OR THE APPLICABLE EMERGENCY NUMBER. YOU WILL NOT MARKET OR REPRESENT THE SERVICE AS AN EMERGENCY LINE.</p>
+    <p class="legal">TO THE EXTENT ANY IMPLIED WARRANTY CANNOT BE DISCLAIMED, IT IS LIMITED IN DURATION TO NINETY (90) DAYS FROM THE DATE OF FIRST USE OF THE SERVICE. NOTHING IN THESE TERMS EXCLUDES OR LIMITS ANY WARRANTY, LIABILITY, OR RIGHT THAT CANNOT BE EXCLUDED OR LIMITED UNDER APPLICABLE LAW, INCLUDING UNDER ALBERTA'S CONSUMER PROTECTION LEGISLATION WHERE IT APPLIES.</p>
+    <p>For clarity, Kiro does not use your Content or End Customer information to train third-party foundational AI models. Our AI service providers process this information to generate responses under contract terms that prohibit training use, as further described in our <a href="/privacy">Privacy Policy</a>.</p>
+
+    <h2 id="s14">14. Limitation of Liability</h2>
+    <p class="legal">TO THE FULLEST EXTENT PERMITTED BY LAW:</p>
+    <p class="legal">(a) NEITHER PARTY WILL BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, OR FOR LOST PROFITS, LOST REVENUE, LOST BUSINESS, LOST BOOKINGS, LOST GOODWILL, OR LOSS OR CORRUPTION OF DATA, ARISING OUT OF OR RELATED TO THESE TERMS OR THE SERVICE, REGARDLESS OF THE THEORY OF LIABILITY (CONTRACT, TORT, STATUTE, OR OTHERWISE) AND WHETHER OR NOT THE PARTY WAS ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+    <p class="legal">(b) EACH PARTY'S TOTAL AGGREGATE LIABILITY ARISING OUT OF OR RELATED TO THESE TERMS AND THE SERVICE IS LIMITED TO THE GREATER OF (i) THE FEES YOU PAID TO KIRO IN THE TWELVE (12) MONTHS BEFORE THE EVENT GIVING RISE TO THE CLAIM, OR (ii) ONE HUNDRED CANADIAN DOLLARS (CAD $100). DURING THE BETA PERIOD, WHERE NO FEES ARE PAID, KIRO'S TOTAL AGGREGATE LIABILITY IS LIMITED TO CAD $100.</p>
+    <p class="legal">(c) THE LIMITATIONS IN THIS SECTION DO NOT APPLY TO: (i) A PARTY'S INDEMNIFICATION OBLIGATIONS UNDER SECTION 15; (ii) A PARTY'S BREACH OF ITS CONFIDENTIALITY OBLIGATIONS; (iii) A PARTY'S GROSS NEGLIGENCE, FRAUD, OR WILLFUL MISCONDUCT; OR (iv) LIABILITY THAT CANNOT BE LIMITED UNDER APPLICABLE LAW.</p>
+    <p class="legal">(d) NO CLAIM MAY BE BROUGHT MORE THAN ONE (1) YEAR AFTER THE CAUSE OF ACTION FIRST AROSE, EXCEPT WHERE A LONGER PERIOD IS REQUIRED BY APPLICABLE LAW.</p>
+    <p class="legal">(e) YOU ACKNOWLEDGE THAT THE PRICING AND AVAILABILITY OF THE SERVICE REFLECT THIS ALLOCATION OF RISK AND THAT THE LIMITATIONS IN THIS SECTION ARE AN ESSENTIAL BASIS OF THE PARTIES' AGREEMENT.</p>
+
+    <h2 id="s15">15. Indemnification</h2>
+    <h3>15.1 By You</h3>
+    <p>You will defend, indemnify, and hold harmless Kiro Solutions Inc. and its officers, directors, employees, and agents from and against any third-party claim, demand, action, or proceeding, and all resulting damages, liabilities, settlements, costs, and reasonable legal fees (collectively, "Losses"), arising out of or relating to:</p>
+    <ul>
+      <li>your use of the Service in violation of these Terms or applicable law;</li>
+      <li>your Content, including any claim that your Content infringes, misappropriates, or violates any third-party right;</li>
+      <li>your failure to provide any call-recording notice, wiretap notice, or consent required by the laws of your jurisdiction or of the jurisdiction of any End Customer, or any claim by an End Customer that a call was recorded, transcribed, or used without proper notice or consent;</li>
+      <li>your handling, use, retention, or disclosure of End Customer information after it is received by you, including any claim by an End Customer arising from your acts or omissions as data controller;</li>
+      <li>any bodily injury, property damage, or other harm arising from actions taken by you or your personnel in reliance on an AI output without independent verification; or</li>
+      <li>your violation of applicable privacy, consumer protection, anti-spam, or telecommunications laws.</li>
+    </ul>
+    <h3>15.2 By Kiro</h3>
+    <p>Kiro will defend, indemnify, and hold harmless you from and against Losses arising out of a third-party claim that the Service, as provided by Kiro and used by you in accordance with these Terms, infringes a valid Canadian or United States patent, copyright, or trademark. Kiro's obligation does not apply to any claim arising from (i) your Content, (ii) your combination of the Service with any third-party product or service, (iii) your use of the Service in violation of these Terms or applicable law, or (iv) any modification of the Service not authorized by Kiro. If the Service becomes, or in Kiro's reasonable opinion is likely to become, subject to an infringement claim, Kiro may, at its option: (1) procure the right for you to continue using the Service; (2) modify or replace the Service so it is non-infringing; or (3) terminate the Service and refund any prepaid, unused fees. This Section states Kiro's sole liability and your sole and exclusive remedy for third-party intellectual property infringement claims.</p>
+    <h3>15.3 Procedure</h3>
+    <p>The indemnified party will (i) promptly notify the indemnifying party of any claim, (ii) give the indemnifying party sole control of the defense and settlement (provided that no settlement requiring an admission or payment by the indemnified party may be made without its consent, which will not be unreasonably withheld), and (iii) provide reasonable cooperation at the indemnifying party's expense. The indemnified party may participate in the defense with counsel of its choice at its own expense.</p>
+
+    <h2 id="s16">16. Term, Suspension, and Termination</h2>
+    <h3>16.1 Term</h3>
+    <p>These Terms begin when you first accept them and continue until terminated as set out below.</p>
+    <h3>16.2 Termination for convenience</h3>
+    <p>Either party may terminate for any reason on thirty (30) days' written notice. During the Beta, either party may terminate at any time on written notice.</p>
+    <h3>16.3 Termination for cause</h3>
+    <p>Either party may terminate immediately on written notice if the other party materially breaches these Terms and fails to cure within fifteen (15) days after receiving notice of the breach, or immediately if the breach is not curable, if the other party becomes insolvent or subject to bankruptcy proceedings, or if required by law.</p>
+    <h3>16.4 Suspension</h3>
+    <p>Kiro may suspend your access, in whole or in part, on notice reasonable under the circumstances (which may be after suspension where advance notice is impracticable, such as in the case of an active security incident, legal directive, or clear violation causing imminent harm), if: (i) required by law or by a governmental or regulatory authority; (ii) necessary to prevent security, integrity, or availability risks to the Service or its users; (iii) you materially violate Section 7 (Acceptable Use); or (iv) fees remain unpaid after notice. We will provide notice of the reason for suspension as soon as reasonably practicable, and will restore access when the cause of suspension is resolved.</p>
+    <h3>16.5 Effects of termination</h3>
+    <p>On termination: (i) your right to use the Service ends; (ii) you may request export of your data within thirty (30) days, in a format we reasonably make available; (iii) after that period, we will delete or de-identify your data in accordance with the Privacy Policy and its retention periods; and (iv) accrued fees remain payable.</p>
+    <h3>16.6 Survival</h3>
+    <p>Sections 10, 12, 13, 14, 15, 18, and this Section survive termination.</p>
+
+    <h2 id="s17">17. Force Majeure</h2>
+    <p>Neither party is liable for delay or failure to perform (other than payment obligations) caused by events beyond its reasonable control, including natural disasters, acts of war or terrorism, civil unrest, strikes, pandemics, governmental actions, internet or utility failures, and failures of third-party providers. The affected party will use reasonable efforts to mitigate the effect and resume performance.</p>
+
+    <h2 id="s18">18. Governing Law and Dispute Resolution</h2>
+    <h3>18.1 Governing law</h3>
+    <p>These Terms are governed by the laws of the Province of Alberta and the federal laws of Canada applicable there, without regard to conflict of laws principles. The United Nations Convention on Contracts for the International Sale of Goods does not apply.</p>
+    <h3>18.2 Informal resolution</h3>
+    <p>Before initiating any formal proceeding, the parties will attempt to resolve any dispute through good-faith discussion for at least thirty (30) days after written notice of the dispute.</p>
+    <h3>18.3 Venue</h3>
+    <p>Except as set out below, the parties submit to the exclusive jurisdiction of the courts sitting in Calgary, Alberta.</p>
+    <h3>18.4 Class action and jury waiver (U.S. Business Clients)</h3>
+    <p>To the extent you are located in the United States and to the fullest extent permitted by law, you and Kiro each waive any right to bring or participate in a class, collective, or representative action and any right to a jury trial. This waiver does not apply to claims that cannot be waived under applicable law.</p>
+    <h3>18.5 Injunctive relief</h3>
+    <p>Either party may seek injunctive or equitable relief in any court of competent jurisdiction to protect its confidential information or intellectual property rights.</p>
+
+    <h2 id="s19">19. Changes to These Terms</h2>
+    <p>We may update these Terms from time to time. When we make material changes, we will (i) update the "Last Updated" date above, (ii) notify you by email or through the Service at least thirty (30) days before the changes take effect where reasonably practicable, and (iii) make the updated Terms available on our website. Your continued use of the Service after changes take effect constitutes acceptance. If you do not agree to the changes, your sole remedy is to stop using the Service and request data export as set out in Section 16. For changes that materially reduce your rights or expand your obligations in a manner not required by law, we will identify those changes in the notice and provide a reasonable mechanism to review and accept or decline them before they take effect for you.</p>
+
+    <h2 id="s20">20. General</h2>
+    <p><strong>Entire agreement.</strong> These Terms, together with the Privacy Policy and any Data Processing Agreement or order form between the parties, constitute the entire agreement between you and Kiro regarding the Service and supersede all prior agreements.</p>
+    <p><strong>Severability.</strong> If any provision is held unenforceable, it will be modified to the minimum extent necessary to make it enforceable, and the remaining provisions will remain in effect.</p>
+    <p><strong>No waiver.</strong> A failure to enforce any provision is not a waiver of future enforcement.</p>
+    <p><strong>Assignment.</strong> You may not assign these Terms without our prior written consent, except to a successor in a merger, acquisition, or sale of substantially all assets. We may assign these Terms in connection with a merger, acquisition, financing, or sale of assets. Any attempted assignment in violation of this Section is void.</p>
+    <p><strong>Notices.</strong> Notices to Kiro must be sent to <a href="mailto:hello@kirodesk.com">hello@kirodesk.com</a> and to our registered office in Calgary, Alberta. Notices to you may be sent to the email address associated with your account or through in-Service notifications and are effective on the date sent.</p>
+    <p><strong>Independent contractors.</strong> The parties are independent contractors. Nothing in these Terms creates a partnership, joint venture, agency, or employment relationship.</p>
+    <p><strong>Publicity.</strong> Neither party will use the other's name, logo, or trademarks in marketing materials without prior written consent, except that Kiro may identify you as a customer in customer lists and case studies with your prior written approval.</p>
+    <p><strong>Export control and sanctions.</strong> You represent that you and your End Customers are not located in, and will not use the Service in, any country or with any person subject to comprehensive Canadian or U.S. sanctions.</p>
+    <p><strong>Headings; interpretation.</strong> Headings are for convenience only. "Including" means "including without limitation."</p>
+
+    <h2 id="s21">21. Contact</h2>
+    <p>Questions about these Terms? Contact us:</p>
+    <div class="contact-card">
+      <div class="r"><strong>Kiro Solutions Inc.</strong></div>
+      <div class="r">Email: <a href="mailto:hello@kirodesk.com">hello@kirodesk.com</a></div>
+      <div class="r">Address: 1271-5005 Dalhousie Dr NW, Unit 175, Calgary, AB T3A 5R8, Canada</div>
+    </div>
   </div>
 </main>
 <footer>
