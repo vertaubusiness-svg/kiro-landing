@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kiro — The AI receptionist for local service businesses</title>
-<meta name="description" content="Kiro is an AI phone receptionist for salons, nail studios, and local service businesses. It answers every call, books the appointment, and texts you the details — even when your hands are full. Free beta open now." />
+<title>Kiro — The AI receptionist for independent salons</title>
+<meta name="description" content="Kiro is an AI phone receptionist built for independent salons and studios. It answers every call, books the appointment, and texts you the details — even when you're mid-service. Free beta open now." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -112,19 +112,17 @@
   .tag.wait { background: rgba(148,163,184,.14); color: #cbd5e1; border-color: #475569; }
 
   /* Stat band */
-  .band { background: var(--ink); color: var(--white); padding: 72px 0; margin-top: 48px; text-align: center; }
+  .band { background: var(--ink); color: var(--white); padding: 72px 0; margin-top: 48px; }
   .band .big { font-family: 'Fraunces', serif; font-size: clamp(44px, 8vw, 88px); font-weight: 500; line-height: 1; }
   .band .big span { color: var(--cyan-bright); }
-  .band p { font-size: 19px; color: #cbd5e1; max-width: 52ch; margin: 20px auto 0; text-wrap: balance; }
+  .band p { font-size: 19px; color: #cbd5e1; max-width: 46ch; margin-top: 20px; }
 
   /* Sections */
   section.block { padding: 84px 0; }
   .section-head { max-width: 40ch; margin-bottom: 44px; }
-  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
-  .section-head.center .eyebrow { justify-content: center; }
   .section-head .eyebrow { margin-bottom: 14px; }
-  .section-head h2 { font-size: clamp(30px, 4vw, 42px); color: var(--slate); text-wrap: balance; }
-  .section-head p { color: var(--muted); font-size: 17px; margin-top: 14px; text-wrap: pretty; }
+  .section-head h2 { font-size: clamp(30px, 4vw, 42px); color: var(--slate); }
+  .section-head p { color: var(--muted); font-size: 17px; margin-top: 14px; }
 
   .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .feature { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; }
@@ -155,13 +153,16 @@
   .dash-stat .l { font-size: 12.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; margin-top: 6px; }
   .dash-note { text-align: center; margin-top: 16px; font-size: 13px; color: var(--muted); }
 
-  /* ROI / value — missed-revenue frame */
-  .stat3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 8px; }
-  .stat3-col { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 30px 26px; text-align: center; }
-  .stat3-col .cnum { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(30px, 4vw, 42px); line-height: 1.05; color: var(--cyan); }
-  .stat3-col .cnum span { font-size: 15px; font-weight: 500; color: var(--muted); }
-  .stat3-col .csub { font-size: 14px; line-height: 1.5; color: var(--muted); margin-top: 12px; }
-  .stat3-col .csub strong { color: var(--slate); font-weight: 600; }
+  /* ROI / value compare */
+  .compare { position: relative; display: grid; grid-template-columns: 1fr 1fr; margin-top: 8px; border: 1px solid var(--line); border-radius: 18px; overflow: hidden; background: var(--white); }
+  .compare-col { padding: 36px 30px; text-align: center; }
+  .compare-col.old { background: var(--paper-warm); border-right: 1px solid var(--line); }
+  .compare-col .ctop { font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+  .compare-col .cnum { font-family: 'Fraunces', serif; font-weight: 600; font-size: clamp(28px, 4vw, 40px); line-height: 1.05; color: var(--slate); }
+  .compare-col.kiro .cnum { color: var(--cyan); }
+  .compare-col .cnum span { font-size: 15px; font-weight: 500; color: var(--muted); }
+  .compare-col .csub { font-size: 13.5px; color: var(--muted); margin-top: 8px; }
+  .compare-mid { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 44px; height: 44px; border-radius: 50%; background: var(--slate); color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 600; box-shadow: 0 4px 12px rgba(15,23,42,.2); z-index: 2; }
   .roi { margin-top: 18px; background: var(--slate); color: #fff; border-radius: 16px; padding: 26px 28px; display: flex; align-items: center; gap: 16px; justify-content: center; text-align: center; flex-wrap: wrap; }
   .roi .ic { width: 42px; height: 42px; border-radius: 11px; background: rgba(34,211,238,.14); color: var(--cyan-bright); display: grid; place-items: center; flex: none; }
   .roi p { font-size: 17px; font-weight: 500; color: #fff; max-width: 34em; }
@@ -186,7 +187,7 @@
   .step .si { position: absolute; top: 28px; right: 26px; color: var(--cyan); opacity: .5; }
 
   /* FAQ */
-  .faq { max-width: 760px; margin: 0 auto; display: grid; gap: 12px; }
+  .faq { max-width: 760px; display: grid; gap: 12px; }
   .faq details { background: var(--white); border: 1px solid var(--line); border-radius: 12px; }
   .faq summary { list-style: none; cursor: pointer; padding: 20px 22px; font-weight: 600; color: var(--slate); font-size: 17px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
   .faq summary::-webkit-details-marker { display: none; }
@@ -208,7 +209,8 @@
     .hero-grid, .split { grid-template-columns: 1fr; gap: 40px; }
     .features { grid-template-columns: 1fr; }
     .dash-body { grid-template-columns: 1fr; }
-    .stat3 { grid-template-columns: 1fr; }
+    .compare { grid-template-columns: 1fr; }
+    .compare-col.old { border-right: 0; border-bottom: 1px solid var(--line); }
     .steps { grid-template-columns: 1fr; }
     .footer-top { grid-template-columns: 1fr; gap: 28px; }
     .nav-links { display: none; }
@@ -220,19 +222,18 @@
     .live .pulse { animation: none; }
     html { scroll-behavior: auto; }
   }
-
-    /* ---- Live demo band ---- */
-    #demo .demo-kicker { font-family:'Inter',sans-serif; font-size:13px; font-weight:700;
-      letter-spacing:.14em; text-transform:uppercase; color:var(--cyan-bright); margin:0 0 16px; }
-    #demo .demo-number { display:inline-block; font-family:'Inter',sans-serif; font-weight:700;
-      font-size:clamp(32px, 6vw, 56px); color:var(--white); text-decoration:none;
-      margin:26px 0 4px; padding:4px 2px; border-bottom:3px solid var(--cyan-bright); letter-spacing:.01em; }
-    #demo .demo-number:hover { color:var(--cyan-bright); }
-    #demo .demo-fine { color:#94a3b8; font-size:14px; margin-top:14px; }
-    .hero-demo { margin-top:14px; font-size:14.5px; color:var(--muted); }
-    .hero-demo a { color:var(--slate); font-weight:600; text-decoration:none;
-      border-bottom:1.5px solid var(--cyan); padding-bottom:1px; }
-  </style>
+  /* ---- Live demo band ---- */
+  #demo .demo-kicker { font-family:'Inter',sans-serif; font-size:13px; font-weight:700;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--cyan-bright); margin:0 0 16px; }
+  #demo .demo-number { display:inline-block; font-family:'Inter',sans-serif; font-weight:700;
+    font-size:clamp(32px, 6vw, 56px); color:var(--white); text-decoration:none;
+    margin:26px 0 4px; padding:4px 2px; border-bottom:3px solid var(--cyan-bright); letter-spacing:.01em; }
+  #demo .demo-number:hover { color:var(--cyan-bright); }
+  #demo .demo-fine { color:#94a3b8; font-size:14px; margin-top:14px; }
+  .hero-demo { margin-top:14px; font-size:14.5px; color:var(--muted); }
+  .hero-demo a { color:var(--slate); font-weight:600; text-decoration:none;
+    border-bottom:1.5px solid var(--cyan); padding-bottom:1px; }
+</style>
 </head>
 <body>
 
@@ -254,7 +255,7 @@
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <span class="eyebrow"><span class="dot"></span> AI receptionist for local service businesses</span>
+        <span class="eyebrow"><span class="dot"></span> AI receptionist for salons &amp; studios</span>
         <h1>You're with a client.<br /><em>Kiro</em> gets the phone.</h1>
         <p class="lead">When your hands are full mid-appointment, Kiro answers every call, books the appointment, and texts you the details — so the booking never walks to the salon down the street.</p>
         <div class="hero-cta">
@@ -262,7 +263,7 @@
           <a class="btn btn-ghost" href="#how">See how it works</a>
         </div>
         <p class="hero-demo">Or hear it live: <a href="tel:+15873247639">+1 (587) 324-7639</a></p>
-        <p class="fineprint">Built for salons, nail studios, and local service businesses. No new phone system. No long contracts.</p>
+        <p class="fineprint">Built for independent salons and studios. No new phone system. No long contracts.</p>
       </div>
 
       <!-- SIGNATURE: live calls panel -->
@@ -332,7 +333,7 @@
   <!-- HOW IT WORKS (3 steps) -->
   <section class="block" id="how">
     <div class="wrap">
-      <div class="section-head center">
+      <div class="section-head">
         <span class="eyebrow"><span class="dot"></span> How it works</span>
         <h2>Three steps, and the phone takes care of itself.</h2>
         <p>No new phone system, no app for your clients to download. Kiro sits on your existing number.</p>
@@ -348,7 +349,7 @@
           <span class="si" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
           <div class="sn">02</div>
           <h3>Kiro handles it</h3>
-          <p>Books the appointment, answers questions about hours, prices, and services, or takes a message — talking with the caller in plain language, not reading off a script.</p>
+          <p>Books the appointment, answers questions about hours, prices, and services, or takes a message — in plain conversation, not a "press 1, press 2" menu.</p>
         </div>
         <div class="step">
           <span class="si" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg></span>
@@ -376,8 +377,8 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow"><span class="dot"></span> What you get</span>
-        <h2>Everything the phone needs — handled.</h2>
-        <p>Every call answered, every booking captured, every message passed to you — on standby around the clock, and you only pay for the minutes it's actually talking.</p>
+        <h2>A front desk that never clocks out.</h2>
+        <p>Everything a good receptionist does at the phone — without the wages, the breaks, or the missed calls.</p>
       </div>
       <div class="features">
         <div class="feature">
@@ -407,7 +408,7 @@
   <!-- DASHBOARD PREVIEW -->
   <section class="block" style="padding-top:0;">
     <div class="wrap">
-      <div class="section-head center">
+      <div class="section-head">
         <span class="eyebrow"><span class="dot"></span> Your dashboard</span>
         <h2>Every call, in one place.</h2>
         <p>Bookings, questions, and callbacks — logged with recordings and transcripts, so you can catch up between clients in seconds.</p>
@@ -430,28 +431,26 @@
   <!-- VALUE / ROI -->
   <section class="block">
     <div class="wrap">
-      <div class="section-head center">
-        <span class="eyebrow"><span class="dot"></span> The real cost</span>
-        <h2>The call you don't catch is the booking you lose.</h2>
-        <p>The math that matters isn't Kiro's price — it's the revenue quietly walking out the door every time the phone rings and no one can pick up.</p>
+      <div class="section-head">
+        <span class="eyebrow"><span class="dot"></span> The math</span>
+        <h2>A receptionist's coverage, for a fraction of the cost.</h2>
       </div>
-      <div class="stat3">
-        <div class="stat3-col">
-          <div class="cnum">85%</div>
-          <div class="csub">of callers who reach a missed call <strong>never call back</strong> — they dial the next salon on the list.</div>
+      <div class="compare">
+        <div class="compare-col old">
+          <div class="ctop">Front desk hire</div>
+          <div class="cnum">$2,500+<span>/mo</span></div>
+          <div class="csub">Wages, breaks, sick days — and still only during open hours.</div>
         </div>
-        <div class="stat3-col">
-          <div class="cnum">~50%</div>
-          <div class="csub">of salon bookings happen <strong>outside open hours</strong> — nights and weekends, when no one's at the desk.</div>
-        </div>
-        <div class="stat3-col">
-          <div class="cnum">$300–800<span>/mo</span></div>
-          <div class="csub">is what a live answering service charges to catch those calls — <strong>with none of the booking</strong>.</div>
+        <div class="compare-mid">vs</div>
+        <div class="compare-col kiro">
+          <div class="ctop">Kiro</div>
+          <div class="cnum">from $179<span>/mo</span></div>
+          <div class="csub">Answers 24/7, never takes a day off, never misses a call.</div>
         </div>
       </div>
       <div class="roi">
         <span class="ic" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
-        <p>One booking Kiro catches can cover <span class="hl">the whole month.</span> It's on standby 24/7 — you only pay for the minutes it's actually on the phone.</p>
+        <p>One booking Kiro catches can cover <span class="hl">a whole month.</span></p>
       </div>
     </div>
   </section>
@@ -459,7 +458,7 @@
   <!-- FAQ -->
   <section class="block origin" id="faq">
     <div class="wrap">
-      <div class="section-head center">
+      <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center;">
         <span class="eyebrow" style="justify-content:center;"><span class="dot"></span> Straight answers</span>
         <h2>The questions owners actually ask.</h2>
       </div>
@@ -470,7 +469,7 @@
         </details>
         <details>
           <summary>Does it sound like a robot reading a menu? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <div class="fa">A quick prompt points the caller the right way — booking or a question — and from there it's a real conversation, not a long phone-tree. Kiro is upfront that it's an assistant, it won't pretend to be a person, and it passes the call to you the moment someone asks for one.</div>
+          <div class="fa">No "press 1, press 2." Callers just say what they need and Kiro answers in plain conversation. It's upfront that it's an assistant — it won't pretend to be a person — and it passes the call to you whenever someone asks for one.</div>
         </details>
         <details>
           <summary>Do I need a new phone or a new number? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
@@ -486,24 +485,20 @@
         </details>
         <details>
           <summary>What does it cost? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <div class="fa">Right now we're opening <strong>free beta</strong> to a handful of businesses while we build alongside real owners. No long contract, keep your number, and you can leave whenever you like. When paid plans start, they begin at $179/month.</div>
-        </details>
-        <details>
-          <summary>Korean-speaking owner? <span class="chev" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></span></summary>
-          <div class="fa">Your callers hear Kiro in English — but you're supported in Korean the whole way. Setup, your weekly summaries, and help are all in Korean, and you can reach us anytime on KakaoTalk. 한국어로 세팅부터 지원까지 도와드립니다.</div>
+          <div class="fa">Right now we're opening <strong>free beta</strong> to a handful of salons while we build alongside real owners. No long contract, keep your number, and you can leave whenever you like. When paid plans start, they begin at $179/month.</div>
         </details>
       </div>
     </div>
   </section>
 
   <!-- FINAL CTA -->
-  <section class="block" style="padding-top:40px;">
+  <section class="block" style="padding-top:0;">
     <div class="wrap">
       <div class="final">
         <h2>Stop losing bookings to a ringing phone.</h2>
-        <p>Be one of the first businesses on Kiro. Free during beta, keep your number, no contract — you can walk away anytime. All we ask for is honest feedback.</p>
+        <p>Be one of the first salons on Kiro. Free during beta, keep your number, no contract — you can walk away anytime. All we ask for is honest feedback.</p>
         <a class="btn btn-primary" href="mailto:hello@kirodesk.com?subject=Kiro%20beta%20for%20my%20salon" style="font-size:16px; padding:14px 26px;">Start free beta</a>
-        <p style="color:#94a3b8; font-size:14px; margin-top:18px;">Not ready yet? Call the live demo first:<br /><a href="tel:+15873247639" style="color:#fff; font-weight:600; text-decoration:none; border-bottom:1.5px solid var(--cyan);">+1 (587) 324-7639</a></p>
+        <p style="color:#94a3b8; font-size:14px; margin-top:18px;">Not ready yet? Call the live demo first: <a href="tel:+15873247639" style="color:var(--slate); font-weight:600; text-decoration:none; border-bottom:1.5px solid var(--cyan);">+1 (587) 324-7639</a></p>
       </div>
     </div>
   </section>
@@ -515,8 +510,7 @@
     <div class="footer-top">
       <div>
         <div class="brand" style="font-size:18px;"><svg width="28" height="28" viewBox="0 0 72 72" aria-hidden="true" style="flex:none;"><rect width="72" height="72" rx="18" fill="#1e293b"/><g stroke-linecap="round"><circle cx="23" cy="25" r="3.6" fill="#22d3ee"/><line x1="31" y1="25" x2="52" y2="25" stroke="#64748b" stroke-width="3.4"/><circle cx="23" cy="36" r="3.6" fill="#22d3ee"/><line x1="31" y1="36" x2="52" y2="36" stroke="#22d3ee" stroke-width="3.4"/><circle cx="23" cy="47" r="3.6" fill="#64748b"/><line x1="31" y1="47" x2="45" y2="47" stroke="#64748b" stroke-width="3.4"/></g></svg> Kiro</div>
-        <p class="footer-blurb">The AI receptionist that answers when your hands are full — for salons, nail studios, and local service businesses.</p>
-        <p class="footer-blurb" style="margin-top:8px;">한인 사장님 — 세팅부터 지원까지 한국어로. 카카오톡 상담 가능.</p>
+        <p class="footer-blurb">The AI receptionist that answers when your hands are full — built for independent salons and studios.</p>
       </div>
       <div class="footer-links">
         <div class="footer-col">
