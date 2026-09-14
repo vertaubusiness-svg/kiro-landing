@@ -150,17 +150,26 @@
   .checks svg{width:14px;height:14px;color:var(--cyan-lit);flex:none;margin-top:4px;}
 
   .dash{display:grid;grid-template-columns:158px 1fr;min-height:392px;}
-  .dash-nav{border-right:1px solid var(--line);padding:14px 10px;background:var(--paper);}
-  .dash-nav .grp{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--label);padding:8px 9px 6px;}
-  .dn{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:6px;font-size:13px;color:var(--muted);margin-bottom:1px;}
-  .dn.on{background:rgba(15,23,42,.045);color:var(--slate);}
-  .dn .sq{width:13px;height:13px;border-radius:3.5px;background:rgba(15,23,42,.12);flex:none;}
+  /* Sidebar always dark, even though the app's own content pane is light (Stripe/Linear
+     pattern) — matches the real dashboard's dashboard/layout.tsx exactly. */
+  .dash-nav{padding:0 10px 14px;background:var(--slate);}
+  .dash-brand{display:flex;align-items:center;gap:7px;padding:13px 9px;margin:0 -10px 8px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .dash-brand .lg{width:6px;height:6px;border-radius:50%;background:var(--cyan-lit);box-shadow:0 0 6px rgba(34,211,238,.6);flex:none;}
+  .dash-brand .nm{font-weight:600;font-size:13.5px;letter-spacing:-.01em;color:#fff;}
+  .dash-nav .grp{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:rgba(255,255,255,.32);padding:8px 9px 6px;}
+  .dn{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:6px;font-size:13px;color:#94a3b8;margin-bottom:1px;}
+  .dn.on{background:rgba(255,255,255,.09);color:#fff;}
+  .dn .sq{width:13px;height:13px;border-radius:3.5px;background:rgba(255,255,255,.18);flex:none;}
   .dn.on .sq{background:var(--primary);}
-  .dn .cnt{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:var(--label);}
+  .dn .cnt{margin-left:auto;font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,.4);}
   .dash-main{padding:16px 18px;background:var(--card);}
-  .dash-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:15px;}
+  .dash-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
   .dash-h .t{font-size:14.5px;font-weight:600;letter-spacing:-.015em;color:var(--slate);}
   .dash-h .sub{font-family:var(--mono);font-size:10.5px;color:var(--label);}
+  .dash-toggle{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
+  .seg-btn{font-family:var(--mono);font-size:10px;letter-spacing:.04em;padding:4px 9px;border-radius:5px;color:var(--label);}
+  .seg-btn.on{background:rgba(15,23,42,.05);color:var(--slate);box-shadow:inset 0 0 0 1px var(--line);}
+  .seg-note{font-size:10.5px;color:var(--label);}
   .tbl{width:100%;border-collapse:collapse;font-size:12.5px;}
   .tbl th{text-align:left;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
     color:var(--label);font-weight:500;padding:0 10px 9px 0;border-bottom:1px solid var(--line);}
@@ -173,15 +182,15 @@
   .pill.ok{background:rgba(15,138,95,.10);color:#0f8a5f;box-shadow:inset 0 0 0 1px rgba(15,138,95,.25);}
   .pill.new{background:rgba(15,23,42,.05);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);}
   .pill .bd{width:5px;height:5px;border-radius:50%;background:currentColor;}
-  .conflict{font-family:var(--mono);font-size:10px;color:#b45309;}
 
   .appr-h{padding:13px 16px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--label);display:flex;justify-content:space-between;align-items:center;background:var(--card);}
   .appr-b{padding:16px;background:var(--card);}
   .row{display:flex;justify-content:space-between;padding:8px 0;font-size:13.5px;border-bottom:1px solid var(--line);}
   .row:last-of-type{border-bottom:none;}
   .row .l{color:var(--label);}
-  .row .r{color:var(--slate);font-weight:500;}
+  .row .r{color:var(--slate);font-weight:500;text-align:right;}
   .row .r.mn{font-family:var(--mono);font-size:12.5px;}
+  .est-note{display:block;font-family:'Inter',system-ui,sans-serif;font-weight:400;font-size:10px;color:var(--label);letter-spacing:0;margin-top:2px;}
   .appr-f{display:flex;gap:8px;padding:14px 16px;border-top:1px solid var(--line);background:var(--card);}
   .mini{flex:1;text-align:center;padding:8px;border-radius:6px;font-size:12.5px;font-weight:600;}
   .mini.ok{background:linear-gradient(180deg,#0A9EC4,#0781A2);color:#02161C;box-shadow:inset 0 1px 0 rgba(255,255,255,.22);}
@@ -370,6 +379,7 @@
       </div>
       <div class="dash">
         <div class="dash-nav">
+          <div class="dash-brand"><span class="lg"></span><span class="nm">Pobare</span></div>
           <div class="grp">Workspace</div>
           <div class="dn"><span class="sq"></span> Overview</div>
           <div class="dn"><span class="sq"></span> Conversations <span class="cnt">23</span></div>
@@ -384,23 +394,27 @@
             <span class="t">Bookings</span>
             <span class="sub">3 WAITING ON YOU</span>
           </div>
+          <div class="dash-toggle">
+            <span class="seg-btn on">Upcoming</span>
+            <span class="seg-btn">All Time</span>
+          </div>
           <table class="tbl">
             <thead>
-              <tr><th>Customer</th><th>Service</th><th class="hide-m">Vehicle</th><th>When</th><th>Status</th></tr>
+              <tr><th>Name</th><th>Service</th><th class="hide-m">Date</th><th>Time</th><th>Status</th></tr>
             </thead>
             <tbody>
-              <tr><td class="nm">Marcus D.</td><td>Full Interior</td><td class="hide-m">2019 Tahoe</td><td class="mn">Thu 9:00</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
-              <tr><td class="nm">Priya S.</td><td>Exterior + Wax</td><td class="hide-m">Civic</td><td class="mn">Thu 13:00 <span class="conflict">· 1 other</span></td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
-              <tr><td class="nm">Dave R.</td><td>Ceramic Coating</td><td class="hide-m">Model 3</td><td class="mn">Fri 8:30</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
-              <tr><td class="nm">Amanda T.</td><td>Full Interior</td><td class="hide-m">Odyssey</td><td class="mn">Fri 14:00</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
-              <tr><td class="nm">Jordan K.</td><td>Maintenance Wash</td><td class="hide-m">Ranger</td><td class="mn">Sat 10:00</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
-              <tr><td class="nm">Sam W.</td><td>Engine Bay</td><td class="hide-m">Silverado</td><td class="mn">Sat 15:30</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
+              <tr><td class="nm">Marcus D.</td><td>Full Interior</td><td class="hide-m">Thu</td><td class="mn">9:00</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
+              <tr><td class="nm">Priya S.</td><td>Exterior + Wax</td><td class="hide-m">Thu</td><td class="mn">13:00</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
+              <tr><td class="nm">Dave R.</td><td>Ceramic Coating</td><td class="hide-m">Fri</td><td class="mn">8:30</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
+              <tr><td class="nm">Amanda T.</td><td>Full Interior</td><td class="hide-m">Fri</td><td class="mn">14:00</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
+              <tr><td class="nm">Jordan K.</td><td>Maintenance Wash</td><td class="hide-m">Sat</td><td class="mn">10:00</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
+              <tr><td class="nm">Sam W.</td><td>Engine Bay</td><td class="hide-m">Sat</td><td class="mn">15:30</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
-    <p class="pnote rv d3">Product preview. Names and vehicles shown are illustrative.</p>
+    <p class="pnote rv d3">Product preview. Names shown are illustrative.</p>
   </div>
 </section>
 
@@ -451,10 +465,11 @@
       <div class="appr-h"><span>Booking request</span><span class="pill wait"><span class="bd"></span>Pending Approval</span></div>
       <div class="appr-b">
         <div class="row"><span class="l">Customer</span><span class="r">Marcus D.</span></div>
-        <div class="row"><span class="l">Vehicle</span><span class="r">2019 Tahoe</span></div>
-        <div class="row"><span class="l">Service</span><span class="r">Full Interior</span></div>
-        <div class="row"><span class="l">Estimated Price</span><span class="r mn">$340 – $420</span></div>
-        <div class="row"><span class="l">Requested</span><span class="r mn">Thu · 9:00 AM</span></div>
+        <div class="row"><span class="l">Phone</span><span class="r mn">(403) 555-0128</span></div>
+        <div class="row"><span class="l">Date</span><span class="r mn">Thu, Sep 18</span></div>
+        <div class="row"><span class="l">Time</span><span class="r mn">9:00 AM</span></div>
+        <div class="row"><span class="l">Service Type</span><span class="r">Full Interior</span></div>
+        <div class="row"><span class="l">Estimated Price<span class="est-note">Confirmed once approved</span></span><span class="r mn">$380</span></div>
         <div class="row"><span class="l">Notes</span><span class="r">Pet hair, heavy soiling</span></div>
       </div>
       <div class="appr-f">
