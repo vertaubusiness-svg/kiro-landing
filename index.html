@@ -612,7 +612,7 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Email alerts with the full thread</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Shows "Powered by Pobare"</li>
         </ul>
-        <a href="#contact" class="btn btn-g btn-lg">Start free</a>
+        <a href="#contact" class="btn btn-g btn-lg" data-cta="primary">Start free</a>
       </div>
       <div class="price hi rv d2">
         <div class="pn" style="color:var(--cyan-lit);">Pro</div>
@@ -625,7 +625,7 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Cancellations and changes handled</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Your branding only</li>
         </ul>
-        <a href="#contact" class="btn btn-p btn-lg">Get started</a>
+        <a href="#contact" class="btn btn-p btn-lg" data-cta="primary">Get started</a>
       </div>
     </div>
     <p class="pnote rv d3">USD. If you're heading over your conversations we tell you first — you'll never get a surprise bill.</p>
@@ -675,7 +675,7 @@
   <div class="wrap final-in">
     <h2 class="rv">The message you didn't get to was the job you lost.</h2>
     <p class="rv d1">Start on the free plan and watch how it answers for a couple of weeks. Nothing books without you.</p>
-    <div class="rv d2"><a href="#contact" class="btn btn-p btn-lg">Start free</a></div>
+    <div class="rv d2"><a href="#contact" class="btn btn-p btn-lg" data-cta="primary">Start free</a></div>
     <p class="cta-note rv d3">Takes you to a short form below. We're a small pilot right now — we reply within a day.</p>
   </div>
 </section>
@@ -752,6 +752,13 @@
       b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang-set')); });
     });
     setLang(root.getAttribute('data-lang') || 'en');
+  })();
+</script>
+<script>
+  (function(){
+    // Launch: change this one line to the dashboard signup URL to move off the pilot form.
+    var PRIMARY_CTA_HREF = '#contact';
+    document.querySelectorAll('[data-cta="primary"]').forEach(function(a){ a.href = PRIMARY_CTA_HREF; });
   })();
 </script>
 <script>
