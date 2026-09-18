@@ -233,6 +233,18 @@
   .cta-note{font-size:12.5px;color:var(--text-3);margin-top:12px;}
   .cta-note a{color:var(--text-3);text-decoration:underline;}
 
+  .contact-form{max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
+  .cf-row{display:flex;flex-direction:column;gap:6px;text-align:left;}
+  .cf-label{font-size:13px;color:var(--text-2);}
+  .cf-opt{color:var(--text-3);font-weight:400;}
+  .cf-input{width:100%;padding:10px 12px;border-radius:7px;border:1px solid var(--hair-2);background:rgba(255,255,255,.03);color:var(--text);font-size:14.5px;font-family:inherit;}
+  .cf-input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(8,145,178,.18);}
+  .cf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+  .cf-submit{width:100%;margin-top:2px;}
+  .cf-status{min-height:18px;font-size:13px;text-align:center;color:var(--text-3);}
+  .cf-status.ok{color:#22c55e;}
+  .cf-status.err{color:#f87171;}
+
   .faq{max-width:720px;margin:0 auto;}
   details{border-bottom:1px solid var(--hair);}
   summary{padding:20px 0;font-size:16px;font-weight:500;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:18px;align-items:center;transition:color .15s;}
@@ -600,7 +612,7 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Email alerts with the full thread</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Shows "Powered by Pobare"</li>
         </ul>
-        <a href="mailto:hello@pobare.com?subject=Pobare%20free%20plan" class="btn btn-g btn-lg">Start free</a>
+        <a href="#contact" class="btn btn-g btn-lg">Start free</a>
       </div>
       <div class="price hi rv d2">
         <div class="pn" style="color:var(--cyan-lit);">Pro</div>
@@ -613,11 +625,11 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Cancellations and changes handled</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Your branding only</li>
         </ul>
-        <a href="mailto:hello@pobare.com?subject=Pobare%20Pro" class="btn btn-p btn-lg">Get started</a>
+        <a href="#contact" class="btn btn-p btn-lg">Get started</a>
       </div>
     </div>
     <p class="pnote rv d3">USD. If you're heading over your conversations we tell you first — you'll never get a surprise bill.</p>
-    <p class="cta-note rv d3" style="text-align:center;">We're onboarding a small pilot personally right now. Tapping a plan opens an email to <a href="mailto:hello@pobare.com">hello@pobare.com</a> — we reply within a day.</p>
+    <p class="cta-note rv d3" style="text-align:center;">We're onboarding a small pilot personally right now. Tapping a plan takes you to a short form below — we reply within a day.</p>
   </div>
 </section>
 
@@ -663,8 +675,41 @@
   <div class="wrap final-in">
     <h2 class="rv">The message you didn't get to was the job you lost.</h2>
     <p class="rv d1">Start on the free plan and watch how it answers for a couple of weeks. Nothing books without you.</p>
-    <div class="rv d2"><a href="mailto:hello@pobare.com?subject=Pobare%20free%20plan" class="btn btn-p btn-lg">Start free</a></div>
-    <p class="cta-note rv d3">Opens an email to hello@pobare.com. We're a small pilot right now — we reply within a day.</p>
+    <div class="rv d2"><a href="#contact" class="btn btn-p btn-lg">Start free</a></div>
+    <p class="cta-note rv d3">Takes you to a short form below. We're a small pilot right now — we reply within a day.</p>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="head mid rv">
+      <span class="eyebrow"><span class="dot"></span> Get started</span>
+      <h2>Tell us about your shop</h2>
+      <p>We're onboarding a small pilot personally right now. Leave your info and we'll set you up — most shops hear back within a day.</p>
+    </div>
+    <form class="contact-form rv d1" id="contact-form" novalidate>
+      <div class="cf-row">
+        <label class="cf-label" for="cf-shop">Shop name</label>
+        <input class="cf-input" id="cf-shop" name="shopName" type="text" maxlength="120" required autocomplete="organization" />
+      </div>
+      <div class="cf-row">
+        <label class="cf-label" for="cf-contact">Email or phone</label>
+        <input class="cf-input" id="cf-contact" name="contact" type="text" maxlength="160" required autocomplete="email" />
+      </div>
+      <div class="cf-row">
+        <label class="cf-label" for="cf-ig">Instagram handle <span class="cf-opt">(optional)</span></label>
+        <input class="cf-input" id="cf-ig" name="instagram" type="text" maxlength="60" placeholder="@yourshop" autocomplete="off" />
+      </div>
+      <div class="cf-hp" aria-hidden="true">
+        <label for="cf-website">Website</label>
+        <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+      <button type="submit" class="btn btn-p btn-lg cf-submit">Send</button>
+      <p class="cf-status" id="cf-status" role="status" aria-live="polite"></p>
+    </form>
+    <p class="cta-note" style="text-align:center;">Prefer email? Reach us directly at hello@pobare.com</p>
   </div>
 </section>
 
@@ -672,7 +717,7 @@
   <div class="wrap f-in">
     <span>© 2026 Pobare. Answers are written by an AI assistant, not a live person.</span>
     <span class="f-links">
-      <a href="mailto:hello@pobare.com">Contact</a>
+      <a href="#contact">Contact</a>
       <a href="/privacy">Privacy</a>
       <a href="/terms">Terms</a>
     </span>
@@ -707,6 +752,46 @@
       b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang-set')); });
     });
     setLang(root.getAttribute('data-lang') || 'en');
+  })();
+</script>
+<script>
+  (function(){
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    var status = document.getElementById('cf-status');
+    var submitBtn = form.querySelector('.cf-submit');
+    function setStatus(text, cls){
+      status.textContent = text;
+      status.className = 'cf-status' + (cls ? ' ' + cls : '');
+    }
+    form.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      var shopName = form.shopName.value.trim();
+      var contact = form.contact.value.trim();
+      var instagram = form.instagram.value.trim();
+      var website = form.website.value.trim();
+      if (!shopName || !contact){
+        setStatus('Please fill in your shop name and a way to reach you.', 'err');
+        return;
+      }
+      submitBtn.disabled = true;
+      setStatus('Sending…');
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ shopName: shopName, contact: contact, instagram: instagram, website: website })
+      }).then(function(res){
+        if (!res.ok) throw new Error('bad status');
+        return res.json();
+      }).then(function(){
+        setStatus("Sent — we'll be in touch within a day.", 'ok');
+        form.reset();
+        submitBtn.disabled = false;
+      }).catch(function(){
+        setStatus("Couldn't send — email us directly at hello@pobare.com.", 'err');
+        submitBtn.disabled = false;
+      });
+    });
   })();
 </script>
 
