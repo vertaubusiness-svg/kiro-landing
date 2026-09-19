@@ -204,6 +204,15 @@
   .pill.new{background:rgba(15,23,42,.05);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);}
   .pill .bd{width:5px;height:5px;border-radius:50%;background:currentColor;}
 
+  .dn[data-tab]{cursor:pointer;}
+  .tab-panel[hidden]{display:none;}
+  .convo-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:12.5px;}
+  .convo-row:last-child{border-bottom:none;}
+  .convo-nm{color:var(--slate);font-weight:500;flex:none;width:80px;}
+  .convo-snip{color:var(--muted);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .convo-tm{font-family:var(--mono);font-size:10.5px;color:var(--label);flex:none;}
+  .dash-mtabs{display:none;}
+
   .appr-h{padding:13px 16px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--label);display:flex;justify-content:space-between;align-items:center;background:var(--card);}
   .appr-b{padding:16px;background:var(--card);}
   .row{display:flex;justify-content:space-between;padding:8px 0;font-size:13.5px;border-bottom:1px solid var(--line);}
@@ -281,6 +290,8 @@
     .dash{grid-template-columns:1fr;}
     .dash-nav{display:none;}
     .tbl .hide-m{display:none;}
+    .dash-mtabs{display:flex;gap:6px;margin-bottom:12px;}
+    .dash-mtabs .seg-btn{box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;}
   }
 </style>
 </head>
@@ -430,35 +441,52 @@
           <div class="dash-brand"><span class="lg"></span><span class="nm">Pobare</span></div>
           <div class="grp">Workspace</div>
           <div class="dn"><span class="sq"></span> Overview</div>
-          <div class="dn"><span class="sq"></span> Conversations <span class="cnt">23</span></div>
+          <div class="dn" data-tab="conversations"><span class="sq"></span> Conversations <span class="cnt">23</span></div>
           <div class="dn"><span class="sq"></span> Calendar</div>
-          <div class="dn on"><span class="sq"></span> Bookings <span class="cnt">6</span></div>
+          <div class="dn on" data-tab="bookings"><span class="sq"></span> Bookings <span class="cnt">6</span></div>
           <div class="dn"><span class="sq"></span> Requests <span class="cnt">2</span></div>
           <div class="grp" style="margin-top:12px;">Setup</div>
           <div class="dn"><span class="sq"></span> Settings</div>
         </div>
         <div class="dash-main">
-          <div class="dash-h">
-            <span class="t">Bookings</span>
-            <span class="sub">3 WAITING ON YOU</span>
+          <div class="dash-mtabs">
+            <span class="seg-btn on" data-tab="bookings">Bookings</span>
+            <span class="seg-btn" data-tab="conversations">Conversations</span>
           </div>
-          <div class="dash-toggle">
-            <span class="seg-btn on">Upcoming</span>
-            <span class="seg-btn">All Time</span>
+          <div class="tab-panel" data-panel="bookings">
+            <div class="dash-h">
+              <span class="t">Bookings</span>
+              <span class="sub">3 WAITING ON YOU</span>
+            </div>
+            <div class="dash-toggle">
+              <span class="seg-btn on">Upcoming</span>
+              <span class="seg-btn">All Time</span>
+            </div>
+            <table class="tbl">
+              <thead>
+                <tr><th>Name</th><th>Service</th><th class="hide-m">Date</th><th>Time</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr><td class="nm">Marcus D.</td><td>Full Interior</td><td class="hide-m">Thu</td><td class="mn">9:00</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
+                <tr><td class="nm">Priya S.</td><td>Exterior + Wax</td><td class="hide-m">Thu</td><td class="mn">13:00</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
+                <tr><td class="nm">Dave R.</td><td>Ceramic Coating</td><td class="hide-m">Fri</td><td class="mn">8:30</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
+                <tr><td class="nm">Amanda T.</td><td>Full Interior</td><td class="hide-m">Fri</td><td class="mn">14:00</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
+                <tr><td class="nm">Jordan K.</td><td>Maintenance Wash</td><td class="hide-m">Sat</td><td class="mn">10:00</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
+                <tr><td class="nm">Sam W.</td><td>Engine Bay</td><td class="hide-m">Sat</td><td class="mn">15:30</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
+              </tbody>
+            </table>
           </div>
-          <table class="tbl">
-            <thead>
-              <tr><th>Name</th><th>Service</th><th class="hide-m">Date</th><th>Time</th><th>Status</th></tr>
-            </thead>
-            <tbody>
-              <tr><td class="nm">Marcus D.</td><td>Full Interior</td><td class="hide-m">Thu</td><td class="mn">9:00</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
-              <tr><td class="nm">Priya S.</td><td>Exterior + Wax</td><td class="hide-m">Thu</td><td class="mn">13:00</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
-              <tr><td class="nm">Dave R.</td><td>Ceramic Coating</td><td class="hide-m">Fri</td><td class="mn">8:30</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
-              <tr><td class="nm">Amanda T.</td><td>Full Interior</td><td class="hide-m">Fri</td><td class="mn">14:00</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
-              <tr><td class="nm">Jordan K.</td><td>Maintenance Wash</td><td class="hide-m">Sat</td><td class="mn">10:00</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
-              <tr><td class="nm">Sam W.</td><td>Engine Bay</td><td class="hide-m">Sat</td><td class="mn">15:30</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
-            </tbody>
-          </table>
+          <div class="tab-panel" data-panel="conversations" hidden>
+            <div class="dash-h">
+              <span class="t">Conversations</span>
+              <span class="sub">23 THIS MONTH</span>
+            </div>
+            <div class="convo-row"><span class="convo-nm">Marcus D.</span><span class="convo-snip">Does the $75 wash include the mats?</span><span class="convo-tm">2m</span></div>
+            <div class="convo-row"><span class="convo-nm">Priya S.</span><span class="convo-snip">Can you fit me in before Thursday?</span><span class="convo-tm">18m</span></div>
+            <div class="convo-row"><span class="convo-nm">Dave R.</span><span class="convo-snip">Ceramic coating on a truck, how long does it take?</span><span class="convo-tm">1h</span></div>
+            <div class="convo-row"><span class="convo-nm">Amanda T.</span><span class="convo-snip">Thanks, see you Friday!</span><span class="convo-tm">3h</span></div>
+            <div class="convo-row"><span class="convo-nm">Jordan K.</span><span class="convo-snip">Is the maintenance wash still $40?</span><span class="convo-tm">5h</span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -734,6 +762,20 @@
       });
     }, { threshold: 0.35 });
     chats.forEach(function(c){ io.observe(c); });
+  })();
+</script>
+<script>
+  (function(){
+    var tabButtons = document.querySelectorAll('.dn[data-tab], .dash-mtabs [data-tab]');
+    var panels = document.querySelectorAll('.tab-panel');
+    if (!tabButtons.length || !panels.length) return;
+    function showTab(name){
+      tabButtons.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-tab') === name); });
+      panels.forEach(function(p){ p.hidden = p.getAttribute('data-panel') !== name; });
+    }
+    tabButtons.forEach(function(b){
+      b.addEventListener('click', function(){ showTab(b.getAttribute('data-tab')); });
+    });
   })();
 </script>
 <script>
