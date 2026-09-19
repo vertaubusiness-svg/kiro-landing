@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-  (function(){
-    try{
-      var saved = localStorage.getItem('pobare_lang');
-      var lang = saved === 'ko' || saved === 'en' ? saved
-        : (navigator.language || '').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en';
-      document.documentElement.setAttribute('data-lang', lang);
-    }catch(e){
-      document.documentElement.setAttribute('data-lang', 'en');
-    }
-  })();
-</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Pobare — Answer every inquiry, book more details</title>
@@ -270,12 +258,6 @@
   .f-in a:hover{color:var(--text-2);}
   .f-links{display:flex;gap:22px;}
   .nav-right{display:flex;align-items:center;gap:10px;}
-  .lang-tog{display:inline-flex;gap:2px;background:rgba(255,255,255,.04);border-radius:6px;padding:2px;box-shadow:inset 0 0 0 1px var(--line);}
-  .lang-btn{font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:4px 9px;border-radius:5px;color:var(--label);background:transparent;border:none;cursor:pointer;}
-  .lang-btn.on{background:rgba(255,255,255,.09);color:var(--slate);}
-  html[data-lang="en"] .lang-ko{display:none;}
-  html[data-lang="ko"] .lang-en{display:none;}
-  html:not([data-lang]) .lang-ko{display:none;}
 
   @media(max-width:880px){
     section{padding:72px 0;}
@@ -285,7 +267,6 @@
     .dash{grid-template-columns:1fr;}
     .dash-nav{display:none;}
     .tbl .hide-m{display:none;}
-    .lang-btn{font-size:10px;padding:4px 7px;}
   }
 </style>
 </head>
@@ -301,10 +282,6 @@
       <a href="#pricing">Pricing</a>
     </div>
     <div class="nav-right">
-      <div class="lang-tog" role="group" aria-label="Language">
-        <button type="button" class="lang-btn" data-lang-set="en">EN</button>
-        <button type="button" class="lang-btn" data-lang-set="ko">KO</button>
-      </div>
       <a href="#pricing" class="btn btn-p">Start free</a>
     </div>
   </div>
@@ -334,25 +311,15 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
       <div class="chat">
-        <div class="m us lang-en">Hello! Welcome to Ace Mobile Detailing. How can I help you today?<br><span class="chat-disc">This chat is handled by an AI assistant. Privacy Policy</span></div>
-        <div class="m us lang-ko">안녕하세요! Ace Mobile Detailing입니다. 무엇을 도와드릴까요?<br><span class="chat-disc">이 대화는 AI 어시스턴트가 응답합니다. 개인정보 처리방침</span></div>
-        <div class="m them lang-en">how much for a basic wash on my truck</div>
-        <div class="m them lang-ko">트럭 기본세차</div>
-        <div class="m us lang-en">Basic Wash starts at $75 for a truck. When works for you?<span class="tm">ANSWERED IN 8s</span></div>
-        <div class="m us lang-ko">기본 세차 트럭은 75달러부터입니다. 언제가 편하세요?<span class="tm">8초 응답</span></div>
-        <div class="m them lang-en">Sept 24, 10 am</div>
-        <div class="m them lang-ko">9월 24일 오전 10시</div>
-        <div class="m us lang-en">Got it — Sept 24, 10 AM, Basic Wash for a truck. Booking #b0ef3527 is in and waiting on approval.</div>
-        <div class="m us lang-ko">9월 24일 오전 10시 트럭 기본 세차 예약 요청을 받았습니다. 예약 번호는 b0ef3527이며, 승인 후 확정됩니다.</div>
-        <div class="card-out lang-en">
+        <div class="m us">Hello! Welcome to Ace Mobile Detailing. How can I help you today?<br><span class="chat-disc">This chat is handled by an AI assistant. Privacy Policy</span></div>
+        <div class="m them">how much for a basic wash on my truck</div>
+        <div class="m us">Basic Wash starts at $75 for a truck. When works for you?<span class="tm">ANSWERED IN 8s</span></div>
+        <div class="m them">Sept 24, 10 am</div>
+        <div class="m us">Got it — Sept 24, 10 AM, Basic Wash for a truck. Booking #b0ef3527 is in and waiting on approval.</div>
+        <div class="card-out">
           <span class="k">Waiting for your approval</span>
           <span class="v">Wed, Sept 24 · Basic Wash - Truck · $75+</span>
           <span class="s">Sujin Lee · 403-555-0148 · #b0ef3527</span>
-        </div>
-        <div class="card-out lang-ko">
-          <span class="k">승인 대기 중</span>
-          <span class="v">9월 24일(수) · 기본 세차 - 트럭 · 75달러부터</span>
-          <span class="s">이수진 · 403-555-0148 · #b0ef3527</span>
         </div>
         <div class="chat-input"><span class="box"></span><span class="snd"></span></div>
       </div>
@@ -416,14 +383,10 @@
     <div class="surf rv d2">
       <div class="surf-bar"><span class="pd"></span><span class="pd"></span><span class="pd"></span><span class="surf-lbl">BEFORE IT QUOTES</span></div>
       <div class="chat">
-        <div class="m them lang-en">how much for a basic wash on my truck</div>
-        <div class="m them lang-ko">트럭 기본세차</div>
-        <div class="m us lang-en">Basic Wash starts at $75 for a truck. When works for you?</div>
-        <div class="m us lang-ko">기본 세차 트럭은 75달러부터입니다. 언제가 편하세요?</div>
-        <div class="m them lang-en">Sept 24, 10 am</div>
-        <div class="m them lang-ko">9월 24일 오전 10시</div>
-        <div class="m us lang-en">Great, that time works. Can I get your name and phone number?</div>
-        <div class="m us lang-ko">완벽합니다! 그 시간에 예약 가능합니다. 이름과 전화번호를 알려주실 수 있나요?</div>
+        <div class="m them">how much for a basic wash on my truck</div>
+        <div class="m us">Basic Wash starts at $75 for a truck. When works for you?</div>
+        <div class="m them">Sept 24, 10 am</div>
+        <div class="m us">Great, that time works. Can I get your name and phone number?</div>
         <div class="chat-input"><span class="box"></span><span class="snd"></span></div>
       </div>
     </div>
@@ -737,21 +700,6 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     els.forEach(function(e){ io.observe(e); });
-  })();
-</script>
-<script>
-  (function(){
-    var root = document.documentElement;
-    var buttons = document.querySelectorAll('.lang-btn');
-    function setLang(lang){
-      root.setAttribute('data-lang', lang);
-      buttons.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-lang-set') === lang); });
-      try{ localStorage.setItem('pobare_lang', lang); }catch(e){}
-    }
-    buttons.forEach(function(b){
-      b.addEventListener('click', function(){ setLang(b.getAttribute('data-lang-set')); });
-    });
-    setLang(root.getAttribute('data-lang') || 'en');
   })();
 </script>
 <script>
