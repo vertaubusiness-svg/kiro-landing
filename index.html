@@ -102,6 +102,20 @@
   .surf-lbl{margin-left:6px;font-family:var(--mono);font-size:10.5px;color:var(--text-3);letter-spacing:.03em;}
 
   .chat{padding:15px 14px;display:flex;flex-direction:column;gap:8px;}
+  .chat .m,.chat .card-out{opacity:0;transform:translateY(7px);transition:opacity .4s ease,transform .4s ease;}
+  .chat.play .m,.chat.play .card-out{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    .chat .m,.chat .card-out{opacity:1;transform:none;transition:none;}
+    .typing{display:none!important;}
+  }
+  .typing{display:inline-flex;gap:4px;align-self:flex-start;padding:9px 12px;border-radius:11px;
+    background:var(--surface-3);opacity:0;}
+  .chat.play .typing{animation:typingShow 1s ease forwards;animation-delay:var(--td,0s);}
+  .typing span{width:5px;height:5px;border-radius:50%;background:var(--text-3);animation:typingDot 1s ease-in-out infinite;}
+  .typing span:nth-child(2){animation-delay:.15s}
+  .typing span:nth-child(3){animation-delay:.3s}
+  @keyframes typingDot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-2px)}}
+  @keyframes typingShow{0%{opacity:0}15%{opacity:1}82%{opacity:1}100%{opacity:0}}
   .m{max-width:86%;padding:9px 12px;border-radius:11px;font-size:13.5px;line-height:1.48;}
   .m.them{background:var(--surface-3);align-self:flex-start;color:var(--text);border-bottom-left-radius:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.045);}
   .m.us{background:linear-gradient(180deg,#0A9EC4,#0781A2);color:#02161C;align-self:flex-end;
@@ -311,12 +325,14 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
       <div class="chat">
-        <div class="m us">Hello! Welcome to Ace Mobile Detailing. How can I help you today?<br><span class="chat-disc">This chat is handled by an AI assistant. Privacy Policy</span></div>
-        <div class="m them">how much for a basic wash on my truck</div>
-        <div class="m us">Basic Wash starts at $75 for a truck. When works for you?<span class="tm">ANSWERED IN 8s</span></div>
-        <div class="m them">Sept 24, 10 am</div>
-        <div class="m us">Got it — Sept 24, 10 AM, Basic Wash for a truck. Booking #b0ef3527 is in and waiting on approval.</div>
-        <div class="card-out">
+        <div class="m us" style="transition-delay:.1s">Hello! Welcome to Ace Mobile Detailing. How can I help you today?<br><span class="chat-disc">This chat is handled by an AI assistant. Privacy Policy</span></div>
+        <div class="m them" style="transition-delay:.6s">how much for a basic wash on my truck</div>
+        <div class="typing" style="--td:.9s"><span></span><span></span><span></span></div>
+        <div class="m us" style="transition-delay:1.7s">Basic Wash starts at $75 for a truck. When works for you?<span class="tm">ANSWERED IN 8s</span></div>
+        <div class="m them" style="transition-delay:2.2s">Sept 24, 10 am</div>
+        <div class="typing" style="--td:2.5s"><span></span><span></span><span></span></div>
+        <div class="m us" style="transition-delay:3.3s">Got it — Sept 24, 10 AM, Basic Wash for a truck. Booking #b0ef3527 is in and waiting on approval.</div>
+        <div class="card-out" style="transition-delay:3.8s">
           <span class="k">Waiting for your approval</span>
           <span class="v">Wed, Sept 24 · Basic Wash - Truck · $75+</span>
           <span class="s">Sujin Lee · 403-555-0148 · #b0ef3527</span>
@@ -383,10 +399,12 @@
     <div class="surf rv d2">
       <div class="surf-bar"><span class="pd"></span><span class="pd"></span><span class="pd"></span><span class="surf-lbl">BEFORE IT QUOTES</span></div>
       <div class="chat">
-        <div class="m them">how much for a basic wash on my truck</div>
-        <div class="m us">Basic Wash starts at $75 for a truck. When works for you?</div>
-        <div class="m them">Sept 24, 10 am</div>
-        <div class="m us">Great, that time works. Can I get your name and phone number?</div>
+        <div class="m them" style="transition-delay:.1s">how much for a basic wash on my truck</div>
+        <div class="typing" style="--td:.4s"><span></span><span></span><span></span></div>
+        <div class="m us" style="transition-delay:1.2s">Basic Wash starts at $75 for a truck. When works for you?</div>
+        <div class="m them" style="transition-delay:1.7s">Sept 24, 10 am</div>
+        <div class="typing" style="--td:2s"><span></span><span></span><span></span></div>
+        <div class="m us" style="transition-delay:2.8s">Great, that time works. Can I get your name and phone number?</div>
         <div class="chat-input"><span class="box"></span><span class="snd"></span></div>
       </div>
     </div>
@@ -700,6 +718,22 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
     els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+<script>
+  (function(){
+    var chats = document.querySelectorAll('.chat');
+    if (!chats.length) return;
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      chats.forEach(function(c){ c.classList.add('play'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('play'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.35 });
+    chats.forEach(function(c){ io.observe(c); });
   })();
 </script>
 <script>
