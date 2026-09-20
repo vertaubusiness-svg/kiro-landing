@@ -213,7 +213,12 @@
   .pill.wait{background:rgba(8,145,178,.10);color:var(--primary);box-shadow:inset 0 0 0 1px rgba(8,145,178,.25);}
   .pill.ok{background:rgba(15,138,95,.10);color:#0f8a5f;box-shadow:inset 0 0 0 1px rgba(15,138,95,.25);}
   .pill.new{background:rgba(15,23,42,.05);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);}
+  .pill.amber{background:rgba(217,119,6,.10);color:#b45309;box-shadow:inset 0 0 0 1px rgba(217,119,6,.3);}
   .pill .bd{width:5px;height:5px;border-radius:50%;background:currentColor;}
+  .req-alert{color:#b45309;font-size:11.5px;font-weight:500;margin:0 0 12px;}
+  .blk-lb{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--label);margin-bottom:6px;}
+  .blk-tx{font-size:12.5px;color:var(--slate);line-height:1.5;}
+  .mini-modal-preview{border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 12px 32px -16px rgba(15,23,42,.25);background:var(--card);margin-top:4px;}
 
   .dn[data-tab]{cursor:pointer;}
   .tab-panel[hidden]{display:none;}
@@ -223,8 +228,6 @@
   .convo-snip{color:var(--muted);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
   .convo-tm{font-family:var(--mono);font-size:10.5px;color:var(--label);flex:none;}
   .dash-mtabs{display:none;}
-  .req-tag{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;padding:3px 7px;
-    border-radius:20px;background:rgba(15,23,42,.05);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);flex:none;}
 
   .ov-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
   .ov-tiles-2{grid-template-columns:repeat(2,1fr);}
@@ -311,6 +314,8 @@
   .mini.sm{flex:none;padding:5px 10px;font-size:11px;}
   .mini.ok{background:linear-gradient(180deg,#0A9EC4,#0781A2);color:#02161C;box-shadow:inset 0 1px 0 rgba(255,255,255,.22);}
   .mini.no{background:rgba(15,23,42,.035);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);}
+  .mini.line-cyan{background:transparent;color:var(--primary);box-shadow:inset 0 0 0 1px rgba(8,145,178,.4);}
+  .mini.line-amber{background:transparent;color:#b45309;box-shadow:inset 0 0 0 1px rgba(217,119,6,.4);}
 
   .prices{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:740px;margin:0 auto;}
   .price{position:relative;border-radius:12px;padding:28px;display:flex;flex-direction:column;
@@ -702,20 +707,66 @@
           </div>
           <div class="tab-panel" data-panel="requests" hidden>
             <div class="dash-h">
-              <span class="t">Requests</span>
-              <span class="sub amber">2 NEW</span>
+              <span class="t">Requests <span class="badge-unified">Unified</span></span>
             </div>
-            <div class="dash-filters" style="margin-bottom:12px;">
-              <span class="flt on">All Types</span><span class="flt">Callback</span><span class="flt">Complaint</span><span class="flt">Service Request</span>
+            <p class="req-alert">2 pending requests need attention.</p>
+            <div class="dash-toolbar">
+              <div class="dash-filters">
+                <span class="flt on">All Types</span><span class="flt">Callback</span><span class="flt">Complaint</span><span class="flt">Emergency</span>
+              </div>
+              <div class="dash-filters">
+                <span class="flt on">All Status</span><span class="flt">Pending</span><span class="flt">In Progress</span><span class="flt">Resolved</span><span class="flt">Escalated</span><span class="flt">Closed</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+                <span class="seg-note">2 records</span>
+                <span class="flt-search">Search...</span>
+              </div>
             </div>
-            <table class="tbl">
-              <thead><tr><th>Name</th><th>Type</th><th class="hide-m">Summary</th><th>Status</th><th class="hide-m">When</th></tr></thead>
-              <tbody>
-                <tr><td class="nm">Priya S.</td><td><span class="req-tag">Callback</span></td><td class="hide-m">Asked for a call back about a quote</td><td><span class="pill wait"><span class="bd"></span>New</span></td><td class="hide-m mn">18m</td></tr>
-                <tr><td class="nm">Dave R.</td><td><span class="req-tag">Complaint</span></td><td class="hide-m">Said the interior smelled like smoke after pickup</td><td><span class="pill wait"><span class="bd"></span>New</span></td><td class="hide-m mn">1d</td></tr>
-                <tr><td class="nm">Amanda T.</td><td><span class="req-tag">Service Request</span></td><td class="hide-m">Asked about adding ceramic coating next visit</td><td><span class="pill ok"><span class="bd"></span>Resolved</span></td><td class="hide-m mn">2d</td></tr>
-              </tbody>
-            </table>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead>
+                  <tr><th>Name</th><th class="hide-m">Type</th><th class="hide-m">Description</th><th class="hide-m">Priority</th><th>Status</th><th class="hide-m">Channel</th><th class="hide-m">Phone</th><th class="hide-m">Received</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td class="nm">Jane Doe</td><td class="hide-m"><span class="pill new">Callback</span></td><td class="hide-m">Asked for a call back about a quote</td><td class="hide-m">Normal</td><td><span class="pill amber"><span class="bd"></span>Pending</span></td><td class="hide-m">Chat</td><td class="hide-m mn">4035559999</td><td class="hide-m mn">8/27/2026, 5:28:26 PM</td><td><span class="mini line-cyan sm">Start</span> <span class="mini line-amber sm">Escalate</span></td></tr>
+                  <tr><td class="nm">Marcus D.</td><td class="hide-m"><span class="pill new">Complaint</span></td><td class="hide-m">Said the interior smelled like smoke after pickup</td><td class="hide-m">High</td><td><span class="pill wait"><span class="bd"></span>In Progress</span></td><td class="hide-m">Web</td><td class="hide-m mn">4035550128</td><td class="hide-m mn">9/18/2026, 9:12:03 AM</td><td><span class="mini line-cyan sm">Start</span> <span class="mini line-amber sm">Escalate</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="dash-pager">
+              <span>Show <b>10</b> records per page</span>
+              <span>1–2 of 2</span>
+              <span class="pgr-nav">First&nbsp; Prev&nbsp; Next&nbsp; Last</span>
+            </div>
+            <div class="ov-sec-h" style="margin-top:16px;"><h4 style="margin:0;">Request Detail</h4><span class="ov-hint">Click a row to open</span></div>
+            <div class="mini-modal-preview">
+              <div class="appr-h"><span>Request Detail</span><span class="appr-x">&times;</span></div>
+              <div class="appr-grid">
+                <div class="cell"><span class="lb">ID</span><span class="vl mn">1d37f7eb</span></div>
+                <div class="cell"><span class="lb">Type</span><span class="vl">Callback</span></div>
+                <div class="cell"><span class="lb">Priority</span><span class="vl">Normal</span></div>
+                <div class="cell"><span class="lb">Channel</span><span class="vl">Chat</span></div>
+                <div class="cell"><span class="lb">Name</span><span class="vl">Jane Doe</span></div>
+                <div class="cell"><span class="lb">Phone</span><span class="vl mn">4035559999</span></div>
+                <div class="cell full"><span class="lb">Received</span><span class="vl mn">8/27/2026, 5:28:26 PM</span></div>
+              </div>
+              <div class="appr-details">
+                <span class="blk-lb">Description</span>
+                <p class="blk-tx">Asked for a call back about a quote for a full interior detail on a Friday afternoon.</p>
+              </div>
+              <div class="appr-details">
+                <span class="blk-lb">Additional Info</span>
+                <div class="d-row"><span class="dl">Legacy Id</span><span class="dv mn">REQ-10492</span></div>
+              </div>
+              <div class="appr-status">
+                <span class="lb">Status</span>
+                <span class="pill amber"><span class="bd"></span>Pending</span>
+              </div>
+              <div class="appr-f">
+                <span class="mini line-cyan">Mark In Progress</span>
+                <span class="mini line-amber">Escalate</span>
+              </div>
+            </div>
           </div>
           <div class="tab-panel" data-panel="settings" hidden>
             <div class="dash-h">
