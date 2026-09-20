@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pobare — Answer every inquiry, book more appointments</title>
+<meta name="description" content="Pobare answers the inquiries you can't get to — quotes the price and takes the booking. Built for salons and studios that book their own appointments. Free to start." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#070809;
+    --surface:#0C0E12;
+    --surface-2:#11141A;
+    --surface-3:#171B22;
+    --cyan:#0891b2;
+    --cyan-lit:#22D3EE;
+    --text:#F4F6F8;
+    --text-2:#98A1AC;
+    --text-3:#646C78;
+    --hair:rgba(255,255,255,.06);
+    --hair-2:rgba(255,255,255,.10);
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+
+    /* Product UI (light) — matches the real app, used only inside .dash/.appr-* */
+    --paper:#f6f7f8;
+    --card:#ffffff;
+    --slate:#1e293b;
+    --muted:#5c6675;
+    --label:#636d7e;
+    --line:rgba(15,23,42,.09);
+    --primary:#0891b2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:var(--bg); color:var(--text);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.55; font-size:16px; letter-spacing:-.011em;
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:200;pointer-events:none;opacity:.02;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 28px;}
+  section{padding:112px 0;position:relative;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{font-weight:600;letter-spacing:-.035em;}
+  h1{font-size:clamp(40px,5.2vw,68px);line-height:1.0;}
+  h2{font-size:clamp(29px,3.4vw,46px);line-height:1.05;}
+  h3{font-size:16.5px;letter-spacing:-.017em;line-height:1.35;}
+
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--text-3);margin-bottom:22px;
+  }
+  .eyebrow .dot{width:4px;height:4px;border-radius:50%;background:var(--cyan-lit);box-shadow:0 0 8px var(--cyan-lit);}
+  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--hair) 18%,var(--hair) 82%,transparent);}
+
+  nav{position:sticky;top:0;z-index:90;background:rgba(7,8,9,.7);backdrop-filter:blur(20px) saturate(140%);border-bottom:1px solid var(--hair);}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:58px;}
+  .brand{font-weight:600;font-size:16.5px;letter-spacing:-.025em;}
+  .nav-links{display:flex;gap:28px;font-size:13.5px;color:var(--text-2);}
+  .nav-links a{transition:color .15s;}
+  .nav-links a:hover{color:var(--text);}
+  .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:7px;font-weight:500;font-size:14px;transition:all .16s cubic-bezier(.4,0,.2,1);cursor:pointer;border:1px solid transparent;white-space:nowrap;}
+  .btn-p{background:linear-gradient(180deg,#FFFFFF,#E8EBEF);color:#08090B;padding:8px 16px;font-weight:600;
+    box-shadow:0 1px 2px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.9);}
+  .btn-p:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(255,255,255,.14),inset 0 1px 0 rgba(255,255,255,.9);}
+  .btn-g{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+    color:var(--text);border-color:var(--hair-2);padding:8px 16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);}
+  .btn-g:hover{background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.04));border-color:rgba(255,255,255,.18);}
+  .btn-lg{padding:12px 24px;font-size:15px;border-radius:8px;}
+
+  .rv{opacity:0;transform:translateY(18px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);}
+  .rv.in{opacity:1;transform:none;}
+  .rv.d1{transition-delay:.07s}.rv.d2{transition-delay:.14s}.rv.d3{transition-delay:.21s}
+  .rv.d4{transition-delay:.28s}.rv.d5{transition-delay:.35s}.rv.d6{transition-delay:.42s}
+  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none;}}
+
+  .aurora{position:absolute;pointer-events:none;border-radius:50%;filter:blur(60px);}
+  .aurora.a{top:-380px;left:50%;transform:translateX(-50%);width:1000px;height:620px;
+    background:radial-gradient(ellipse,rgba(8,145,178,.20) 0%,rgba(8,145,178,.06) 42%,transparent 68%);}
+  .aurora.b{bottom:-420px;left:50%;transform:translateX(-50%);width:900px;height:640px;
+    background:radial-gradient(ellipse,rgba(8,145,178,.16) 0%,transparent 62%);}
+
+  .hero{padding:104px 0 92px;overflow:hidden;}
+  .hero-in{position:relative;display:grid;grid-template-columns:1.03fr .97fr;gap:58px;align-items:center;}
+  .hero h1{margin-bottom:24px;}
+  .hero .lead{font-size:18px;color:var(--text-2);max-width:41ch;margin-bottom:32px;letter-spacing:-.008em;line-height:1.6;}
+  .cta-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .fine{margin-top:20px;font-size:13px;color:var(--text-3);}
+
+  .surf{position:relative;border-radius:13px;overflow:hidden;
+    background:linear-gradient(180deg,var(--surface-2) 0%,var(--surface) 100%);
+    box-shadow:0 0 0 1px rgba(255,255,255,.07),inset 0 1px 0 rgba(255,255,255,.09),0 30px 80px -20px rgba(0,0,0,.9);}
+  .surf-bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--hair);background:rgba(255,255,255,.014);}
+  .pd{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.11);}
+  .surf-lbl{margin-left:6px;font-family:var(--mono);font-size:10.5px;color:var(--text-3);letter-spacing:.03em;}
+
+  .chat{padding:15px 14px;display:flex;flex-direction:column;gap:8px;}
+  .chat .m,.chat .card-out{opacity:0;transform:translateY(7px);transition:opacity .4s ease,transform .4s ease;}
+  .chat.play .m,.chat.play .card-out{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    .chat .m,.chat .card-out{opacity:1;transform:none;transition:none;}
+    .typing{display:none!important;}
+  }
+  .typing{display:inline-flex;gap:4px;padding:9px 12px;border-radius:11px;opacity:0;}
+  .typing.them{align-self:flex-start;background:var(--surface-3);border-bottom-left-radius:4px;}
+  .typing.us{align-self:flex-end;background:linear-gradient(180deg,#0A9EC4,#0781A2);border-bottom-right-radius:4px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.22);}
+  .chat.play .typing{animation:typingShow 1s ease forwards;animation-delay:var(--td,0s);}
+  .typing span{width:5px;height:5px;border-radius:50%;animation:typingDot 1s ease-in-out infinite;}
+  .typing.them span{background:var(--text-3);}
+  .typing.us span{background:#02161C;}
+  .typing span:nth-child(2){animation-delay:.15s}
+  .typing span:nth-child(3){animation-delay:.3s}
+  @keyframes typingDot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-2px)}}
+  @keyframes typingShow{0%{opacity:0}15%{opacity:1}82%{opacity:1}100%{opacity:0}}
+  .m{max-width:86%;padding:9px 12px;border-radius:11px;font-size:13.5px;line-height:1.48;}
+  .m.them{background:var(--surface-3);align-self:flex-start;color:var(--text);border-bottom-left-radius:4px;box-shadow:inset 0 1px 0 rgba(255,255,255,.045);}
+  .m.us{background:linear-gradient(180deg,#0A9EC4,#0781A2);color:#02161C;align-self:flex-end;
+    border-bottom-right-radius:4px;font-weight:500;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 2px 10px rgba(8,145,178,.22);}
+  .m .tm{display:block;font-family:var(--mono);font-size:10px;margin-top:5px;opacity:.6;letter-spacing:.02em;}
+  .card-out{margin-top:5px;border-radius:9px;padding:12px 13px;
+    background:linear-gradient(180deg,rgba(34,211,238,.07),rgba(34,211,238,.02));
+    box-shadow:inset 0 0 0 1px rgba(34,211,238,.18);}
+  .card-out .k{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--cyan-lit);font-weight:500;}
+  .card-out .v{display:block;font-size:13px;margin-top:6px;color:var(--text);font-weight:500;}
+  .card-out .s{display:block;font-size:11.5px;color:var(--text-3);margin-top:4px;}
+  .chat-disc{display:block;margin-top:3px;font-size:10px;color:inherit;opacity:.72;}
+  .store-bar{display:flex;align-items:center;gap:7px;padding:8px 14px;border-bottom:1px solid var(--hair);font-family:var(--mono);font-size:10.5px;color:var(--text-2);background:rgba(255,255,255,.01);}
+  .store-bar .dot{width:6px;height:6px;border-radius:50%;background:#22c55e;flex:none;}
+  .store-bar svg{margin-left:auto;width:12px;height:12px;color:var(--text-3);flex:none;}
+  .chat-input{display:flex;gap:6px;align-items:center;margin-top:2px;}
+  .chat-input .box{flex:1;height:26px;border-radius:8px;border:1px solid var(--hair-2);background:rgba(255,255,255,.02);}
+  .chat-input .snd{width:26px;height:26px;border-radius:8px;background:var(--cyan);flex:none;}
+
+  .strip{padding:24px 0;}
+  .strip-in{display:flex;gap:42px;justify-content:center;flex-wrap:wrap;font-size:13px;color:var(--text-3);}
+  .strip-in span{display:flex;align-items:center;gap:8px;}
+  .strip-in svg{width:13px;height:13px;color:var(--cyan);}
+
+  .head{max-width:62ch;margin-bottom:56px;}
+  .head h2{margin-bottom:18px;max-width:19ch;}
+  .head p{color:var(--text-2);font-size:17px;max-width:52ch;line-height:1.62;}
+  .head.mid{margin-left:auto;margin-right:auto;text-align:center;}
+  .head.mid h2,.head.mid p{margin-left:auto;margin-right:auto;}
+  .head.mid h2{max-width:22ch;}
+
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .c{position:relative;border-radius:11px;padding:24px;
+    background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.008));
+    box-shadow:0 0 0 1px var(--hair),inset 0 1px 0 rgba(255,255,255,.05);
+    transition:all .2s cubic-bezier(.4,0,.2,1);}
+  .c:hover{box-shadow:0 0 0 1px var(--hair-2),inset 0 1px 0 rgba(255,255,255,.08),0 8px 30px -8px rgba(0,0,0,.7);transform:translateY(-2px);}
+  .c .ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+    background:linear-gradient(180deg,rgba(34,211,238,.15),rgba(34,211,238,.05));
+    box-shadow:inset 0 0 0 1px rgba(34,211,238,.18);}
+  .c .ic svg{width:15px;height:15px;color:var(--cyan-lit);}
+  .c p{font-size:14px;color:var(--text-2);margin-top:8px;line-height:1.6;}
+  .c .n{font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.11em;color:var(--text-3);margin-bottom:13px;}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+  .split.rev .split-copy{order:2;}
+  .split-copy h2{font-size:clamp(27px,2.9vw,38px);margin-bottom:18px;max-width:16ch;}
+  .split-copy p{color:var(--text-2);font-size:16.5px;margin-bottom:15px;max-width:44ch;line-height:1.62;}
+  .checks{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:12px;}
+  .checks li{display:flex;gap:11px;font-size:14.5px;color:var(--text-2);align-items:flex-start;}
+  .checks svg{width:14px;height:14px;color:var(--cyan-lit);flex:none;margin-top:4px;}
+
+  .dash{display:grid;grid-template-columns:158px 1fr;min-height:392px;}
+  /* Sidebar always dark, even though the app's own content pane is light (Stripe/Linear
+     pattern) — matches the real dashboard's dashboard/layout.tsx exactly. */
+  .dash-nav{padding:0 10px 10px;background:var(--slate);display:flex;flex-direction:column;height:100%;}
+  .dash-brand{display:flex;align-items:center;gap:7px;padding:13px 9px;margin:0 -10px 4px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .dash-brand .lg{width:6px;height:6px;border-radius:50%;background:var(--cyan-lit);box-shadow:0 0 6px rgba(34,211,238,.6);flex:none;}
+  .dash-brand .nm{font-weight:600;font-size:13.5px;letter-spacing:-.01em;color:#fff;}
+  .dash-client{padding:7px 9px 10px;margin-bottom:2px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .dash-client .cl-lb{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#7c8698;margin-bottom:4px;}
+  .dash-client .cl-vl{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11.5px;color:#e2e8f0;}
+  .dash-nav .grp{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:#909dae;padding:8px 9px 6px;}
+  .dn{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:6px;font-size:13px;color:#94a3b8;margin-bottom:1px;}
+  .dn.on{background:rgba(255,255,255,.09);color:#fff;}
+  .dn .sq{width:13px;height:13px;border-radius:3.5px;background:rgba(255,255,255,.18);flex:none;}
+  .dn.on .sq{background:var(--primary);}
+  .dn .cnt{margin-left:auto;font-family:var(--mono);font-size:10.5px;padding:2px 6px;border-radius:20px;background:#323c4d;color:#cbd5e1;}
+  .dn.on .cnt{background:#535b69;color:#fff;}
+  .dash-bottom{margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,.08);}
+  .dn-ghost{color:#7c8698;font-size:12px;}
+  .dash-main{padding:16px 18px;background:var(--card);}
+  .dash-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;flex-wrap:wrap;gap:6px;}
+  .dash-h .t{font-size:14.5px;font-weight:600;letter-spacing:-.015em;color:var(--slate);}
+  .dash-h .sub{font-family:var(--mono);font-size:10.5px;color:var(--label);}
+  .dash-h .sub.amber{color:#b45309;}
+  .badge-unified{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:rgba(15,23,42,.05);padding:2px 6px;border-radius:4px;margin-left:6px;box-shadow:inset 0 0 0 1px var(--line);vertical-align:middle;font-weight:500;}
+  .dash-toggle{display:flex;align-items:center;gap:9px;margin-bottom:14px;flex-wrap:wrap;}
+  .seg-btn{font-family:var(--mono);font-size:10px;letter-spacing:.04em;padding:4px 9px;border-radius:5px;color:var(--label);}
+  .seg-btn.on{background:rgba(15,23,42,.05);color:var(--slate);box-shadow:inset 0 0 0 1px var(--line);}
+  .seg-note{font-size:10.5px;color:var(--label);}
+  .tbl{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .tbl th{text-align:left;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--label);font-weight:500;padding:0 10px 9px 0;border-bottom:1px solid var(--line);}
+  .tbl td{padding:11px 10px 11px 0;border-bottom:1px solid var(--line);color:var(--muted);}
+  .tbl tr:last-child td{border-bottom:none;}
+  .tbl .nm{color:var(--slate);font-weight:500;}
+  .tbl .mn{font-family:var(--mono);font-size:11.5px;}
+  .pill{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border-radius:20px;font-size:10.5px;font-weight:500;}
+  .pill.wait{background:rgba(8,145,178,.10);color:var(--primary);box-shadow:inset 0 0 0 1px rgba(8,145,178,.25);}
+  .pill.ok{background:rgba(15,138,95,.10);color:#0f8a5f;box-shadow:inset 0 0 0 1px rgba(15,138,95,.25);}
+  .pill.new{background:rgba(15,23,42,.05);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);}
+  .pill.amber{background:rgba(217,119,6,.10);color:#b45309;box-shadow:inset 0 0 0 1px rgba(217,119,6,.3);}
+  .pill .bd{width:5px;height:5px;border-radius:50%;background:currentColor;}
+  .req-alert{color:#b45309;font-size:11.5px;font-weight:500;margin:0 0 12px;}
+  .blk-lb{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--label);margin-bottom:6px;}
+  .blk-tx{font-size:12.5px;color:var(--slate);line-height:1.5;}
+  .mini-modal-preview{border-radius:12px;overflow:hidden;box-shadow:0 0 0 1px var(--line),0 12px 32px -16px rgba(15,23,42,.25);background:var(--card);margin-top:4px;}
+
+  .dn[data-tab]{cursor:pointer;}
+  .tab-panel[hidden]{display:none;}
+  .convo-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:12.5px;}
+  .convo-row:last-child{border-bottom:none;}
+  .convo-nm{color:var(--slate);font-weight:500;flex:none;width:80px;}
+  .convo-snip{color:var(--muted);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .convo-tm{font-family:var(--mono);font-size:10.5px;color:var(--label);flex:none;}
+  .dash-mtabs{display:none;}
+
+  .ov-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+  .ov-tiles-2{grid-template-columns:repeat(2,1fr);}
+  .ov-tile{background:var(--paper);border-radius:8px;padding:10px;box-shadow:inset 0 0 0 1px var(--line);}
+  .ov-tile .num{display:block;font-size:19px;font-weight:600;color:var(--slate);}
+  .ov-tile .lbl{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--label);margin-top:3px;}
+  .ov-tile .ov-sub{display:block;font-size:9.5px;color:var(--label);margin-top:4px;}
+  .ov-tile.amber{box-shadow:inset 0 0 0 1px rgba(217,119,6,.3);background:rgba(217,119,6,.06);border-top:2px solid #d97706;}
+  .ov-sec{margin-top:16px;}
+  .ov-sec h4{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--label);font-weight:500;margin-bottom:2px;}
+  .ov-sec-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;flex-wrap:wrap;gap:4px;}
+  .ov-hint{font-size:10px;color:var(--label);}
+  .ov-empty{font-size:11.5px;color:var(--label);padding:4px 0 0;}
+  .ov-link{font-size:10.5px;color:var(--primary);font-weight:500;}
+  .ov-empty-box{background:var(--paper);border-radius:8px;padding:14px;text-align:center;box-shadow:inset 0 0 0 1px var(--line);}
+  .ov-empty-box .t{display:block;font-size:12.5px;color:var(--slate);font-weight:500;}
+  .ov-empty-box .d{display:block;font-size:11px;color:var(--label);margin:4px 0 8px;}
+  .ov-link-box{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--paper);border-radius:8px;padding:9px 12px;box-shadow:inset 0 0 0 1px var(--line);flex-wrap:wrap;}
+  .ov-link-url{font-family:var(--mono);font-size:11px;color:var(--slate);}
+  .ov-link-btns{display:flex;gap:6px;flex:none;}
+
+  .cal-nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .cal-arrow{font-family:var(--mono);color:var(--label);padding:2px 5px;}
+  .cal-today{font-size:10.5px;color:var(--label);padding:2px 6px;border-radius:5px;box-shadow:inset 0 0 0 1px var(--line);}
+  .cal-legend{display:flex;flex-wrap:wrap;gap:12px;margin:2px 0 12px;font-size:10px;color:var(--muted);}
+  .cal-legend .dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:4px;}
+  .cal-legend .dot.pending{background:#94a3b8;}
+  .cal-legend .dot.wait{background:var(--primary);}
+  .cal-legend .dot.ok{background:#0f8a5f;}
+  .cal-legend .dot.cancel{background:#dc2626;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px;}
+  .cal-wd{font-family:var(--mono);font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:var(--label);text-align:center;padding-bottom:2px;}
+  .cal-day{aspect-ratio:1;border-radius:6px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:3px 4px;font-size:10px;color:var(--muted);position:relative;overflow:hidden;}
+  .cal-day.blank{background:none;box-shadow:none;}
+  .cal-day b{font-size:10.5px;color:var(--muted);font-weight:600;}
+  .cal-day.today b{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--primary);color:#fff;}
+  .cal-day em{display:block;font-style:normal;font-size:8px;line-height:1.3;color:var(--slate);background:rgba(8,145,178,.10);border-radius:3px;padding:1px 3px;margin-top:2px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+  .dash-filters{display:flex;flex-wrap:wrap;gap:6px;}
+  .flt{font-size:10.5px;color:var(--muted);padding:5px 9px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line);background:var(--paper);}
+  .flt i{font-style:normal;color:var(--label);margin-left:3px;}
+  .flt.on{background:rgba(15,23,42,.06);color:var(--slate);box-shadow:inset 0 0 0 1px var(--line);font-weight:500;}
+  .flt-search{font-size:10.5px;color:var(--label);padding:5px 9px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line);flex:1;min-width:90px;}
+  .flt-date{font-size:10.5px;color:var(--label);padding:5px 9px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line);}
+  .dash-toolbar{margin-bottom:12px;display:flex;flex-direction:column;gap:8px;}
+  .dash-pager{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-top:10px;font-size:10.5px;color:var(--label);}
+  .pgr-nav{font-family:var(--mono);letter-spacing:.03em;}
+  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+  .hrs-row{display:flex;align-items:center;gap:10px;padding:5px 0;font-size:12px;}
+  .hrs-day{width:34px;flex:none;color:var(--label);}
+  .hrs-day.on{color:var(--slate);font-weight:500;}
+  .hrs-time{color:var(--muted);}
+  .hrs-time.off{color:var(--label);font-style:italic;}
+  .brand-row{display:flex;align-items:center;gap:8px;padding:6px 0;}
+  .swatch{width:20px;height:20px;border-radius:5px;flex:none;box-shadow:inset 0 0 0 1px var(--line);}
+  .brand-hex{font-size:12px;color:var(--slate);}
+
+  .appr-h{padding:13px 16px;border-bottom:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--slate);display:flex;justify-content:space-between;align-items:center;background:var(--card);}
+  .appr-x{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--label);font-size:16px;line-height:1;box-shadow:inset 0 0 0 1px var(--line);flex:none;}
+  .row{display:flex;justify-content:space-between;padding:8px 0;font-size:13.5px;border-bottom:1px solid var(--line);}
+  .row:last-of-type{border-bottom:none;}
+  .row .l{color:var(--label);}
+  .row .r{color:var(--slate);font-weight:500;text-align:right;}
+  .row .r.mn{font-family:var(--mono);font-size:12.5px;}
+  .appr-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px;padding:16px 16px 4px;background:var(--card);}
+  .appr-grid .cell{display:flex;flex-direction:column;gap:3px;}
+  .appr-grid .cell.full{grid-column:1 / -1;}
+  .appr-grid .lb{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--label);}
+  .appr-grid .vl{font-size:13px;font-weight:600;color:var(--slate);}
+  .appr-grid .vl.mn{font-family:var(--mono);font-weight:500;}
+  .appr-details{margin:14px 16px 0;padding:12px 13px;border-radius:8px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);}
+  .appr-details .d-row{display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0;}
+  .appr-details .d-row .dl{color:var(--label);}
+  .appr-details .d-row .dv{color:var(--slate);font-weight:500;text-align:right;}
+  .appr-notes{margin:14px 16px 0;padding-top:12px;border-top:1px solid var(--line);background:var(--card);}
+  .appr-notes .lb{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--label);margin-bottom:4px;}
+  .appr-notes .vl{font-size:12.5px;color:var(--slate);}
+  .appr-status{margin:14px 16px 0;padding:12px 0;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--card);}
+  .appr-status .lb{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--label);}
+  .appr-f{display:flex;gap:8px;padding:14px 16px;border-top:1px solid var(--line);background:var(--card);}
+  .mini{flex:1;text-align:center;padding:8px;border-radius:6px;font-size:12.5px;font-weight:600;}
+  .mini.sm{flex:none;padding:5px 10px;font-size:11px;}
+  .mini.ok{background:linear-gradient(180deg,#0A9EC4,#0781A2);color:#02161C;box-shadow:inset 0 1px 0 rgba(255,255,255,.22);}
+  .mini.no{background:rgba(15,23,42,.035);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);}
+  .mini.line-cyan{background:transparent;color:var(--primary);box-shadow:inset 0 0 0 1px rgba(8,145,178,.4);}
+  .mini.line-amber{background:transparent;color:#b45309;box-shadow:inset 0 0 0 1px rgba(217,119,6,.4);}
+
+  .prices{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:740px;margin:0 auto;}
+  .price{position:relative;border-radius:12px;padding:28px;display:flex;flex-direction:column;
+    background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.006));
+    box-shadow:0 0 0 1px var(--hair),inset 0 1px 0 rgba(255,255,255,.05);}
+  .price.hi{background:linear-gradient(180deg,rgba(34,211,238,.07),rgba(255,255,255,.006) 40%);
+    box-shadow:0 0 0 1px rgba(34,211,238,.28),inset 0 1px 0 rgba(34,211,238,.2),0 20px 60px -24px rgba(8,145,178,.5);}
+  .price .pn{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--text-3);}
+  .price .amt{font-size:40px;font-weight:600;letter-spacing:-.04em;margin:14px 0 3px;}
+  .price .amt small{font-size:14px;font-weight:400;color:var(--text-3);letter-spacing:0;}
+  .price .for{font-size:13.5px;color:var(--text-3);min-height:38px;}
+  .price ul{list-style:none;margin:22px 0 26px;display:flex;flex-direction:column;gap:11px;flex:1;}
+  .price li{font-size:14px;color:var(--text-2);display:flex;gap:10px;align-items:flex-start;line-height:1.5;}
+  .price li svg{width:13px;height:13px;color:var(--cyan-lit);flex:none;margin-top:5px;}
+  .price li b{color:var(--text);font-weight:600;}
+  .pnote{text-align:center;margin-top:26px;font-size:13.5px;color:var(--text-3);}
+  .cta-note{font-size:12.5px;color:var(--text-3);margin-top:12px;}
+  .cta-note a{color:var(--text-3);text-decoration:underline;}
+
+  .contact-form{max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:14px;}
+  .cf-row{display:flex;flex-direction:column;gap:6px;text-align:left;}
+  .cf-label{font-size:13px;color:var(--text-2);}
+  .cf-opt{color:var(--text-3);font-weight:400;}
+  .cf-input{width:100%;padding:10px 12px;border-radius:7px;border:1px solid var(--hair-2);background:rgba(255,255,255,.03);color:var(--text);font-size:14.5px;font-family:inherit;}
+  .cf-input:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(8,145,178,.18);}
+  .cf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
+  .cf-submit{width:100%;margin-top:2px;}
+  .cf-status{min-height:18px;font-size:13px;text-align:center;color:var(--text-3);}
+  .cf-status.ok{color:#22c55e;}
+  .cf-status.err{color:#f87171;}
+
+  .faq{max-width:720px;margin:0 auto;}
+  details{border-bottom:1px solid var(--hair);}
+  summary{padding:20px 0;font-size:16px;font-weight:500;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:18px;align-items:center;transition:color .15s;}
+  summary:hover{color:#fff;}
+  summary::-webkit-details-marker{display:none;}
+  .pl{position:relative;width:12px;height:12px;flex:none;}
+  .pl::before,.pl::after{content:"";position:absolute;background:var(--text-3);transition:.25s cubic-bezier(.4,0,.2,1);}
+  .pl::before{top:5.5px;left:0;width:12px;height:1.5px;}
+  .pl::after{left:5.5px;top:0;width:1.5px;height:12px;}
+  details[open] .pl::after{transform:rotate(90deg);opacity:0;}
+  .fa{padding:0 0 22px;color:var(--text-2);font-size:15px;max-width:60ch;line-height:1.65;}
+  .fa b{color:var(--text);font-weight:600;}
+
+  .final{text-align:center;overflow:hidden;padding:128px 0;}
+  .final-in{position:relative;}
+  .final h2{max-width:22ch;margin:0 auto 20px;}
+  .final p{color:var(--text-2);font-size:17px;max-width:44ch;margin:0 auto 32px;}
+  .final p.cta-note{color:var(--text-3);font-size:12.5px;max-width:none;margin:16px auto 0;}
+
+  footer{border-top:1px solid var(--hair);padding:38px 0;}
+  .f-in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:13px;color:var(--text-3);}
+  .f-in a{transition:color .15s;}
+  .f-in a:hover{color:var(--text-2);}
+  .f-links{display:flex;gap:22px;}
+  .nav-right{display:flex;align-items:center;gap:10px;}
+
+  @media(max-width:880px){
+    section{padding:72px 0;}
+    .hero-in,.split,.grid-3,.prices{grid-template-columns:1fr;gap:36px;}
+    .split.rev .split-copy{order:0;}
+    .nav-links{display:none;}
+    .dash{grid-template-columns:1fr;}
+    .dash-nav{display:none;}
+    .tbl .hide-m{display:none;}
+    .dash-mtabs{display:flex;gap:6px;margin-bottom:12px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+      scrollbar-width:none;padding-bottom:2px;}
+    .dash-mtabs::-webkit-scrollbar{display:none;}
+    .dash-mtabs .seg-btn{box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;flex:none;white-space:nowrap;}
+    .ov-tiles{grid-template-columns:repeat(3,1fr);gap:6px;}
+    .ov-tile{padding:8px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="#top" class="brand">Pobare</a>
+    <div class="nav-links">
+      <a href="#problem">Why</a>
+      <a href="#how">How it works</a>
+      <a href="#control">Control</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="nav-right">
+      <a href="#pricing" class="btn btn-p">Start free</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="top">
+  <div class="aurora a"></div>
+  <div class="wrap hero-in">
+    <div>
+      <span class="eyebrow rv"><span class="dot"></span> For stylists who answer their own booking DMs</span>
+      <h1 class="rv d1">The inquiry you couldn't answer went to the salon down the street.</h1>
+      <p class="lead rv d2">You're halfway through a color, or elbow-deep in a gel fill. Pobare answers the message, quotes the price — your range, if you've set one — and takes the booking, so the client doesn't book somewhere else while your hands are full.</p>
+      <div class="cta-row rv d3">
+        <a href="#pricing" class="btn btn-p btn-lg">Start free</a>
+        <a href="#how" class="btn btn-g btn-lg">See how it works</a>
+      </div>
+      <p class="fine rv d4">Free plan · No card · Nothing books without your say-so</p>
+    </div>
+
+    <div class="surf rv d3">
+      <div class="surf-bar">
+        <span class="pd"></span><span class="pd"></span><span class="pd"></span>
+        <span class="surf-lbl">SAT 9:42 PM</span>
+      </div>
+      <div class="store-bar">
+        <span class="dot"></span>Open now · closes 7pm
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="chat">
+        <div class="m us" style="transition-delay:.1s">Hello! Welcome to Nine Willow Hair Nail Studio. How can I help you today?<br><span class="chat-disc">This chat is handled by an AI assistant. Privacy Policy</span></div>
+        <div class="typing them" style="--td:.5s"><span></span><span></span><span></span></div>
+        <div class="m them" style="transition-delay:1.3s">how much for gel nails</div>
+        <div class="typing us" style="--td:1.6s"><span></span><span></span><span></span></div>
+        <div class="m us" style="transition-delay:2.4s">Gel Nails start at $25, up to $40 with art or a longer shape. When works for you?<span class="tm">ANSWERED IN 8s</span></div>
+        <div class="typing them" style="--td:2.7s"><span></span><span></span><span></span></div>
+        <div class="m them" style="transition-delay:3.5s">this thurs afternoon works</div>
+        <div class="typing us" style="--td:3.8s"><span></span><span></span><span></span></div>
+        <div class="m us" style="transition-delay:4.6s">Got it — Thursday, 2 PM, Gel Nails. Booking #s4af7213 is in and waiting on approval.</div>
+        <div class="card-out" style="transition-delay:5.1s">
+          <span class="k">Waiting for your approval</span>
+          <span class="v">Thu, Sept 24 · Gel Nails · $25+</span>
+          <span class="s">Grace M. · 403-555-0191 · #s4af7213</span>
+        </div>
+        <div class="chat-input"><span class="box"></span><span class="snd"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+<div class="strip">
+  <div class="wrap strip-in rv">
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> No website needed</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> One link in your bio</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Keep your own booking setup</span>
+    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Live in an afternoon</span>
+  </div>
+</div>
+<div class="rule"></div>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="head rv">
+      <span class="eyebrow"><span class="dot"></span> The problem</span>
+      <h2>Booking DMs arrive at the worst possible time.</h2>
+      <p>Not because you don't care — because you're mid-color, hands full of foils, or elbow-deep in a gel fill. By the time you reach your phone, the conversation has moved on without you.</p>
+    </div>
+    <div class="grid-3">
+      <div class="c rv d1">
+        <div class="n">01</div>
+        <h3>You physically can't reach the phone</h3>
+        <p>Mid-color, hands full of foils, halfway through a fill. The message lands and sits there for hours.</p>
+      </div>
+      <div class="c rv d2">
+        <div class="n">02</div>
+        <h3>Weeknights and Sundays are when they ask</h3>
+        <p>People book a cut or a fresh set from the couch on a Sunday evening — exactly the time nobody's left to answer the DM.</p>
+      </div>
+      <div class="c rv d3">
+        <div class="n">03</div>
+        <h3>They DMed three salons, not one</h3>
+        <p>Whoever answers first usually gets the booking. Not the cheapest, not the best reviewed — the first to reply.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section>
+  <div class="wrap split rev">
+    <div class="split-copy rv">
+      <span class="eyebrow"><span class="dot"></span> Why a link in your bio isn't enough</span>
+      <h2>A booking link still gets DMed first.</h2>
+      <p>A haircut or a gel set has a fairly fixed price — but people don't trust a form to answer "do you have anything today" or "can you add gel removal." They want a real answer before they commit their afternoon.</p>
+      <p>So they skip the link, or tap it and DM you anyway to ask first. The link was never the problem. The conversation in front of it was missing.</p>
+      <ul class="checks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Answers "do you have anything today" and "can I add gel removal" — then quotes</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Gives the price up front — or your range, if you've set one — and catches any add-ons they mention</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Books the date, time and contact info in the same conversation</li>
+      </ul>
+    </div>
+    <div class="surf rv d2">
+      <div class="surf-bar"><span class="pd"></span><span class="pd"></span><span class="pd"></span><span class="surf-lbl">BEFORE IT QUOTES</span></div>
+      <div class="chat">
+        <div class="m them" style="transition-delay:.1s">do you have anything today for a gel mani</div>
+        <div class="typing us" style="--td:.4s"><span></span><span></span><span></span></div>
+        <div class="m us" style="transition-delay:1.2s">We've got a 4:30 opening today for Gel Nails, starting at $25. Want me to book it?</div>
+        <div class="typing them" style="--td:1.5s"><span></span><span></span><span></span></div>
+        <div class="m them" style="transition-delay:2.3s">yes please</div>
+        <div class="typing us" style="--td:2.6s"><span></span><span></span><span></span></div>
+        <div class="m us" style="transition-delay:3.4s">Great — can I get your name and phone number?</div>
+        <div class="chat-input"><span class="box"></span><span class="snd"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="how">
+  <div class="wrap">
+    <div class="head mid rv">
+      <span class="eyebrow"><span class="dot"></span> How it works</span>
+      <h2>Three steps. No website, nothing to install.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="c rv d1">
+        <div class="n">STEP 1</div>
+        <h3>Tell us your services and prices</h3>
+        <p>A photo of your price list is enough. We build it out with you — packages, ranges, add-ons, hours.</p>
+      </div>
+      <div class="c rv d2">
+        <div class="n">STEP 2</div>
+        <h3>Put one link in your bio</h3>
+        <p>Instagram bio, Google listing, a text you send. Customers tap it and land in a conversation instead of a form.</p>
+      </div>
+      <div class="c rv d3">
+        <div class="n">STEP 3</div>
+        <h3>Approve the ones you want</h3>
+        <p>Every booking waits for you. Open it, read the whole conversation, tap approve. The customer gets the confirmation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="control">
+  <div class="wrap split">
+    <div class="split-copy rv">
+      <span class="eyebrow"><span class="dot"></span> You stay in control</span>
+      <h2>It doesn't book anything behind your back.</h2>
+      <p>The first thing every owner asks is what happens when it gets something wrong. So nothing is final until you say so. You see what was said, what was quoted, and who it was — then you decide.</p>
+      <p>It only ever works from the prices and services you gave us. When someone asks for a person, or complains, or asks something outside what it knows, it stops and hands you the whole conversation.</p>
+      <ul class="checks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Quotes only from the prices and ranges you set</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Says it's an assistant if asked — never pretends to be you</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Hands off with full context, so nobody repeats themselves</li>
+      </ul>
+    </div>
+    <div class="surf rv d2">
+      <div class="appr-h"><span>Booking Detail</span><span class="appr-x">&times;</span></div>
+      <div class="appr-grid">
+        <div class="cell"><span class="lb">ID</span><span class="vl mn">N92e5c14</span></div>
+        <div class="cell"><span class="lb">Type</span><span class="vl">Appointment</span></div>
+        <div class="cell"><span class="lb">Channel</span><span class="vl">Instagram</span></div>
+        <div class="cell"><span class="lb">Name</span><span class="vl">Marcus D.</span></div>
+        <div class="cell"><span class="lb">Phone</span><span class="vl mn">(403) 555-0128</span></div>
+        <div class="cell"><span class="lb">Date</span><span class="vl mn">2026-09-24</span></div>
+        <div class="cell"><span class="lb">Time</span><span class="vl mn">14:00</span></div>
+        <div class="cell"><span class="lb">Party Size</span><span class="vl">1</span></div>
+        <div class="cell full"><span class="lb">Created</span><span class="vl mn">9/18/2026, 6:40:44 PM</span></div>
+      </div>
+      <div class="appr-details">
+        <div class="d-row"><span class="dl">Service Type</span><span class="dv">Full Color</span></div>
+        <div class="d-row"><span class="dl">Estimated Price</span><span class="dv">$150 USD</span></div>
+        <div class="d-row"><span class="dl">Duration</span><span class="dv">90 min</span></div>
+        <div class="d-row"><span class="dl">Email</span><span class="dv">marcus.d@example.com</span></div>
+      </div>
+      <div class="appr-notes">
+        <span class="lb">Notes</span>
+        <span class="vl">First time client, wants a natural finish</span>
+      </div>
+      <div class="appr-status">
+        <span class="lb">Status</span>
+        <span class="pill wait"><span class="bd"></span>Pending Approval</span>
+      </div>
+      <div class="appr-f">
+        <span class="mini no">Edit</span>
+        <span class="mini ok">Approve</span>
+        <span class="mini no">Reject</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section>
+  <div class="wrap">
+    <div class="head rv">
+      <span class="eyebrow"><span class="dot"></span> What it handles</span>
+      <h2>The part of the job that happens on your phone.</h2>
+    </div>
+    <div class="grid-3">
+      <div class="c rv d1">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.5 8.5 0 0 1-3.9-.9L3 21l1.9-5A8.4 8.4 0 0 1 12 3.1a8.4 8.4 0 0 1 9 8.4z"/></svg></div>
+        <h3>Replies in seconds, any hour</h3>
+        <p>Sunday night, mid-appointment, between clients. Every message gets a real answer, not an auto-reply.</p>
+      </div>
+      <div class="c rv d2">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <h3>Quotes the way you'd quote</h3>
+        <p>Asks what changes the price, then gives your starting price — or your range, once you've set one. No made-up numbers.</p>
+      </div>
+      <div class="c rv d3">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+        <h3>Collects everything you need</h3>
+        <p>Service, add-ons, day, time, name and number — all in the chat, all in one place.</p>
+      </div>
+      <div class="c rv d4">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Knows when you're closed</h3>
+        <p>Won't offer a day you don't work. Suggests another one instead of leaving them hanging.</p>
+      </div>
+      <div class="c rv d5">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 6L2 7"/></svg></div>
+        <h3>Emails you the moment it lands</h3>
+        <p>Every request hits your inbox with the full conversation attached. Nothing to go check.</p>
+      </div>
+      <div class="c rv d6">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9"/></svg></div>
+        <h3>Knows when to get out of the way</h3>
+        <p>Complaints and odd requests go straight to you, with everything that was said.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="pricing">
+  <div class="wrap">
+    <div class="head mid rv">
+      <span class="eyebrow"><span class="dot"></span> Pricing</span>
+      <h2>Start free. Move up when approving gets old.</h2>
+      <p>Full prices below. No setup fee, no contract, no "contact us for a quote."</p>
+    </div>
+    <div class="prices">
+      <div class="price rv d1">
+        <div class="pn">Free</div>
+        <div class="amt">$0</div>
+        <p class="for">For trying it on real clients without risking one.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Replies instantly, 24/7</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> <span><b>Every booking waits for your approval</b></span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> 50 conversations a month</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Email alerts with the full thread</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Shows "Powered by Pobare"</li>
+        </ul>
+        <a href="#contact" class="btn btn-g btn-lg" data-cta="primary">Start free</a>
+      </div>
+      <div class="price hi rv d2">
+        <div class="pn" style="color:var(--cyan-lit);">Pro</div>
+        <div class="amt">$49 <small>/ month</small></div>
+        <p class="for">For when you'd rather it just handled the whole thing.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Everything in Free</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> <span><b>Books on its own</b> — approve only when you want to</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> 500 conversations a month</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Cancellations and changes handled</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg> Your branding only</li>
+        </ul>
+        <a href="#contact" class="btn btn-p btn-lg" data-cta="primary">Get started</a>
+      </div>
+    </div>
+    <p class="pnote rv d3">USD. If you're heading over your conversations we tell you first — you'll never get a surprise bill.</p>
+    <p class="cta-note rv d3" style="text-align:center;">We're onboarding a small pilot personally right now. Tapping a plan takes you to a short form below — we reply within a day.</p>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section>
+  <div class="wrap">
+    <div class="head mid rv">
+      <span class="eyebrow"><span class="dot"></span> Straight answers</span>
+      <h2>What owners actually ask.</h2>
+    </div>
+    <div class="faq rv d1">
+      <details>
+        <summary>Do I need a website?<span class="pl"></span></summary>
+        <div class="fa">No, and most salons we work with don't have one. You get a link that goes in your Instagram bio, your Google listing, or a text. If you do have a site, it can sit on there too.</div>
+      </details>
+      <details>
+        <summary>Does it reply inside Instagram DMs?<span class="pl"></span></summary>
+        <div class="fa"><b>Not yet.</b> Right now the customer taps the link in your bio and the conversation happens there. Replying inside the DM thread itself needs Meta's approval and we're working on it — we'd rather tell you than let you find out.</div>
+      </details>
+      <details>
+        <summary>Does it know which days I'm already booked?<span class="pl"></span></summary>
+        <div class="fa"><b>Not yet — here's exactly where it stands.</b> It knows your hours and the days you're closed, so it won't offer a day you don't work. What it can't do yet is see which slots are already full — you'll see how many bookings you already have at that time, but nothing is blocked automatically. That's why every request comes to you before it's confirmed. Real availability is what we're building next.</div>
+      </details>
+      <details>
+        <summary>What if it quotes the wrong price?<span class="pl"></span></summary>
+        <div class="fa"><b>Not just a single number anymore — here's exactly where it stands.</b> If you've set a range for that service, it quotes the range; otherwise, your starting price. Either way, it only uses the numbers you gave us — never invents one. It can also factor in things the customer mentions, like a color correction or an add-on, though it never brings those up first. And on the free plan nothing is confirmed until you approve it, so you see the quote before the customer is held to it. Most owners watch closely for a week or two, then let it run.</div>
+      </details>
+      <details>
+        <summary>Will customers know it isn't me?<span class="pl"></span></summary>
+        <div class="fa">If they ask, yes — it says it's an assistant and never pretends to be you. In practice people care far more about getting a straight answer at 9pm than about who typed it.</div>
+      </details>
+      <details>
+        <summary>What does it cost, really?<span class="pl"></span></summary>
+        <div class="fa">Free for 50 conversations a month, or $49/month for 500 with automatic booking. No setup fee, no contract, cancel any time. One recovered booking pays for the year.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="aurora b"></div>
+  <div class="wrap final-in">
+    <h2 class="rv">The message you didn't get to was the booking you lost.</h2>
+    <p class="rv d1">Start on the free plan and watch how it answers for a couple of weeks. Nothing books without you.</p>
+    <div class="rv d2"><a href="#contact" class="btn btn-p btn-lg" data-cta="primary">Start free</a></div>
+    <p class="cta-note rv d3">Takes you to a short form below. We're a small pilot right now — we reply within a day.</p>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="head mid rv">
+      <span class="eyebrow"><span class="dot"></span> Get started</span>
+      <h2>Tell us about your salon</h2>
+      <p>We're onboarding a small pilot personally right now. Leave your info and we'll set you up — most salons hear back within a day.</p>
+    </div>
+    <form class="contact-form rv d1" id="contact-form" novalidate>
+      <div class="cf-row">
+        <label class="cf-label" for="cf-shop">Salon name</label>
+        <input class="cf-input" id="cf-shop" name="shopName" type="text" maxlength="120" required autocomplete="organization" />
+      </div>
+      <div class="cf-row">
+        <label class="cf-label" for="cf-contact">Email or phone</label>
+        <input class="cf-input" id="cf-contact" name="contact" type="text" maxlength="160" required autocomplete="email" />
+      </div>
+      <div class="cf-row">
+        <label class="cf-label" for="cf-ig">Instagram handle <span class="cf-opt">(optional)</span></label>
+        <input class="cf-input" id="cf-ig" name="instagram" type="text" maxlength="60" placeholder="@yoursalon" autocomplete="off" />
+      </div>
+      <div class="cf-hp" aria-hidden="true">
+        <label for="cf-website">Website</label>
+        <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+      <button type="submit" class="btn btn-p btn-lg cf-submit">Send</button>
+      <p class="cf-status" id="cf-status" role="status" aria-live="polite"></p>
+    </form>
+    <p class="cta-note" style="text-align:center;">Prefer email? Reach us directly at hello@pobare.com</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap f-in">
+    <span>© 2026 Pobare. Answers are written by an AI assistant, not a live person.</span>
+    <span class="f-links">
+      <a href="#contact">Contact</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.rv');
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      els.forEach(function(e){ e.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
+<script>
+  (function(){
+    var chats = document.querySelectorAll('.chat');
+    if (!chats.length) return;
+    if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      chats.forEach(function(c){ c.classList.add('play'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add('play'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.35 });
+    chats.forEach(function(c){ io.observe(c); });
+  })();
+</script>
+<script>
+  (function(){
+    var tabButtons = document.querySelectorAll('.dn[data-tab], .dash-mtabs [data-tab]');
+    var panels = document.querySelectorAll('.tab-panel');
+    if (!tabButtons.length || !panels.length) return;
+    function showTab(name){
+      tabButtons.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-tab') === name); });
+      panels.forEach(function(p){ p.hidden = p.getAttribute('data-panel') !== name; });
+    }
+    tabButtons.forEach(function(b){
+      b.addEventListener('click', function(){ showTab(b.getAttribute('data-tab')); });
+    });
+  })();
+</script>
+<script>
+  (function(){
+    // Launch: change this one line to the dashboard signup URL to move off the pilot form.
+    var PRIMARY_CTA_HREF = '#contact';
+    document.querySelectorAll('[data-cta="primary"]').forEach(function(a){ a.href = PRIMARY_CTA_HREF; });
+  })();
+</script>
+<script>
+  (function(){
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    var status = document.getElementById('cf-status');
+    var submitBtn = form.querySelector('.cf-submit');
+    function setStatus(text, cls){
+      status.textContent = text;
+      status.className = 'cf-status' + (cls ? ' ' + cls : '');
+    }
+    form.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      var shopName = form.shopName.value.trim();
+      var contact = form.contact.value.trim();
+      var instagram = form.instagram.value.trim();
+      var website = form.website.value.trim();
+      if (!shopName || !contact){
+        setStatus('Please fill in your salon name and a way to reach you.', 'err');
+        return;
+      }
+      submitBtn.disabled = true;
+      setStatus('Sending…');
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ shopName: shopName, contact: contact, instagram: instagram, website: website })
+      }).then(function(res){
+        if (!res.ok) throw new Error('bad status');
+        return res.json();
+      }).then(function(){
+        setStatus("Sent — we'll be in touch within a day.", 'ok');
+        form.reset();
+        submitBtn.disabled = false;
+      }).catch(function(){
+        setStatus("Couldn't send — email us directly at hello@pobare.com.", 'err');
+        submitBtn.disabled = false;
+      });
+    });
+  })();
+</script>
+
+</body>
+</html>
