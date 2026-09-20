@@ -176,10 +176,13 @@
   .dash{display:grid;grid-template-columns:158px 1fr;min-height:392px;}
   /* Sidebar always dark, even though the app's own content pane is light (Stripe/Linear
      pattern) — matches the real dashboard's dashboard/layout.tsx exactly. */
-  .dash-nav{padding:0 10px 14px;background:var(--slate);}
-  .dash-brand{display:flex;align-items:center;gap:7px;padding:13px 9px;margin:0 -10px 8px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .dash-nav{padding:0 10px 10px;background:var(--slate);display:flex;flex-direction:column;height:100%;}
+  .dash-brand{display:flex;align-items:center;gap:7px;padding:13px 9px;margin:0 -10px 4px;border-bottom:1px solid rgba(255,255,255,.08);}
   .dash-brand .lg{width:6px;height:6px;border-radius:50%;background:var(--cyan-lit);box-shadow:0 0 6px rgba(34,211,238,.6);flex:none;}
   .dash-brand .nm{font-weight:600;font-size:13.5px;letter-spacing:-.01em;color:#fff;}
+  .dash-client{padding:7px 9px 10px;margin-bottom:2px;border-bottom:1px solid rgba(255,255,255,.08);}
+  .dash-client .cl-lb{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#7c8698;margin-bottom:4px;}
+  .dash-client .cl-vl{display:flex;align-items:center;justify-content:space-between;gap:6px;font-size:11.5px;color:#e2e8f0;}
   .dash-nav .grp{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:#909dae;padding:8px 9px 6px;}
   .dn{display:flex;align-items:center;gap:9px;padding:7px 9px;border-radius:6px;font-size:13px;color:#94a3b8;margin-bottom:1px;}
   .dn.on{background:rgba(255,255,255,.09);color:#fff;}
@@ -187,11 +190,15 @@
   .dn.on .sq{background:var(--primary);}
   .dn .cnt{margin-left:auto;font-family:var(--mono);font-size:10.5px;padding:2px 6px;border-radius:20px;background:#323c4d;color:#cbd5e1;}
   .dn.on .cnt{background:#535b69;color:#fff;}
+  .dash-bottom{margin-top:auto;padding-top:8px;border-top:1px solid rgba(255,255,255,.08);}
+  .dn-ghost{color:#7c8698;font-size:12px;}
   .dash-main{padding:16px 18px;background:var(--card);}
-  .dash-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;}
+  .dash-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;flex-wrap:wrap;gap:6px;}
   .dash-h .t{font-size:14.5px;font-weight:600;letter-spacing:-.015em;color:var(--slate);}
   .dash-h .sub{font-family:var(--mono);font-size:10.5px;color:var(--label);}
-  .dash-toggle{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
+  .dash-h .sub.amber{color:#b45309;}
+  .badge-unified{font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:rgba(15,23,42,.05);padding:2px 6px;border-radius:4px;margin-left:6px;box-shadow:inset 0 0 0 1px var(--line);vertical-align:middle;font-weight:500;}
+  .dash-toggle{display:flex;align-items:center;gap:9px;margin-bottom:14px;flex-wrap:wrap;}
   .seg-btn{font-family:var(--mono);font-size:10px;letter-spacing:.04em;padding:4px 9px;border-radius:5px;color:var(--label);}
   .seg-btn.on{background:rgba(15,23,42,.05);color:var(--slate);box-shadow:inset 0 0 0 1px var(--line);}
   .seg-note{font-size:10.5px;color:var(--label);}
@@ -220,19 +227,53 @@
     border-radius:20px;background:rgba(15,23,42,.05);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);flex:none;}
 
   .ov-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+  .ov-tiles-2{grid-template-columns:repeat(2,1fr);}
   .ov-tile{background:var(--paper);border-radius:8px;padding:10px;box-shadow:inset 0 0 0 1px var(--line);}
   .ov-tile .num{display:block;font-size:19px;font-weight:600;color:var(--slate);}
   .ov-tile .lbl{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:var(--label);margin-top:3px;}
+  .ov-tile .ov-sub{display:block;font-size:9.5px;color:var(--label);margin-top:4px;}
+  .ov-tile.amber{box-shadow:inset 0 0 0 1px rgba(217,119,6,.3);background:rgba(217,119,6,.06);border-top:2px solid #d97706;}
   .ov-sec{margin-top:16px;}
   .ov-sec h4{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--label);font-weight:500;margin-bottom:2px;}
+  .ov-sec-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;flex-wrap:wrap;gap:4px;}
+  .ov-hint{font-size:10px;color:var(--label);}
+  .ov-empty{font-size:11.5px;color:var(--label);padding:4px 0 0;}
+  .ov-link{font-size:10.5px;color:var(--primary);font-weight:500;}
+  .ov-empty-box{background:var(--paper);border-radius:8px;padding:14px;text-align:center;box-shadow:inset 0 0 0 1px var(--line);}
+  .ov-empty-box .t{display:block;font-size:12.5px;color:var(--slate);font-weight:500;}
+  .ov-empty-box .d{display:block;font-size:11px;color:var(--label);margin:4px 0 8px;}
+  .ov-link-box{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--paper);border-radius:8px;padding:9px 12px;box-shadow:inset 0 0 0 1px var(--line);flex-wrap:wrap;}
+  .ov-link-url{font-family:var(--mono);font-size:11px;color:var(--slate);}
+  .ov-link-btns{display:flex;gap:6px;flex:none;}
 
+  .cal-nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+  .cal-arrow{font-family:var(--mono);color:var(--label);padding:2px 5px;}
+  .cal-today{font-size:10.5px;color:var(--label);padding:2px 6px;border-radius:5px;box-shadow:inset 0 0 0 1px var(--line);}
+  .cal-legend{display:flex;flex-wrap:wrap;gap:12px;margin:2px 0 12px;font-size:10px;color:var(--muted);}
+  .cal-legend .dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:4px;}
+  .cal-legend .dot.pending{background:#94a3b8;}
+  .cal-legend .dot.wait{background:var(--primary);}
+  .cal-legend .dot.ok{background:#0f8a5f;}
+  .cal-legend .dot.cancel{background:#dc2626;}
   .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px;}
   .cal-wd{font-family:var(--mono);font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:var(--label);text-align:center;padding-bottom:2px;}
   .cal-day{aspect-ratio:1;border-radius:6px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);
-    display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);position:relative;}
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;padding:3px 4px;font-size:10px;color:var(--muted);position:relative;overflow:hidden;}
   .cal-day.blank{background:none;box-shadow:none;}
-  .cal-day.today{box-shadow:inset 0 0 0 1.5px var(--primary);color:var(--slate);font-weight:600;}
-  .cal-day.has::after{content:"";position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:var(--primary);}
+  .cal-day b{font-size:10.5px;color:var(--muted);font-weight:600;}
+  .cal-day.today b{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--primary);color:#fff;}
+  .cal-day em{display:block;font-style:normal;font-size:8px;line-height:1.3;color:var(--slate);background:rgba(8,145,178,.10);border-radius:3px;padding:1px 3px;margin-top:2px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+
+  .dash-filters{display:flex;flex-wrap:wrap;gap:6px;}
+  .flt{font-size:10.5px;color:var(--muted);padding:5px 9px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line);background:var(--paper);}
+  .flt i{font-style:normal;color:var(--label);margin-left:3px;}
+  .flt.on{background:rgba(15,23,42,.06);color:var(--slate);box-shadow:inset 0 0 0 1px var(--line);font-weight:500;}
+  .flt-search{font-size:10.5px;color:var(--label);padding:5px 9px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line);flex:1;min-width:90px;}
+  .flt-date{font-size:10.5px;color:var(--label);padding:5px 9px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line);}
+  .dash-toolbar{margin-bottom:12px;display:flex;flex-direction:column;gap:8px;}
+  .dash-pager{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;margin-top:10px;font-size:10.5px;color:var(--label);}
+  .pgr-nav{font-family:var(--mono);letter-spacing:.03em;}
+  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
 
   .appr-h{padding:13px 16px;border-bottom:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--slate);display:flex;justify-content:space-between;align-items:center;background:var(--card);}
   .appr-x{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--label);font-size:16px;line-height:1;box-shadow:inset 0 0 0 1px var(--line);flex:none;}
@@ -482,14 +523,19 @@
       <div class="dash">
         <div class="dash-nav">
           <div class="dash-brand"><span class="lg"></span><span class="nm">Pobare</span></div>
+          <div class="dash-client"><span class="cl-lb">Client</span><span class="cl-vl">Ace Mobile Detailing <span>▾</span></span></div>
           <div class="grp">Workspace</div>
           <div class="dn" data-tab="overview"><span class="sq"></span> Overview</div>
-          <div class="dn" data-tab="conversations"><span class="sq"></span> Conversations <span class="cnt">23</span></div>
+          <div class="dn" data-tab="conversations"><span class="sq"></span> Conversations <span class="cnt">5</span></div>
           <div class="dn" data-tab="calendar"><span class="sq"></span> Calendar</div>
-          <div class="dn on" data-tab="bookings"><span class="sq"></span> Bookings <span class="cnt">6</span></div>
+          <div class="dn on" data-tab="bookings"><span class="sq"></span> Bookings <span class="cnt">2</span></div>
           <div class="dn" data-tab="requests"><span class="sq"></span> Requests <span class="cnt">2</span></div>
           <div class="grp" style="margin-top:12px;">Setup</div>
           <div class="dn" data-tab="settings"><span class="sq"></span> Settings</div>
+          <div class="dash-bottom">
+            <div class="dn dn-ghost">Admin Panel</div>
+            <div class="dn dn-ghost">Logout</div>
+          </div>
         </div>
         <div class="dash-main">
           <div class="dash-mtabs">
@@ -502,26 +548,38 @@
           </div>
           <div class="tab-panel" data-panel="bookings">
             <div class="dash-h">
-              <span class="t">Bookings</span>
-              <span class="sub">3 WAITING ON YOU</span>
+              <span class="t">Bookings <span class="badge-unified">Unified</span></span>
+              <span class="sub amber">2 WAITING ON YOU</span>
             </div>
-            <div class="dash-toggle">
-              <span class="seg-btn on">Upcoming</span>
-              <span class="seg-btn">All Time</span>
+            <div class="dash-toolbar">
+              <div class="dash-filters">
+                <span class="flt on">All Types</span><span class="flt">Reservation</span><span class="flt">Appointment</span><span class="flt">Consultation</span><span class="flt">Service</span><span class="flt">Waitlist</span>
+              </div>
+              <div class="dash-filters">
+                <span class="flt on">All Status</span><span class="flt">Pending</span><span class="flt">Pending Approval</span><span class="flt">Confirmed</span><span class="flt">In Progress</span><span class="flt">Completed</span><span class="flt">Cancelled</span>
+              </div>
+              <div class="dash-filters">
+                <span class="flt on">Upcoming</span><span class="flt">All Time</span>
+                <span class="flt-search">Search name or phone…</span>
+                <span class="mini no sm">+ New Booking</span>
+              </div>
+              <div class="ov-hint">Hiding past bookings — switch to All Time to see everything.</div>
             </div>
-            <table class="tbl">
-              <thead>
-                <tr><th>Name</th><th>Service</th><th class="hide-m">Date</th><th>Time</th><th>Status</th></tr>
-              </thead>
-              <tbody>
-                <tr><td class="nm">Marcus D.</td><td>Full Interior</td><td class="hide-m">Thu</td><td class="mn">9:00</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
-                <tr><td class="nm">Priya S.</td><td>Exterior + Wax</td><td class="hide-m">Thu</td><td class="mn">13:00</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
-                <tr><td class="nm">Dave R.</td><td>Ceramic Coating</td><td class="hide-m">Fri</td><td class="mn">8:30</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td></tr>
-                <tr><td class="nm">Amanda T.</td><td>Full Interior</td><td class="hide-m">Fri</td><td class="mn">14:00</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
-                <tr><td class="nm">Jordan K.</td><td>Maintenance Wash</td><td class="hide-m">Sat</td><td class="mn">10:00</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
-                <tr><td class="nm">Sam W.</td><td>Engine Bay</td><td class="hide-m">Sat</td><td class="mn">15:30</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td></tr>
-              </tbody>
-            </table>
+            <div class="tbl-wrap">
+              <table class="tbl">
+                <thead>
+                  <tr><th>Name</th><th>Service</th><th class="hide-m">Type</th><th>Date ↑</th><th class="hide-m">Time</th><th>Status</th><th class="hide-m">Channel</th><th class="hide-m">Phone</th><th class="hide-m">Connector</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td class="nm">Marcus D.</td><td>Full Interior</td><td class="hide-m">Appointment</td><td class="mn">Sep 18</td><td class="hide-m mn">9:00</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td><td class="hide-m">Web</td><td class="hide-m mn">(403) 555-0128</td><td class="hide-m">Chat Widget</td></tr>
+                  <tr><td class="nm">Priya S.</td><td>Exterior + Wax</td><td class="hide-m">Appointment</td><td class="mn">Sep 18</td><td class="hide-m mn">13:00</td><td><span class="pill wait"><span class="bd"></span>Pending Approval</span></td><td class="hide-m">Web</td><td class="hide-m mn">(587) 555-0117</td><td class="hide-m">Chat Widget</td></tr>
+                  <tr><td class="nm">Dave R.</td><td>Ceramic Coating</td><td class="hide-m">Appointment</td><td class="mn">Sep 19</td><td class="hide-m mn">8:30</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td><td class="hide-m">Web</td><td class="hide-m mn">(780) 555-0142</td><td class="hide-m">Chat Widget</td></tr>
+                  <tr><td class="nm">Amanda T.</td><td>Full Interior</td><td class="hide-m">Appointment</td><td class="mn">Sep 19</td><td class="hide-m mn">14:00</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td><td class="hide-m">Web</td><td class="hide-m mn">(403) 555-0177</td><td class="hide-m">Chat Widget</td></tr>
+                  <tr><td class="nm">Jordan K.</td><td>Maintenance Wash</td><td class="hide-m">Appointment</td><td class="mn">Sep 20</td><td class="hide-m mn">10:00</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td><td class="hide-m">Web</td><td class="hide-m mn">(403) 555-0163</td><td class="hide-m">Chat Widget</td></tr>
+                  <tr><td class="nm">Sam W.</td><td>Engine Bay</td><td class="hide-m">Appointment</td><td class="mn">Sep 20</td><td class="hide-m mn">15:30</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td><td class="hide-m">Web</td><td class="hide-m mn">(587) 555-0129</td><td class="hide-m">Chat Widget</td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
           <div class="tab-panel" data-panel="conversations" hidden>
             <div class="dash-h">
@@ -537,47 +595,79 @@
           <div class="tab-panel" data-panel="overview" hidden>
             <div class="dash-h">
               <span class="t">Overview</span>
-              <span class="sub">SAT, SEP 20</span>
+              <span class="dash-toggle" style="margin-bottom:0;">
+                <span class="seg-btn">Today</span>
+                <span class="seg-btn">This Week</span>
+                <span class="seg-btn on">This Month</span>
+              </span>
             </div>
-            <div class="ov-tiles">
-              <div class="ov-tile"><span class="num">3</span><span class="lbl">Pending Approval</span></div>
-              <div class="ov-tile"><span class="num">2</span><span class="lbl">New Requests</span></div>
-              <div class="ov-tile"><span class="num">23</span><span class="lbl">Conversations</span></div>
-            </div>
-            <div class="ov-sec">
-              <h4>Today's Schedule</h4>
-              <div class="row"><span class="l">10:00 · Jordan K.</span><span class="r">Maintenance Wash</span></div>
-              <div class="row"><span class="l">15:30 · Sam W.</span><span class="r">Engine Bay</span></div>
-            </div>
-            <div class="ov-sec">
-              <h4>Recent Activity</h4>
-              <div class="row"><span class="l">Amanda T. confirmed</span><span class="r mn">Fri 14:00</span></div>
-              <div class="row"><span class="l">New message from Priya S.</span><span class="r mn">18m ago</span></div>
+            <div class="ov-sec" style="margin-top:0;">
+              <div class="ov-sec-h"><h4 style="margin:0;">Needs Attention</h4><span class="ov-hint">Click a card to manage</span></div>
+              <div class="ov-tiles ov-tiles-2">
+                <div class="ov-tile"><span class="num">0</span><span class="lbl">Bookings Today</span><span class="ov-sub">Next: Sep 24, 10:00 AM</span></div>
+                <div class="ov-tile amber"><span class="num">2</span><span class="lbl">Pending Bookings</span></div>
+              </div>
+              <div class="ov-empty">No call categories in this period.</div>
             </div>
             <div class="ov-sec">
-              <h4>This Month</h4>
-              <div class="row"><span class="l">Bookings</span><span class="r">31</span></div>
-              <div class="row"><span class="l">Conversations</span><span class="r">96</span></div>
+              <div class="ov-sec-h"><h4 style="margin:0;">Today's Schedule</h4><span class="ov-link">View Calendar →</span></div>
+              <div class="ov-empty-box">
+                <span class="t">No bookings today yet.</span>
+                <span class="d">New requests will show up here as they're approved.</span>
+                <span class="ov-link">Open calendar →</span>
+              </div>
+            </div>
+            <div class="ov-sec">
+              <div class="ov-sec-h"><h4 style="margin:0;">Recent Activity</h4><span class="ov-hint"><span class="ov-link">Bookings →</span> &nbsp;<span class="ov-link">Requests →</span></span></div>
+              <table class="tbl">
+                <thead><tr><th>Type</th><th>Name</th><th class="hide-m">Summary</th><th>Status</th><th class="hide-m">Channel</th><th>When</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="pill new">Appt.</span></td><td class="nm">Amanda T.</td><td class="hide-m">Full Interior</td><td><span class="pill ok"><span class="bd"></span>Confirmed</span></td><td class="hide-m">Web</td><td class="mn">Fri 14:00</td></tr>
+                  <tr><td><span class="pill new">Appt.</span></td><td class="nm">Marcus D.</td><td class="hide-m">Full Interior</td><td><span class="pill wait"><span class="bd"></span>Pending</span></td><td class="hide-m">Instagram</td><td class="mn">2m ago</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="ov-sec">
+              <div class="ov-sec-h"><h4 style="margin:0;">This Month <span class="ov-hint">September 2026</span></h4><span class="ov-link">Customize →</span></div>
+              <div class="ov-tiles ov-tiles-2">
+                <div class="ov-tile"><span class="num">4</span><span class="lbl">Reservations</span></div>
+                <div class="ov-tile"><span class="num">1</span><span class="lbl">After-Hours Bookings</span></div>
+              </div>
+            </div>
+            <div class="ov-sec">
+              <h4>No-Show Rate <span class="ov-hint">All Time</span></h4>
+              <div class="row"><span class="l">No-shows</span><span class="r">0%</span></div>
+            </div>
+            <div class="ov-sec">
+              <h4>Your Chatbot Link</h4>
+              <div class="ov-link-box">
+                <span class="ov-link-url">pobare.com/c/ace-mobile-detailing</span>
+                <span class="ov-link-btns"><span class="mini no sm">Copy Link</span><span class="mini no sm">Open ↗</span></span>
+              </div>
             </div>
           </div>
           <div class="tab-panel" data-panel="calendar" hidden>
             <div class="dash-h">
               <span class="t">Calendar</span>
-              <span class="sub">SEPTEMBER</span>
+              <span class="cal-nav">
+                <span class="seg-btn on">Month</span><span class="seg-btn">Week</span><span class="seg-btn">Day</span>
+                <span class="cal-arrow">‹</span><span class="cal-today">Today</span><span class="cal-arrow">›</span>
+              </span>
             </div>
-            <div class="dash-toggle">
-              <span class="seg-btn on">Month</span>
-              <span class="seg-btn">Week</span>
-              <span class="seg-btn">Day</span>
+            <div class="cal-legend">
+              <span><i class="dot pending"></i>Pending</span>
+              <span><i class="dot wait"></i>Pending Approval</span>
+              <span><i class="dot ok"></i>Confirmed / Completed</span>
+              <span><i class="dot cancel"></i>Cancelled</span>
             </div>
             <div class="cal-grid">
-              <span class="cal-wd">S</span><span class="cal-wd">M</span><span class="cal-wd">T</span><span class="cal-wd">W</span><span class="cal-wd">T</span><span class="cal-wd">F</span><span class="cal-wd">S</span>
-              <span class="cal-day blank"></span><span class="cal-day blank"></span>
-              <span class="cal-day">1</span><span class="cal-day">2</span><span class="cal-day">3</span><span class="cal-day">4</span><span class="cal-day">5</span>
-              <span class="cal-day">6</span><span class="cal-day">7</span><span class="cal-day">8</span><span class="cal-day">9</span><span class="cal-day">10</span><span class="cal-day">11</span><span class="cal-day">12</span>
-              <span class="cal-day">13</span><span class="cal-day">14</span><span class="cal-day">15</span><span class="cal-day">16</span><span class="cal-day">17</span><span class="cal-day has">18</span><span class="cal-day has">19</span>
-              <span class="cal-day today has">20</span><span class="cal-day">21</span><span class="cal-day">22</span><span class="cal-day">23</span><span class="cal-day has">24</span><span class="cal-day">25</span><span class="cal-day">26</span>
-              <span class="cal-day">27</span><span class="cal-day">28</span><span class="cal-day">29</span><span class="cal-day">30</span>
+              <span class="cal-wd">M</span><span class="cal-wd">T</span><span class="cal-wd">W</span><span class="cal-wd">T</span><span class="cal-wd">F</span><span class="cal-wd">S</span><span class="cal-wd">S</span>
+              <span class="cal-day blank"></span>
+              <span class="cal-day"><b>1</b></span><span class="cal-day"><b>2</b></span><span class="cal-day"><b>3</b></span><span class="cal-day"><b>4</b></span><span class="cal-day"><b>5</b></span><span class="cal-day"><b>6</b></span>
+              <span class="cal-day"><b>7</b></span><span class="cal-day"><b>8</b></span><span class="cal-day"><b>9</b></span><span class="cal-day"><b>10</b></span><span class="cal-day"><b>11</b></span><span class="cal-day"><b>12</b></span><span class="cal-day"><b>13</b></span>
+              <span class="cal-day"><b>14</b></span><span class="cal-day"><b>15</b></span><span class="cal-day has"><b>16</b><em>11 AM Dave R.</em></span><span class="cal-day"><b>17</b></span><span class="cal-day has"><b>18</b><em>2 PM Priya S.</em></span><span class="cal-day"><b>19</b></span><span class="cal-day today"><b>20</b></span>
+              <span class="cal-day"><b>21</b></span><span class="cal-day"><b>22</b></span><span class="cal-day"><b>23</b></span><span class="cal-day has"><b>24</b><em>10 AM Marcus D.</em></span><span class="cal-day"><b>25</b></span><span class="cal-day"><b>26</b></span><span class="cal-day"><b>27</b></span>
+              <span class="cal-day"><b>28</b></span><span class="cal-day"><b>29</b></span><span class="cal-day"><b>30</b></span>
             </div>
           </div>
           <div class="tab-panel" data-panel="requests" hidden>
