@@ -234,16 +234,31 @@
   .cal-day.today{box-shadow:inset 0 0 0 1.5px var(--primary);color:var(--slate);font-weight:600;}
   .cal-day.has::after{content:"";position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:var(--primary);}
 
-  .appr-h{padding:13px 16px;border-bottom:1px solid var(--line);font-size:12.5px;color:var(--label);display:flex;justify-content:space-between;align-items:center;background:var(--card);}
-  .appr-b{padding:16px;background:var(--card);}
+  .appr-h{padding:13px 16px;border-bottom:1px solid var(--line);font-size:13.5px;font-weight:600;color:var(--slate);display:flex;justify-content:space-between;align-items:center;background:var(--card);}
+  .appr-x{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--label);font-size:16px;line-height:1;box-shadow:inset 0 0 0 1px var(--line);flex:none;}
   .row{display:flex;justify-content:space-between;padding:8px 0;font-size:13.5px;border-bottom:1px solid var(--line);}
   .row:last-of-type{border-bottom:none;}
   .row .l{color:var(--label);}
   .row .r{color:var(--slate);font-weight:500;text-align:right;}
   .row .r.mn{font-family:var(--mono);font-size:12.5px;}
-  .est-note{display:block;font-family:'Inter',system-ui,sans-serif;font-weight:400;font-size:10px;color:var(--label);letter-spacing:0;margin-top:2px;}
+  .appr-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px;padding:16px 16px 4px;background:var(--card);}
+  .appr-grid .cell{display:flex;flex-direction:column;gap:3px;}
+  .appr-grid .cell.full{grid-column:1 / -1;}
+  .appr-grid .lb{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--label);}
+  .appr-grid .vl{font-size:13px;font-weight:600;color:var(--slate);}
+  .appr-grid .vl.mn{font-family:var(--mono);font-weight:500;}
+  .appr-details{margin:14px 16px 0;padding:12px 13px;border-radius:8px;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);}
+  .appr-details .d-row{display:flex;justify-content:space-between;font-size:12.5px;padding:4px 0;}
+  .appr-details .d-row .dl{color:var(--label);}
+  .appr-details .d-row .dv{color:var(--slate);font-weight:500;text-align:right;}
+  .appr-notes{margin:14px 16px 0;padding-top:12px;border-top:1px solid var(--line);background:var(--card);}
+  .appr-notes .lb{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--label);margin-bottom:4px;}
+  .appr-notes .vl{font-size:12.5px;color:var(--slate);}
+  .appr-status{margin:14px 16px 0;padding:12px 0;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;background:var(--card);}
+  .appr-status .lb{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--label);}
   .appr-f{display:flex;gap:8px;padding:14px 16px;border-top:1px solid var(--line);background:var(--card);}
   .mini{flex:1;text-align:center;padding:8px;border-radius:6px;font-size:12.5px;font-weight:600;}
+  .mini.sm{flex:none;padding:5px 10px;font-size:11px;}
   .mini.ok{background:linear-gradient(180deg,#0A9EC4,#0781A2);color:#02161C;box-shadow:inset 0 1px 0 rgba(255,255,255,.22);}
   .mini.no{background:rgba(15,23,42,.035);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);}
 
@@ -646,21 +661,35 @@
       </ul>
     </div>
     <div class="surf rv d2">
-      <div class="appr-h"><span>Booking request</span><span class="pill wait"><span class="bd"></span>Pending Approval</span></div>
-      <div class="appr-b">
-        <div class="row"><span class="l">Booking ID</span><span class="r mn">#a41c9e02</span></div>
-        <div class="row"><span class="l">Channel</span><span class="r">Instagram DM</span></div>
-        <div class="row"><span class="l">Customer</span><span class="r">Marcus D.</span></div>
-        <div class="row"><span class="l">Phone</span><span class="r mn">(403) 555-0128</span></div>
-        <div class="row"><span class="l">Date</span><span class="r mn">Thu, Sep 18</span></div>
-        <div class="row"><span class="l">Time</span><span class="r mn">9:00 AM</span></div>
-        <div class="row"><span class="l">Service Type</span><span class="r">Full Interior</span></div>
-        <div class="row"><span class="l">Estimated Price<span class="est-note">Confirmed once approved</span></span><span class="r mn">$380</span></div>
-        <div class="row"><span class="l">Notes</span><span class="r">Pet hair, heavy soiling</span></div>
+      <div class="appr-h"><span>Booking Detail</span><span class="appr-x">&times;</span></div>
+      <div class="appr-grid">
+        <div class="cell"><span class="lb">ID</span><span class="vl mn">A41c9e02</span></div>
+        <div class="cell"><span class="lb">Type</span><span class="vl">Appointment</span></div>
+        <div class="cell"><span class="lb">Channel</span><span class="vl">Web</span></div>
+        <div class="cell"><span class="lb">Name</span><span class="vl">Marcus D.</span></div>
+        <div class="cell"><span class="lb">Phone</span><span class="vl mn">(403) 555-0128</span></div>
+        <div class="cell"><span class="lb">Date</span><span class="vl mn">2026-09-24</span></div>
+        <div class="cell"><span class="lb">Time</span><span class="vl mn">10:00</span></div>
+        <div class="cell"><span class="lb">Party Size</span><span class="vl">1</span></div>
+        <div class="cell full"><span class="lb">Created</span><span class="vl mn">9/18/2026, 6:40:44 PM</span></div>
+      </div>
+      <div class="appr-details">
+        <div class="d-row"><span class="dl">Service Type</span><span class="dv">Full Interior</span></div>
+        <div class="d-row"><span class="dl">Estimated Price</span><span class="dv">$380 USD</span></div>
+        <div class="d-row"><span class="dl">Duration</span><span class="dv">120 min</span></div>
+        <div class="d-row"><span class="dl">Email</span><span class="dv">marcus.d@example.com</span></div>
+      </div>
+      <div class="appr-notes">
+        <span class="lb">Notes</span>
+        <span class="vl">Pet hair, heavy soiling</span>
+      </div>
+      <div class="appr-status">
+        <span class="lb">Status</span>
+        <span class="pill wait"><span class="bd"></span>Pending Approval</span>
       </div>
       <div class="appr-f">
-        <span class="mini ok">Approve</span>
         <span class="mini no">Edit</span>
+        <span class="mini ok">Approve</span>
         <span class="mini no">Reject</span>
       </div>
     </div>
