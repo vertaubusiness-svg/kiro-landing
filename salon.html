@@ -100,6 +100,9 @@
   .surf-bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--hair);background:rgba(255,255,255,.014);}
   .pd{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.11);}
   .surf-lbl{margin-left:6px;font-family:var(--mono);font-size:10.5px;color:var(--text-3);letter-spacing:.03em;}
+  /* Linear-style preview: real proportions, cropped + faded — not scaled down */
+  .dash-preview{max-height:340px;}
+  .dash-preview::after{content:"";position:absolute;left:0;right:0;bottom:0;height:130px;background:linear-gradient(180deg,transparent,var(--bg) 82%);pointer-events:none;}
 
   .chat{padding:15px 14px;display:flex;flex-direction:column;gap:8px;}
   .chat .m,.chat .card-out{opacity:0;transform:translateY(7px);transition:opacity .4s ease,transform .4s ease;}
@@ -387,6 +390,8 @@
     .dash-mtabs .seg-btn{box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;flex:none;white-space:nowrap;}
     .ov-tiles{grid-template-columns:repeat(3,1fr);gap:6px;}
     .ov-tile{padding:8px;}
+    .dash-preview{max-height:280px;}
+    .dash-preview::after{height:100px;}
   }
 </style>
 </head>
@@ -529,7 +534,7 @@
       <h2>Everything waiting in one place.</h2>
       <p>Open it between clients. Every request, the whole conversation, and what's already on that day — then approve, edit or decline.</p>
     </div>
-    <div class="surf rv d2">
+    <div class="surf dash-preview rv d2">
       <div class="surf-bar">
         <span class="pd"></span><span class="pd"></span><span class="pd"></span>
         <span class="surf-lbl">POBARE — BOOKINGS</span>
