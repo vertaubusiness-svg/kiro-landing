@@ -434,6 +434,19 @@
       background:linear-gradient(90deg,transparent 76%,var(--bg) 94%);
       box-shadow:inset 0 0 44px rgba(0,0,0,.28),inset 0 24px 34px -28px rgba(0,0,0,.5);}
   }
+
+  /* Live chatbot embed — real widget.html iframe, lazy-loaded on scroll (see script at
+     the bottom). Reuses .surf's frame language so it reads as "another live chat window",
+     distinct from the dashboard preview's app-chrome treatment above. */
+  .embed-wrap{max-width:640px;margin:0 auto;}
+  .embed-box{position:relative;height:560px;background:var(--surface);}
+  .embed-box iframe{width:100%;height:100%;border:0;display:block;}
+  .embed-box::before{content:"Loading assistant…";position:absolute;inset:0;display:flex;
+    align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;
+    letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);
+    opacity:1;transition:opacity .3s ease;pointer-events:none;}
+  .embed-box.loaded::before{opacity:0;}
+  @media(max-width:880px){ .embed-box{height:520px;} }
 </style>
 </head>
 <body>
@@ -873,6 +886,29 @@
 
 <div class="rule"></div>
 
+<section id="try">
+  <div class="wrap">
+    <div class="head mid rv">
+      <span class="eyebrow"><span class="dot"></span> Try it yourself</span>
+      <h2>Talk to it. It's the real assistant, not a demo video.</h2>
+      <p>Ask about a price, a date, anything a customer would ask. Same assistant, same rules as the one running above — not a script.</p>
+    </div>
+    <div class="embed-wrap rv d2">
+      <div class="surf">
+        <div class="surf-bar">
+          <span class="pd"></span><span class="pd"></span><span class="pd"></span>
+          <span class="surf-lbl">LIVE — ACE MOBILE DETAILING</span>
+        </div>
+        <div class="embed-box" data-embed-src="https://chat.pobare.com/widget.html?client=49b658fa-14e8-4be4-b0ee-e8be908f2ecc">
+          <iframe title="Try the Pobare assistant" loading="lazy" allow="clipboard-write"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
 <section id="control">
   <div class="wrap split">
     <div class="split-copy rv">
@@ -1126,6 +1162,24 @@
       });
     }, { threshold: 0.35 });
     chats.forEach(function(c){ io.observe(c); });
+  })();
+</script>
+<script>
+  (function(){
+    var box = document.querySelector('[data-embed-src]');
+    if (!box) return;
+    var src = box.getAttribute('data-embed-src');
+    var iframe = box.querySelector('iframe');
+    function load(){
+      if (iframe.src) return;
+      iframe.addEventListener('load', function(){ box.classList.add('loaded'); });
+      iframe.src = src;
+    }
+    if (!('IntersectionObserver' in window)){ load(); return; }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting){ load(); io.unobserve(en.target); } });
+    }, { threshold: 0.2 });
+    io.observe(box);
   })();
 </script>
 <script>
