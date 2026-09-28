@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Free Detailing Quote Calculator — Pobare</title>
+<meta name="description" content="A free quote calculator for auto detailers. Set your own fixed prices by vehicle size once, then get a starting price for any job in seconds. Nothing is sent anywhere." />
+<link rel="canonical" href="https://pobare.com/tools/detailing-quote-calculator" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"WebApplication",
+  "name":"Detailing Quote Calculator",
+  "applicationCategory":"BusinessApplication",
+  "operatingSystem":"Web",
+  "url":"https://pobare.com/tools/detailing-quote-calculator",
+  "description":"Free quote calculator for auto detailing shops. Set fixed prices by vehicle size, then get a starting price for any job by condition and add-ons.",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"},
+  "publisher":{"@type":"Organization","name":"Pobare"}
+}
+</script>
+<style>
+  :root{
+    --bg:#070809;--surface:#0C0E12;--surface-2:#11141A;--surface-3:#171B22;
+    --text:#F4F6F8;--text-2:#98A1AC;--text-3:#646C78;
+    --cyan:#0891b2;--cyan-lit:#22D3EE;
+    --hair:rgba(255,255,255,.07);--hair-2:rgba(255,255,255,.11);
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);
+    line-height:1.58;font-size:15px;letter-spacing:-.011em;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+
+  nav{border-bottom:1px solid var(--hair);position:sticky;top:0;background:rgba(7,8,9,.82);backdrop-filter:blur(16px);z-index:20}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:600;font-size:16px;letter-spacing:-.025em}
+  .crumb{font-size:13px;color:var(--text-3)}
+  .crumb a{color:var(--text-2)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:7px;
+    font-weight:600;font-size:14px;padding:8px 16px;transition:.15s;cursor:pointer;border:none;font-family:inherit}
+  .btn-p{background:linear-gradient(180deg,#fff,#E8EBEF);color:#08090B;box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
+  .btn-p:hover{transform:translateY(-1px)}
+
+  header{padding:56px 0 40px;text-align:center;position:relative;overflow:hidden}
+  header::before{content:"";position:absolute;top:-300px;left:50%;transform:translateX(-50%);
+    width:800px;height:480px;border-radius:50%;filter:blur(60px);pointer-events:none;
+    background:radial-gradient(ellipse,rgba(8,145,178,.16) 0%,transparent 66%)}
+  .eyebrow{position:relative;display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:18px}
+  .eyebrow .dot{width:4px;height:4px;border-radius:50%;background:var(--cyan-lit);box-shadow:0 0 8px var(--cyan-lit)}
+  h1{position:relative;font-size:clamp(30px,4.4vw,46px);font-weight:600;letter-spacing:-.035em;line-height:1.05;margin-bottom:16px}
+  header p{position:relative;color:var(--text-2);max-width:54ch;margin:0 auto;font-size:16.5px}
+
+  .grid{display:grid;grid-template-columns:1.25fr .95fr;gap:20px;align-items:start;padding-bottom:64px}
+  .card{border-radius:12px;padding:26px;
+    background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.008));
+    box-shadow:0 0 0 1px var(--hair),inset 0 1px 0 rgba(255,255,255,.06)}
+  .card h2{font-size:15px;font-weight:600;letter-spacing:-.015em;margin-bottom:4px}
+  .card .sub{font-size:13px;color:var(--text-3);margin-bottom:22px}
+
+  .sec{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;
+    color:var(--text-3);margin:24px 0 12px;padding-top:18px;border-top:1px solid var(--hair)}
+  .sec:first-of-type{margin-top:0;padding-top:0;border-top:none}
+
+  label{display:block;font-size:13.5px;color:var(--text-2);margin-bottom:7px}
+  .opts{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px}
+  .opt{padding:8px 14px;border-radius:7px;font-size:13.5px;cursor:pointer;transition:.14s;
+    background:rgba(255,255,255,.035);color:var(--text-2);box-shadow:inset 0 0 0 1px var(--hair)}
+  .opt:hover{background:rgba(255,255,255,.07)}
+  .opt.on{background:linear-gradient(180deg,#0A9EC4,#0781A2);color:#02161C;font-weight:600;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
+
+  .addons{display:grid;gap:8px;margin-bottom:6px}
+  .addon{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 13px;
+    border-radius:8px;cursor:pointer;background:rgba(255,255,255,.025);
+    box-shadow:inset 0 0 0 1px var(--hair);transition:.14s;font-size:13.5px}
+  .addon:hover{background:rgba(255,255,255,.05)}
+  .addon.on{box-shadow:inset 0 0 0 1px rgba(34,211,238,.35);background:rgba(34,211,238,.06)}
+  .addon .amt{font-family:var(--mono);font-size:12.5px;color:var(--text-3)}
+  .addon.on .amt{color:var(--cyan-lit)}
+
+  .rates{display:grid;grid-template-columns:1fr repeat(3,68px);gap:8px 10px;align-items:center;font-size:13px}
+  .rates .rh{font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--text-3);text-align:right}
+  .rates .rl{color:var(--text-2)}
+  .rates input{width:100%;background:var(--surface-2);color:var(--text);font-family:var(--mono);
+    font-size:13px;border:none;box-shadow:inset 0 0 0 1px var(--hair-2);border-radius:7px;padding:7px 8px;text-align:right}
+  .rates input:focus{outline:none;box-shadow:inset 0 0 0 1px var(--cyan)}
+
+  /* result */
+  .res{position:sticky;top:78px}
+  .res .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--text-3)}
+  .res .big{font-size:clamp(32px,4.6vw,44px);font-weight:600;letter-spacing:-.035em;line-height:1.05;margin:10px 0 4px;color:var(--cyan-lit)}
+  .res .sub2{font-size:13px;color:var(--text-3)}
+  .brk{margin-top:22px;padding-top:18px;border-top:1px solid var(--hair)}
+  .brk-row{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;padding:6px 0;color:var(--text-2)}
+  .brk-row .v{font-family:var(--mono);font-size:12.5px;color:var(--text)}
+  .brk-row.tot{margin-top:8px;padding-top:12px;border-top:1px solid var(--hair);color:var(--text);font-weight:600}
+
+  .say{margin-top:20px;padding:15px 16px;border-radius:10px;
+    background:linear-gradient(180deg,rgba(34,211,238,.07),rgba(34,211,238,.02));
+    box-shadow:inset 0 0 0 1px rgba(34,211,238,.2)}
+  .say .k{color:var(--cyan-lit);margin-bottom:8px;display:block}
+  .say p{font-size:13.5px;color:var(--text);line-height:1.5}
+
+  .cta{margin-top:56px;padding:40px 32px;border-radius:14px;text-align:center;
+    background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.008));
+    box-shadow:0 0 0 1px var(--hair),inset 0 1px 0 rgba(255,255,255,.06)}
+  .cta h2{font-size:clamp(22px,2.6vw,30px);font-weight:600;letter-spacing:-.03em;max-width:26ch;margin:0 auto 12px}
+  .cta p{color:var(--text-2);max-width:48ch;margin:0 auto 24px;font-size:15.5px}
+
+  .note{text-align:center;font-size:13px;color:var(--text-3);margin-top:26px;padding-bottom:8px}
+  footer{border-top:1px solid var(--hair);padding:30px 0;margin-top:56px;font-size:13px;color:var(--text-3);text-align:center}
+  footer .fline{color:var(--text-2);margin-bottom:10px;font-size:13.5px}
+  footer .fline a{color:var(--cyan-lit)}
+
+  @media(max-width:860px){
+    .grid{grid-template-columns:1fr}
+    .res{position:static}
+    .rates{grid-template-columns:1fr repeat(3,58px);font-size:12px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="/" class="brand">Pobare</a>
+    <span class="crumb"><a href="/tools">Free tools</a></span>
+    <a href="/#pricing" class="btn btn-p">Start free</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span> Free tool · nothing is sent anywhere</span>
+    <h1>Detailing quote calculator</h1>
+    <p>Set your own fixed prices by vehicle size once. Then get the starting price to quote for any job — the same starting price Pobare would text back the moment a customer asks.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="grid">
+
+    <!-- INPUTS -->
+    <div class="card">
+      <h2>The job</h2>
+      <p class="sub">Pick what's in front of you.</p>
+
+      <div class="sec">Service</div>
+      <div class="opts" id="svc">
+        <span class="opt on" data-k="wash">Wash</span>
+        <span class="opt" data-k="interior">Interior</span>
+        <span class="opt" data-k="full">Full detail</span>
+        <span class="opt" data-k="paint">Paint correction</span>
+        <span class="opt" data-k="ceramic">Ceramic coating</span>
+      </div>
+
+      <div class="sec">Vehicle size</div>
+      <div class="opts" id="size">
+        <span class="opt on" data-k="sedan">Sedan</span>
+        <span class="opt" data-k="suv">SUV</span>
+        <span class="opt" data-k="truck">Truck</span>
+      </div>
+
+      <div class="sec">Condition</div>
+      <div class="opts" id="cond">
+        <span class="opt on" data-k="normal">Normal</span>
+        <span class="opt" data-k="moderate">Moderate</span>
+        <span class="opt" data-k="heavy">Heavy</span>
+      </div>
+
+      <div class="sec">Add-ons</div>
+      <div class="addons" id="addons">
+        <span class="addon" data-k="pet"><span>Pet hair removal</span><span class="amt">+$60</span></span>
+        <span class="addon" data-k="odor"><span>Odour / smoke treatment</span><span class="amt">+$80</span></span>
+        <span class="addon" data-k="engine"><span>Engine bay</span><span class="amt">+$50</span></span>
+        <span class="addon" data-k="gel"><span>Gel/wax removal</span><span class="amt">+$40</span></span>
+      </div>
+
+      <div class="sec">Your prices</div>
+      <p class="sub" style="margin-bottom:14px">Fixed price by vehicle size — the same structure Pobare quotes from. Change these to your own. Saved in this browser only.</p>
+      <div class="rates" id="rates">
+        <div></div><div class="rh">Sedan</div><div class="rh">SUV</div><div class="rh">Truck</div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div class="card res">
+      <span class="k">Starting price</span>
+      <div class="big" id="price">$79</div>
+      <div class="sub2" id="condNote">Normal condition</div>
+
+      <div class="brk" id="brk"></div>
+
+      <div class="say">
+        <span class="k">What to tell the customer</span>
+        <p id="script"></p>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="note">
+    Nothing you type here leaves your browser. Your prices are saved locally so they're still here next time.
+  </p>
+
+  <!-- CTA -->
+  <div class="cta">
+    <h2>This is the part you're doing at 9pm, one message at a time.</h2>
+    <p>Pobare asks the same questions and gives the same starting price — the moment the customer messages, while you're still under a car. You set the prices; it does the asking.</p>
+    <a href="/" class="btn btn-p" style="padding:12px 24px;font-size:15px">See how it works</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="fline">이건 사장님이 밤 9시에 하나씩 하고 있는 그 일이에요 — <a href="/">Pobare가 대신하는 걸 보기</a></p>
+    <div>© 2026 Pobare · <a href="/" style="color:var(--text-2)">pobare.com</a> · <a href="/tools" style="color:var(--text-2)">Free tools</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var SERVICES = ['wash','interior','full','paint','ceramic'];
+  var SIZES = ['sedan','suv','truck'];
+  var DEFAULT_PRICES = {
+    wash:    { sedan:79,  suv:99,  truck:119 },
+    interior:{ sedan:149, suv:189, truck:219 },
+    full:    { sedan:249, suv:319, truck:389 },
+    paint:   { sedan:399, suv:499, truck:599 },
+    ceramic: { sedan:649, suv:799, truck:999 }
+  };
+  var COND = { normal:1.0, moderate:1.15, heavy:1.35 };
+  var COND_LABEL = { normal:'Normal condition', moderate:'Moderate condition (+15%)', heavy:'Heavy condition (+35%)' };
+  var ADDON = { pet:60, odor:80, engine:50, gel:40 };
+  var SERVICE_LABEL = { wash:'Wash', interior:'Interior detail', full:'Full detail', paint:'Paint correction', ceramic:'Ceramic coating' };
+  var SIZE_LABEL = { sedan:'sedan', suv:'SUV', truck:'truck' };
+
+  var state = { svc:'wash', size:'sedan', cond:'normal', addons:[] };
+
+  // build the rates grid (service x size, all owner-editable)
+  var ratesEl = document.getElementById('rates');
+  SERVICES.forEach(function(svc){
+    var label = document.createElement('div');
+    label.className = 'rl';
+    label.textContent = SERVICE_LABEL[svc];
+    ratesEl.appendChild(label);
+    SIZES.forEach(function(size){
+      var input = document.createElement('input');
+      input.type = 'number';
+      input.id = 'r-' + svc + '-' + size;
+      input.value = DEFAULT_PRICES[svc][size];
+      ratesEl.appendChild(input);
+    });
+  });
+
+  // restore saved prices
+  try{
+    var saved = JSON.parse(localStorage.getItem('pobare_detailing_rates_v2')||'{}');
+    SERVICES.forEach(function(svc){
+      SIZES.forEach(function(size){
+        var k = svc + '-' + size;
+        if(saved[k] != null) document.getElementById('r-'+k).value = saved[k];
+      });
+    });
+  }catch(e){}
+
+  function saveRates(){
+    var o = {};
+    SERVICES.forEach(function(svc){
+      SIZES.forEach(function(size){
+        var k = svc + '-' + size;
+        o[k] = document.getElementById('r-'+k).value;
+      });
+    });
+    try{ localStorage.setItem('pobare_detailing_rates_v2', JSON.stringify(o)); }catch(e){}
+  }
+
+  function rate(svc, size){
+    var v = parseFloat(document.getElementById('r-'+svc+'-'+size).value);
+    return (isNaN(v)||v<0) ? 0 : v;
+  }
+  function money(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
+
+  function calc(){
+    var base = rate(state.svc, state.size);
+    var conditioned = Math.round(base * COND[state.cond]);
+    var add = state.addons.reduce(function(s,k){ return s + ADDON[k]; }, 0);
+    var total = conditioned + add;
+
+    document.getElementById('price').textContent = money(total);
+    document.getElementById('condNote').textContent = COND_LABEL[state.cond];
+
+    var rows = '';
+    rows += row(SERVICE_LABEL[state.svc] + ' (' + SIZE_LABEL[state.size] + ', base)', money(base));
+    if(COND[state.cond]!==1) rows += row(COND_LABEL[state.cond].split(' (')[0], '×' + COND[state.cond].toFixed(2));
+    state.addons.forEach(function(k){
+      var name = document.querySelector('.addon[data-k="'+k+'"] span').textContent;
+      rows += row(name, '+' + money(ADDON[k]));
+    });
+    rows += '<div class="brk-row tot"><span>Starting price</span><span class="v">' + money(total) + '</span></div>';
+    document.getElementById('brk').innerHTML = rows;
+
+    document.getElementById('script').textContent =
+      SERVICE_LABEL[state.svc] + ' starts at ' + money(total) + ' for a ' + SIZE_LABEL[state.size] + '. When works for you?';
+  }
+
+  function row(l,v){ return '<div class="brk-row"><span>'+l+'</span><span class="v">'+v+'</span></div>'; }
+
+  ['svc','size','cond'].forEach(function(group){
+    document.getElementById(group).addEventListener('click', function(e){
+      var t = e.target.closest('.opt'); if(!t) return;
+      this.querySelectorAll('.opt').forEach(function(o){ o.classList.remove('on'); });
+      t.classList.add('on');
+      state[group] = t.getAttribute('data-k');
+      calc();
+    });
+  });
+
+  document.getElementById('addons').addEventListener('click', function(e){
+    var t = e.target.closest('.addon'); if(!t) return;
+    t.classList.toggle('on');
+    var k = t.getAttribute('data-k');
+    var i = state.addons.indexOf(k);
+    if(i>-1) state.addons.splice(i,1); else state.addons.push(k);
+    calc();
+  });
+
+  ratesEl.addEventListener('input', function(){ saveRates(); calc(); });
+
+  calc();
+})();
+</script>
+</body>
+</html>
