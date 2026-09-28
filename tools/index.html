@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Free tools — Pobare</title>
+<meta name="description" content="Free tools for one-person auto detailing shops. No signup, nothing sent anywhere." />
+<link rel="canonical" href="https://pobare.com/tools" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#070809;--surface:#0C0E12;--text:#F4F6F8;--text-2:#98A1AC;--text-3:#646C78;
+    --cyan:#0891b2;--cyan-lit:#22D3EE;--hair:rgba(255,255,255,.07);
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);
+    line-height:1.6;font-size:15.5px;letter-spacing:-.011em;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  a{color:inherit;text-decoration:none}
+
+  nav{border-bottom:1px solid var(--hair);position:sticky;top:0;background:rgba(7,8,9,.82);backdrop-filter:blur(16px);z-index:20}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .brand{font-weight:600;font-size:16px;letter-spacing:-.025em}
+  .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:7px;
+    font-weight:600;font-size:14px;padding:8px 16px;transition:.15s;cursor:pointer;border:none;font-family:inherit}
+  .btn-p{background:linear-gradient(180deg,#fff,#E8EBEF);color:#08090B;box-shadow:inset 0 1px 0 rgba(255,255,255,.9)}
+  .btn-p:hover{transform:translateY(-1px)}
+
+  header{padding:56px 0 40px;text-align:center;position:relative;overflow:hidden}
+  header::before{content:"";position:absolute;top:-300px;left:50%;transform:translateX(-50%);
+    width:800px;height:480px;border-radius:50%;filter:blur(60px);pointer-events:none;
+    background:radial-gradient(ellipse,rgba(8,145,178,.16) 0%,transparent 66%)}
+  .eyebrow{position:relative;display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);
+    font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:18px}
+  .eyebrow .dot{width:4px;height:4px;border-radius:50%;background:var(--cyan-lit);box-shadow:0 0 8px var(--cyan-lit)}
+  h1{position:relative;font-size:clamp(28px,4.2vw,42px);font-weight:600;letter-spacing:-.035em;line-height:1.08;margin-bottom:16px}
+  header p{position:relative;color:var(--text-2);max-width:56ch;margin:0 auto;font-size:16px}
+
+  .list{padding:8px 0 64px;display:grid;gap:16px}
+  .card{display:block;border-radius:12px;padding:24px 26px;
+    background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.008));
+    box-shadow:0 0 0 1px var(--hair),inset 0 1px 0 rgba(255,255,255,.06);transition:.15s}
+  .card:hover{box-shadow:0 0 0 1px rgba(34,211,238,.3),inset 0 1px 0 rgba(255,255,255,.06)}
+  .card h2{font-size:17px;font-weight:600;letter-spacing:-.02em;margin-bottom:6px}
+  .card p{color:var(--text-2);font-size:14px;margin-bottom:0}
+  .card .go{display:inline-block;margin-top:12px;font-family:var(--mono);font-size:12.5px;color:var(--cyan-lit)}
+
+  .note{text-align:center;font-size:13px;color:var(--text-3);padding-bottom:8px}
+  footer{border-top:1px solid var(--hair);padding:30px 0;margin-top:32px;font-size:13px;color:var(--text-3);text-align:center}
+  footer .fline{color:var(--text-2);margin-bottom:10px;font-size:13.5px}
+  footer .fline a{color:var(--cyan-lit)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="/" class="brand">Pobare</a>
+    <a href="/#pricing" class="btn btn-p">Start free</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span> Free · no signup · nothing sent anywhere</span>
+    <h1>Free tools for detailers</h1>
+    <p>Small tools we built for one-person auto detailing shops. No signup, no email required — everything runs in your browser.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="list">
+    <a class="card" href="/tools/detailing-quote-calculator">
+      <h2>Detailing quote calculator</h2>
+      <p>Set your fixed prices by vehicle size, then get a starting price for any job by condition and add-ons — instantly.</p>
+      <span class="go">Open the calculator →</span>
+    </a>
+  </div>
+
+  <p class="note">More tools land here as we build them.</p>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="fline">이건 사장님이 밤 9시에 하나씩 하고 있는 그 일이에요 — <a href="/">Pobare가 대신하는 걸 보기</a></p>
+    <div>© 2026 Pobare · <a href="/" style="color:var(--text-2)">pobare.com</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
